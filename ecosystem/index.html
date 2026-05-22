@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nvidia Ecosystem — 英伟达生态链金融分析</title>
+<meta property="og:title" content="Nvidia Ecosystem — 英伟达生态链金融分析">
+<meta property="og:description" content="30家英伟达生态链公司的完整分析：业务介绍、金融数据、生态位关系">
+<meta name="description" content="30家英伟达生态链公司的完整分析：业务介绍、金融数据、生态位关系">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ========== CSS Custom Properties (Design System) ========== */
+:root {
+  --bg: #0a0c10;
+  --bg-elevated: #111318;
+  --bg-card: #16181e;
+  --bg-hover: #1c1f26;
+  --surface: #1e2128;
+  --ink: #e8eaed;
+  --ink-muted: #9aa0a6;
+  --ink-faint: #5f6368;
+  --ink-rule: #2d3038;
+  --border: #2d3038;
+  --border-strong: #3c4048;
+  --accent: #76b900;
+  --accent-soft: #76b90033;
+  --accent-glow: #76b90022;
+  --navy: #1a237e;
+  --gold: #fdd835;
+  --gold-soft: #fdd83522;
+  --green: #34a853;
+  --green-bg: #34a85315;
+  --red: #ea4335;
+  --red-bg: #ea433515;
+  --orange: #fb8c00;
+  --orange-bg: #fb8c0015;
+  --blue: #4285f4;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --page-measure: 1280px;
+  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Layer-specific colors */
+[data-layer="0"] { --layer-color: #8e44ad; --layer-bg: #8e44ad15; }
+[data-layer="1"] { --layer-color: #27ae60; --layer-bg: #27ae6015; }
+[data-layer="2"] { --layer-color: #2980b9; --layer-bg: #2980b915; }
+[data-layer="3"] { --layer-color: #f39c12; --layer-bg: #f39c1215; }
+[data-layer="4"] { --layer-color: #e67e22; --layer-bg: #e67e2215; }
+[data-layer="5"] { --layer-color: #c0392b; --layer-bg: #c0392b15; }
+[data-layer="6"] { --layer-color: #2c3e50; --layer-bg: #2c3e5015; }
+[data-layer="7"] { --layer-color: #16a085; --layer-bg: #16a08515; }
+
+/* ========== Reset & Base ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== Layout ========== */
+.container { max-width: var(--page-measure); margin: 0 auto; padding: 0 24px; }
+
+/* ========== Header ========== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  padding: 16px 0;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo {
+  width: 36px; height: 36px;
+  background: var(--accent);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  color: #000;
+}
+.header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+.header-meta {
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ========== Stats Bar ========== */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+.stat-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  text-align: center;
+}
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+
+/* ========== Ecosystem Flow ========== */
+.ecosystem-flow {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin: 24px 0;
+  overflow-x: auto;
+}
+.flow-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.flow-nodes {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  min-width: 900px;
+}
+.flow-node {
+  flex: 1;
+  border-radius: var(--radius-md);
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  position: relative;
+}
+.flow-node:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.flow-node-icon { font-size: 24px; }
+.flow-node-name { font-size: 11px; font-weight: 600; }
+.flow-node-count { font-size: 10px; color: var(--ink-muted); }
+.flow-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--ink-faint);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* ========== Controls ========== */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+  align-items: center;
+}
+.filter-btn {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--ink-muted);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-sans);
+}
+.filter-btn:hover {
+  border-color: var(--ink-faint);
+  color: var(--ink);
+}
+.filter-btn.active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.search-box {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: var(--font-sans);
+  outline: none;
+  min-width: 200px;
+  transition: var(--transition);
+}
+.search-box:focus {
+  border-color: var(--accent);
+}
+.search-box::placeholder { color: var(--ink-faint); }
+.sort-select {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: var(--font-sans);
+  outline: none;
+  cursor: pointer;
+}
+
+/* ========== Table ========== */
+.table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  margin: 16px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+thead {
+  background: var(--bg-elevated);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+th {
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 500;
+  color: var(--ink-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid var(--border);
+}
+th:hover { color: var(--ink); }
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-rule, var(--border));
+  vertical-align: middle;
+}
+tr:last-child td { border-bottom: none; }
+tr {
+  cursor: pointer;
+  transition: background var(--transition);
+}
+tr:hover { background: var(--bg-hover); }
+
+.ticker-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ticker-badge {
+  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+.company-name { font-weight: 500; }
+.category-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 500;
+}
+.layer-indicator {
+  width: 3px;
+  height: 24px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.num { font-family: var(--font-mono); font-size: 12px; text-align: right; }
+.num-pos { color: var(--green); }
+.num-neg { color: var(--red); }
+.num-na { color: var(--ink-faint); }
+.num-cell { text-align: right; }
+
+/* ========== Modal ========== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  max-width: 720px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 32px;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--ink-muted);
+  font-size: 20px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+.modal-close:hover { background: var(--bg-hover); color: var(--ink); }
+.modal-header {
+  display: flex;
+  align-items: start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.modal-ticker-icon {
+  width: 48px; height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.modal-title { font-size: 22px; font-weight: 700; }
+.modal-subtitle { font-size: 14px; color: var(--ink-muted); margin-top: 4px; }
+.modal-section {
+  margin-bottom: 24px;
+}
+.modal-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.modal-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.modal-fin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+.modal-fin-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  text-align: center;
+}
+.modal-fin-val {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+.modal-fin-lbl {
+  font-size: 10px;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+.modal-products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.product-tag {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  color: var(--ink-muted);
+}
+.modal-role {
+  background: var(--bg-card);
+  border-left: 3px solid var(--layer-color, var(--accent));
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin: 8px 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ========== Footer ========== */
+.footer {
+  text-align: center;
+  padding: 32px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 48px;
+  font-size: 12px;
+  color: var(--ink-faint);
+  line-height: 1.8;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+  .header h1 { font-size: 15px; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .modal { padding: 20px; }
+  .modal-fin-grid { grid-template-columns: repeat(2, 1fr); }
+  .controls { justify-content: center; }
+  .search-box { min-width: 140px; }
+  .flow-nodes { min-width: 600px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="header">
+  <div class="container header-inner">
+    <div class="header-left">
+      <div class="logo">NV</div>
+      <div>
+        <h1>Nvidia Ecosystem</h1>
+        <div class="header-meta">英伟达生态链 · 30家公司全景分析</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <a href="../dashboard/" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--accent);border-radius:20px;font-size:12px;font-weight:500;color:var(--accent);text-decoration:none;transition:var(--transition);font-family:var(--font-sans);cursor:pointer;" class="btn-live">
+        <span>📊</span> 实时数据面板
+      </a>
+      <span class="header-meta" id="header-date"></span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  
+  <!-- ========== STATS ========== -->
+  <div class="stats-bar" id="stats-bar"></div>
+
+  <!-- ========== ECOSYSTEM FLOW ========== -->
+  <div class="ecosystem-flow">
+    <div class="flow-title">🏗️ 英伟达生态链结构</div>
+    <div class="flow-nodes" id="flow-nodes"></div>
+  </div>
+
+  <!-- ========== CONTROLS ========== -->
+  <div class="controls">
+    <button class="filter-btn active" data-layer="all">全部公司</button>
+    <button class="filter-btn" data-layer="0">🏭 芯片代工</button>
+    <button class="filter-btn" data-layer="1">💾 存储</button>
+    <button class="filter-btn" data-layer="2">🔬 设备</button>
+    <button class="filter-btn" data-layer="3">🌐 光通信</button>
+    <button class="filter-btn" data-layer="4">🏗️ 封测</button>
+    <button class="filter-btn" data-layer="5">⚡ 基础设施</button>
+    <button class="filter-btn" data-layer="6">☁️ 云服务</button>
+    <button class="filter-btn" data-layer="7">🔌 其他</button>
+    <input class="search-box" type="text" placeholder="🔍 搜索公司或代码..." id="search-input">
+    <select class="sort-select" id="sort-select">
+      <option value="ytd">按YTD涨幅 ↓</option>
+      <option value="1y">按1年涨幅 ↓</option>
+      <option value="mcap">按市值 ↓</option>
+      <option value="ps">按P/S ↓</option>
+      <option value="pe">按P/E ↓</option>
+      <option value="name" selected>按名称</option>
+    </select>
+  </div>
+
+  <!-- ========== TABLE ========== -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th data-sort="name">公司</th>
+          <th class="num-cell" data-sort="price">价格</th>
+          <th class="num-cell" data-sort="mcap">市值</th>
+          <th class="num-cell" data-sort="ps">P/S</th>
+          <th class="num-cell" data-sort="pe">P/E</th>
+          <th class="num-cell" data-sort="ytd">% YTD</th>
+          <th class="num-cell" data-sort="1y">% 1Y</th>
+          <th>生态链层</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+
+  <!-- ========== MODAL ========== -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal-content"></div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>Data source: speculator_io | May 6, 2026</p>
+    <p>Built with ❤️ by Hermes Agent — Interactive Nvidia Ecosystem Analysis</p>
+  </div>
+</footer>
+
+<script>
+// ========== DATA ==========
+const COMPANIES = [
+  {
+    "ticker": "TSM",
+    "company": "TSMC (台积电)",
+    "cn": "台湾积体电路制造",
+    "category": "芯片代工",
+    "ecosystemLayer": 0,
+    "description": "全球最大的半导体晶圆代工厂，Nvidia GPU独家制造商",
+    "role": "独家核心代工厂 — H100/B200/RTX50 全部由 TSMC 4N/3nm 制造",
+    "nvidiaRelation": "供应商-客户（不可替代）。Nvidia是其前三大客户，CoWoS先进封装成供应链瓶颈",
+    "investment": "-",
+    "revenueExposure": "极高（Nvidia是其Top 3客户，占营收10%+）",
+    "products": [
+      "3nm/5nm制程代工",
+      "CoWoS先进封装",
+      "H100/B200 GPU制造"
+    ],
+    "color": "#9b59b6",
+    "financial": {
+      "price": 419.5,
+      "marketCap": "2.0T",
+      "marketCapVal": 2000000000000,
+      "ps": null,
+      "pe": null,
+      "ytd": null,
+      "1y": null
+    }
+  },
+  {
+    "ticker": "INTC",
+    "company": "Intel (英特尔)",
+    "cn": "英特尔",
+    "category": "芯片代工/设计",
+    "ecosystemLayer": 0,
+    "description": "全球最大的CPU制造商，Nvidia竞争对手+潜在代工厂",
+    "role": "竞合伙伴 — 2025年Nvidia投资$50亿共同开发CPU；Intel Foundry开始为Nvidia代工",
+    "nvidiaRelation": "竞合（复杂多面）：Gaudi加速器直接竞争 vs Intel Foundry潜在代工关系",
+    "investment": "Nvidia投资$50亿",
+    "revenueExposure": "低（主要仍是竞争对手关系）",
+    "products": [
+      "Xeon CPU",
+      "Gaudi AI加速器",
+      "Intel Foundry代工服务"
+    ],
+    "color": "#0071c5",
+    "financial": {
+      "price": 113.01,
+      "marketCap": "568.0B",
+      "marketCapVal": 568000000000,
+      "ps": 10.56,
+      "pe": null,
+      "ytd": 199.21,
+      "1y": 466.75
+    }
+  },
+  {
+    "ticker": "ARM",
+    "company": "Arm Holdings",
+    "cn": "安谋控股",
+    "category": "芯片IP授权",
+    "ecosystemLayer": 0,
+    "description": "全球CPU架构IP领导者，Nvidia全线ARM产品的架构授权方",
+    "role": "核心CPU架构授权方 — Nvidia Grace CPU、Jetson、DRIVE全线采用ARM架构",
+    "nvidiaRelation": "IP授权商-客户（深度绑定）。2020年$400亿收购ARM未果，转为深度合作",
+    "investment": "-（2020年收购未果）",
+    "revenueExposure": "高（Nvidia是大客户，ARM架构用于Nvidia全部CPU产品线）",
+    "products": [
+      "ARM CPU架构",
+      "Neoverse服务器核",
+      "Cortex系列"
+    ],
+    "color": "#0091bd",
+    "financial": {
+      "price": 237.3,
+      "marketCap": "252.0B",
+      "marketCapVal": 252000000000,
+      "ps": 53.95,
+      "pe": 316.27,
+      "ytd": 110.32,
+      "1y": 93.81
+    }
+  },
+  {
+    "ticker": "MU",
+    "company": "Micron (美光)",
+    "cn": "美光科技",
+    "category": "存储/内存",
+    "ecosystemLayer": 1,
+    "description": "全球三大DRAM制造商之一，美国唯一DRAM制造商",
+    "role": "核心直接供应商 — GPU内存层。HBM3E用于H100/B200 AI GPU，GDDR6X为Nvidia联合开发",
+    "nvidiaRelation": "直接供应商 | HBM3E显存决定GPU出货能力；与Nvidia联合开发GDDR6X/GDDR7",
+    "investment": "-",
+    "revenueExposure": "高度直接（HBM收入主要来自Nvidia，占营收20-30%+）",
+    "products": [
+      "HBM3E高带宽内存",
+      "GDDR6X/GDDR7显存",
+      "DDR5/LPDDR5"
+    ],
+    "color": "#00a3e0",
+    "financial": {
+      "price": 666.59,
+      "marketCap": "751.7B",
+      "marketCapVal": 751700000000,
+      "ps": 12.93,
+      "pe": 31.47,
+      "ytd": 125.86,
+      "1y": 727.96
+    }
+  },
+  {
+    "ticker": "WDC",
+    "company": "Western Digital (西部数据)",
+    "cn": "西部数据",
+    "category": "存储/硬盘",
+    "ecosystemLayer": 1,
+    "description": "全球最大的HDD制造商之一，重要的企业级SSD供应商",
+    "role": "间接供应商 — AI数据中心存储层。提供大容量HDD和NVMe SSD",
+    "nvidiaRelation": "间接配套 | AI训练数据先存到WD硬盘再喂给GPU训练",
+    "investment": "-",
+    "revenueExposure": "间接（AI数据中心存储约占营收15-25%）",
+    "products": [
+      "Ultrastar HDD (20-30TB+)",
+      "NVMe SSD",
+      "OpenFlex数据平台"
+    ],
+    "color": "#00549a",
+    "financial": {
+      "price": 483.15,
+      "marketCap": "166.5B",
+      "marketCapVal": 166500000000,
+      "ps": 14.14,
+      "pe": 28.86,
+      "ytd": 172.66,
+      "1y": 990.88
+    }
+  },
+  {
+    "ticker": "SNDK",
+    "company": "SanDisk (闪迪)",
+    "cn": "闪迪",
+    "category": "存储/闪存",
+    "ecosystemLayer": 1,
+    "description": "NAND闪存品牌（2016年被WD收购，不再独立上市）",
+    "role": "间接（已退市）— 现为WD子公司/品牌，技术整合进WD产品线",
+    "nvidiaRelation": "间接 | NAND技术通过WD企业SSD间接服务于AI基础设施",
+    "investment": "-（2016年被WD以$190亿收购）",
+    "revenueExposure": "间接，难以单独量化",
+    "products": [
+      "NAND闪存",
+      "消费级SSD",
+      "存储卡"
+    ],
+    "color": "#e31837",
+    "financial": {
+      "price": 1409.98,
+      "marketCap": "208.8B",
+      "marketCapVal": 208800000000,
+      "ps": 15.84,
+      "pe": 49.02,
+      "ytd": 477.03,
+      "1y": 4067.84
+    }
+  },
+  {
+    "ticker": "ASML",
+    "company": "ASML",
+    "cn": "阿斯麦",
+    "category": "半导体设备",
+    "ecosystemLayer": 2,
+    "description": "全球唯一EUV光刻机制造商，半导体制造的核心设备供应商",
+    "role": "核心基础设施 — EUV光刻机是TSMC制造Nvidia GPU不可或缺的设备",
+    "nvidiaRelation": "Nvidia→TSMC→ASML。EUV光刻机决定了Nvidia芯片能否在3nm制程制造",
+    "investment": "-",
+    "revenueExposure": "间接但关键（Nvidia增长推动TSMC扩产→ASML设备订单）",
+    "products": [
+      "EUV (极紫外)光刻机",
+      "DUV (深紫外)光刻机"
+    ],
+    "color": "#1b3764",
+    "financial": {
+      "price": 1544.74,
+      "marketCap": "597.0B",
+      "marketCapVal": 597000000000,
+      "ps": null,
+      "pe": null,
+      "ytd": null,
+      "1y": null
+    }
+  },
+  {
+    "ticker": "LRCX",
+    "company": "Lam Research (泛林)",
+    "cn": "泛林半导体",
+    "category": "半导体设备",
+    "ecosystemLayer": 2,
+    "description": "全球领先的半导体刻蚀和沉积设备制造商",
+    "role": "核心制造设备 — 刻蚀/沉积设备用于TSMC制造Nvidia GPU的晶体管结构",
+    "nvidiaRelation": "Nvidia→TSMC→Lam。3nm/5nm晶体管成形依赖Lam刻蚀技术",
+    "investment": "-",
+    "revenueExposure": "间接（与TSMC/Nvidia产能扩张正相关）",
+    "products": [
+      "刻蚀设备",
+      "薄膜沉积设备",
+      "清洁设备"
+    ],
+    "color": "#00539b",
+    "financial": {
+      "price": 297.17,
+      "marketCap": "371.6B",
+      "marketCapVal": 371600000000,
+      "ps": 17.14,
+      "pe": 56.09,
+      "ytd": 67.09,
+      "1y": 306.19
+    }
+  },
+  {
+    "ticker": "KLAC",
+    "company": "KLA Corporation (科磊)",
+    "cn": "科磊",
+    "category": "半导体设备",
+    "ecosystemLayer": 2,
+    "description": "全球半导体工艺控制和良率管理领导者",
+    "role": "质量守门员 — 晶圆缺陷检测设备确保Nvidia GPU的高良率",
+    "nvidiaRelation": "Nvidia→TSMC→KLA。每步工艺缺陷检测直接影响Nvidia GPU出货量",
+    "investment": "-",
+    "revenueExposure": "间接（AI芯片复杂度推高检测需求）",
+    "products": [
+      "晶圆检测设备",
+      "光罩检测",
+      "量测设备"
+    ],
+    "color": "#0072b5",
+    "financial": {
+      "price": 1816.29,
+      "marketCap": "237.3B",
+      "marketCapVal": 237300000000,
+      "ps": null,
+      "pe": null,
+      "ytd": null,
+      "1y": null
+    }
+  },
+  {
+    "ticker": "CAMT",
+    "company": "Camtek",
+    "cn": "康特科技",
+    "category": "半导体设备",
+    "ecosystemLayer": 2,
+    "description": "先进封装检测设备（AOI自动光学检测）专业供应商",
+    "role": "封装检测专家 — CoWoS先进封装质量把关",
+    "nvidiaRelation": "Nvidia→封测厂→Camtek。HBM堆叠和CoWoS封装需要Camtek检测",
+    "investment": "-",
+    "revenueExposure": "中高（先进封装检测需求随AI芯片爆发）",
+    "products": [
+      "自动光学检测(AOI)",
+      "封装检测系统",
+      "2.5D/3D检测"
+    ],
+    "color": "#1b6b2f",
+    "financial": {
+      "price": 202.54,
+      "marketCap": "9.4B",
+      "marketCapVal": 9400000000,
+      "ps": 19.01,
+      "pe": 199.54,
+      "ytd": 83.21,
+      "1y": 201.04
+    }
+  },
+  {
+    "ticker": "LITE",
+    "company": "Lumentum",
+    "cn": "鲁门特姆",
+    "category": "光通信",
+    "ecosystemLayer": 3,
+    "description": "磷化铟(InP)激光器和硅光子学技术领导者",
+    "role": "硅光子学生态核... — 高能效激光器集成于Spectrum-X/Quantum-X光交换机",
+    "nvidiaRelation": "战略投资$20亿+生态合作。激光器用于AI工厂光互连",
+    "investment": "Nvidia投资$20亿",
+    "revenueExposure": "极高（Nvidia是其最大客户，1.6T光模块需求暴增）",
+    "products": [
+      "InP激光器",
+      "共封装光学(CPO)",
+      "1.6T光模块"
+    ],
+    "color": "#0088cc",
+    "financial": {
+      "price": 944.28,
+      "marketCap": "67.4B",
+      "marketCapVal": 67400000000,
+      "ps": 27.09,
+      "pe": 288.73,
+      "ytd": 148.9,
+      "1y": 1365.82
+    }
+  },
+  {
+    "ticker": "COHR",
+    "company": "Coherent (相干)",
+    "cn": "相干公司",
+    "category": "光通信",
+    "ecosystemLayer": 3,
+    "description": "全球光子学领导者，硅光子交换芯片创新者",
+    "role": "CPO创新伙伴 — 共封装光学技术消除DSP功耗瓶颈",
+    "nvidiaRelation": "战略投资$20亿。GTC 2025被列为CPO生态创新合作伙伴",
+    "investment": "Nvidia投资$20亿",
+    "revenueExposure": "极高（Nvidia CPO合作直接驱动营收）",
+    "products": [
+      "硅光子交换芯片",
+      "共封装光学",
+      "光收发器"
+    ],
+    "color": "#1a237e",
+    "financial": {
+      "price": 344.67,
+      "marketCap": "67.3B",
+      "marketCapVal": 67300000000,
+      "ps": 0.04,
+      "pe": 371.45,
+      "ytd": 83.34,
+      "1y": 393.87
+    }
+  },
+  {
+    "ticker": "GLW",
+    "company": "Corning (康宁)",
+    "cn": "康宁",
+    "category": "光通信",
+    "ecosystemLayer": 3,
+    "description": "175年历史的光学玻璃和光纤制造巨头",
+    "role": "光纤战略伙伴 — 用玻璃光纤替代AI机架内5000根铜缆",
+    "nvidiaRelation": "投资最高$32亿联合建3座美国工厂，产能提升10倍",
+    "investment": "Nvidia最高投资$32亿",
+    "revenueExposure": "极高（AI光纤化是核心增长驱动力）",
+    "products": [
+      "光学玻璃光纤",
+      "光子互连",
+      "先进光学制造"
+    ],
+    "color": "#e87a27",
+    "financial": {
+      "price": 181.57,
+      "marketCap": "156.3B",
+      "marketCapVal": 156300000000,
+      "ps": 9.57,
+      "pe": 87.23,
+      "ytd": 104.24,
+      "1y": 305.65
+    }
+  },
+  {
+    "ticker": "NOK",
+    "company": "Nokia (诺基亚)",
+    "cn": "诺基亚",
+    "category": "通信网络",
+    "ecosystemLayer": 3,
+    "description": "全球通信设备巨头，5G/6G + AI-RAN技术领导者",
+    "role": "AI-RAN与6G合作伙伴 — 5G/6G软件适配Nvidia芯片",
+    "nvidiaRelation": "Nvidia投资$10亿，合作AI-RAN联合开发和6G技术",
+    "investment": "Nvidia投资$10亿",
+    "revenueExposure": "中高（AI-RAN是Nokia战略转型方向）",
+    "products": [
+      "5G/6G基站",
+      "AI-RAN软件",
+      "IP/光网络"
+    ],
+    "color": "#005aff",
+    "financial": {
+      "price": 13.19,
+      "marketCap": "75.4B",
+      "marketCapVal": 75400000000,
+      "ps": 3.77,
+      "pe": 78.72,
+      "ytd": 99.85,
+      "1y": 162.23
+    }
+  },
+  {
+    "ticker": "ASX",
+    "company": "ASE (日月光)",
+    "cn": "日月光投控",
+    "category": "封装测试",
+    "ecosystemLayer": 4,
+    "description": "全球最大半导体封装测试服务商（OSAT）",
+    "role": "封装扩容伙伴 — CoWoS替补产能，CoWoP联合开发",
+    "nvidiaRelation": "Nvidia与ASE子公司矽品联合开发CoWoP封装技术",
+    "investment": "-",
+    "revenueExposure": "高（先进封装收入翻倍至$16亿，75%来自先进封装）",
+    "products": [
+      "先进封装(2.5D/3D)",
+      "CoWoP",
+      "半导体测试"
+    ],
+    "color": "#e60012",
+    "financial": {
+      "price": 34.16,
+      "marketCap": "74.8B",
+      "marketCapVal": 74800000000,
+      "ps": 3.11,
+      "pe": 50.78,
+      "ytd": 104.8,
+      "1y": 279.56
+    }
+  },
+  {
+    "ticker": "AMKR",
+    "company": "Amkor (安靠)",
+    "cn": "安靠科技",
+    "category": "封装测试",
+    "ecosystemLayer": 4,
+    "description": "美国最大OSAT封装测试服务商",
+    "role": "关键封装伙伴 — Nvidia指定先进封装合作伙伴，$70亿亚利桑那工厂",
+    "nvidiaRelation": "Nvidia明确指定为AI芯片关键封装伙伴；与TSMC签署美国工厂MOU",
+    "investment": "投资$70亿亚利桑那工厂（获芯片法案支持）",
+    "revenueExposure": "高（先进封装是核心增长引擎）",
+    "products": [
+      "FCBGA封装",
+      "2.5D/3D封装",
+      "半导体测试"
+    ],
+    "color": "#004b87",
+    "financial": {
+      "price": 77.22,
+      "marketCap": "19.1B",
+      "marketCapVal": 19100000000,
+      "ps": 2.71,
+      "pe": 44.09,
+      "ytd": 88.11,
+      "1y": 341.76
+    }
+  },
+  {
+    "ticker": "FLEX",
+    "company": "Flex (伟创力)",
+    "cn": "伟创力",
+    "category": "电子制造",
+    "ecosystemLayer": 4,
+    "description": "全球领先的电子制造服务（EMS）和系统工程公司",
+    "role": "AI工厂集成商 — 模块化AI数据中心系统设计与制造",
+    "nvidiaRelation": "正式合作伙伴。开发Nvidia Omniverse DSX蓝图参考设计",
+    "investment": "-",
+    "revenueExposure": "高（AI基础设施是核心增长驱动）",
+    "products": [
+      "模块化AI数据中心",
+      "800V直流电源机架",
+      "液冷系统"
+    ],
+    "color": "#1f7f4b",
+    "financial": {
+      "price": 134.73,
+      "marketCap": "49.5B",
+      "marketCapVal": 49500000000,
+      "ps": 1.77,
+      "pe": 60.31,
+      "ytd": 119.29,
+      "1y": 266.41
+    }
+  },
+  {
+    "ticker": "JBL",
+    "company": "Jabil (捷普)",
+    "cn": "捷普",
+    "category": "电子制造",
+    "ecosystemLayer": 4,
+    "description": "全球工程与制造解决方案提供商",
+    "role": "AI硬件幕后制造商 — 服务器/光模块EMS",
+    "nvidiaRelation": "关键供应链合作伙伴。制造Nvidia AI服务器硬件、网络系统",
+    "investment": "$5亿北卡罗来纳AI生产基地",
+    "revenueExposure": "极高（FY2025 AI营收预计75-85亿美元）",
+    "products": [
+      "AI服务器制造",
+      "CPO交换机系统",
+      "液冷方案"
+    ],
+    "color": "#009b77",
+    "financial": {
+      "price": 372.34,
+      "marketCap": "39.3B",
+      "marketCapVal": 39300000000,
+      "ps": 1.2,
+      "pe": 49.89,
+      "ytd": 61.35,
+      "1y": 147.75
+    }
+  },
+  {
+    "ticker": "FN",
+    "company": "Fabrinet",
+    "cn": "法布里奈特",
+    "category": "光学制造",
+    "ecosystemLayer": 4,
+    "description": "专注于光学和精密光电制造的特种EMS提供商",
+    "role": "1.6T光学收发器制造商 — Blackwell平台光互连核心供应商",
+    "nvidiaRelation": "关键供应商。1.6T收发器占营收28%，为Blackwell平台供货",
+    "investment": "-",
+    "revenueExposure": "极高（1.6T收发器28%营收，AI光学为核心驱动力）",
+    "products": [
+      "1.6T光学收发器",
+      "高级光学封装",
+      "DCI组件"
+    ],
+    "color": "#2b5797",
+    "financial": {
+      "price": 679.09,
+      "marketCap": "24.3B",
+      "marketCapVal": 24300000000,
+      "ps": 5.75,
+      "pe": 58.39,
+      "ytd": 45.73,
+      "1y": 231.51
+    }
+  },
+  {
+    "ticker": "VRT",
+    "company": "Vertiv",
+    "cn": "维谛技术",
+    "category": "数据中心基础设施",
+    "ecosystemLayer": 5,
+    "description": "数据中心关键基础设施供应商，电力与冷却解决方案",
+    "role": "电力与冷却伙伴 — 确保Nvidia GPU在高密度下稳定运行",
+    "nvidiaRelation": "加入Nvidia合作伙伴网络(NPN)，参与ARPA-E COOLERCHIPS冷却项目",
+    "investment": "-",
+    "revenueExposure": "高（GPU功率>1000W推动冷却需求暴增）",
+    "products": [
+      "精密冷却系统",
+      "UPS电源",
+      "电力分配"
+    ],
+    "color": "#ed1c24",
+    "financial": {
+      "price": 358.92,
+      "marketCap": "137.9B",
+      "marketCapVal": 137900000000,
+      "ps": 12.71,
+      "pe": 90.11,
+      "ytd": 111.79,
+      "1y": 283.95
+    }
+  },
+  {
+    "ticker": "ETN",
+    "company": "Eaton (伊顿)",
+    "cn": "伊顿",
+    "category": "电力管理",
+    "ecosystemLayer": 5,
+    "description": "全球智能电力管理公司，UPS/配电解决方案领导者",
+    "role": "HVDC电力架构伙伴 — 800V高压直流方案赋能AI工厂",
+    "nvidiaRelation": "与Nvidia合作开发800V HVDC电力基础设施",
+    "investment": "-",
+    "revenueExposure": "中高（AI数据中心UPS/配电需求激增）",
+    "products": [
+      "UPS不间断电源",
+      "HVDC高压直流方案",
+      "开关设备"
+    ],
+    "color": "#003057",
+    "financial": {
+      "price": 421.39,
+      "marketCap": "163.5B",
+      "marketCapVal": 163500000000,
+      "ps": null,
+      "pe": null,
+      "ytd": null,
+      "1y": null
+    }
+  },
+  {
+    "ticker": "NVTS",
+    "company": "Navitas",
+    "cn": "纳微半导体",
+    "category": "功率半导体",
+    "ecosystemLayer": 5,
+    "description": "氮化镓(GaN)和碳化硅(SiC)功率半导体领导者",
+    "role": "功率半导体核心供应商 — 用于800V HVDC AI工厂架构",
+    "nvidiaRelation": "Nvidia选择Navitas开发下一代800V HVDC数据中心电力",
+    "investment": "-",
+    "revenueExposure": "高（GaN/SiC器件直接用于Rubin平台电源方案）",
+    "products": [
+      "GaNFast氮化镓FET",
+      "GeneSiC碳化硅",
+      "电源管理IC"
+    ],
+    "color": "#00843d",
+    "financial": {
+      "price": 16.68,
+      "marketCap": "3.8B",
+      "marketCapVal": 3800000000,
+      "ps": 95.06,
+      "pe": null,
+      "ytd": 122.4,
+      "1y": 773.3
+    }
+  },
+  {
+    "ticker": "CRWV",
+    "company": "CoreWeave",
+    "cn": "科威",
+    "category": "AI云服务",
+    "ecosystemLayer": 6,
+    "description": "专注于AI和高性能计算的GPU云服务提供商",
+    "role": "Nvidia战略投资的旗舰级AI云伙伴，最新GPU首发平台",
+    "nvidiaRelation": "Nvidia战略投资+重大股东。CoreWeave商业模式即出租Nvidia GPU",
+    "investment": "Nvidia投资$1亿+",
+    "revenueExposure": "极高（核心商业模式即出租Nvidia GPU算力）",
+    "products": [
+      "GPU云服务",
+      "AI超级计算机",
+      "Blackwell Ultra首发部署"
+    ],
+    "color": "#ff6900",
+    "financial": {
+      "price": 137.98,
+      "marketCap": "74.9B",
+      "marketCapVal": 74900000000,
+      "ps": 14.6,
+      "pe": null,
+      "ytd": 86.64,
+      "1y": 154.11
+    }
+  },
+  {
+    "ticker": "NBIS",
+    "company": "Nebius",
+    "cn": "尼比乌斯",
+    "category": "AI云服务",
+    "ecosystemLayer": 6,
+    "description": "前Yandex重组后的AI基础设施公司，欧洲AI云平台",
+    "role": "Nvidia重金投资的欧洲AI云平台，全栈AI工程合作伙伴",
+    "nvidiaRelation": "Nvidia投资$20亿支持其部署5GW+容量的AI工厂",
+    "investment": "Nvidia投资$20亿",
+    "revenueExposure": "极高（Nvidia是最大投资方和技术提供商）",
+    "products": [
+      "GPU云服务",
+      "AI工厂建设",
+      "Nvidia全栈方案部署"
+    ],
+    "color": "#744fb3",
+    "financial": {
+      "price": 195.09,
+      "marketCap": "49.5B",
+      "marketCapVal": 49500000000,
+      "ps": 92.72,
+      "pe": 345.14,
+      "ytd": 124.27,
+      "1y": 679.11
+    }
+  },
+  {
+    "ticker": "DELL",
+    "company": "Dell (戴尔)",
+    "cn": "戴尔科技",
+    "category": "服务器OEM",
+    "ecosystemLayer": 6,
+    "description": "全球最大服务器制造商之一，PowerEdge系列GPU服务器",
+    "role": "核心OEM制造商 — Dell AI Factory整合Nvidia加速计算",
+    "nvidiaRelation": "Dell AI Factory with NVIDIA。提供PowerEdge XE系列GPU服务器",
+    "investment": "-",
+    "revenueExposure": "高（PowerEdge GPU服务器是增长最快的产品线）",
+    "products": [
+      "PowerEdge XE9680 GPU服务器",
+      "Dell AI Factory",
+      "液冷机架"
+    ],
+    "color": "#007db8",
+    "financial": {
+      "price": 238.8,
+      "marketCap": "155.3B",
+      "marketCapVal": 155300000000,
+      "ps": 1.37,
+      "pe": 27.51,
+      "ytd": 86.05,
+      "1y": 154.18
+    }
+  },
+  {
+    "ticker": "MPWR",
+    "company": "Monolithic Power Systems",
+    "cn": "芯源系统",
+    "category": "电源管理IC",
+    "ecosystemLayer": 7,
+    "description": "GPU核心电源管理IC供应商，Nvidia最关键的电源芯片伙伴",
+    "role": "核心电源IC供应商 — GPU供电最关键的外部芯片供应商",
+    "nvidiaRelation": "Nvidia GPU核心电源方案商。DC-DC转换技术用于H100/B200等",
+    "investment": "-",
+    "revenueExposure": "极高（Nvidia占营收25-35%，业绩高度联动）",
+    "products": [
+      "多相电源控制器",
+      "Intelli-Phase功率级",
+      "DC-DC转换器"
+    ],
+    "color": "#d42027",
+    "financial": {
+      "price": 1652.35,
+      "marketCap": "81.2B",
+      "marketCapVal": 81200000000,
+      "ps": 27.45,
+      "pe": 118.09,
+      "ytd": 78.13,
+      "1y": 165.23
+    }
+  },
+  {
+    "ticker": "ADI",
+    "company": "Analog Devices",
+    "cn": "亚德诺半导体",
+    "category": "模拟芯片",
+    "ecosystemLayer": 7,
+    "description": "全球顶级高性能模拟/混合信号半导体公司",
+    "role": "高性能模拟方案商 — 精密数据转换/时钟/RF/BMS",
+    "nvidiaRelation": "Nvidia首选模拟方案商，覆盖信号链/时钟/隔离/汽车",
+    "investment": "-",
+    "revenueExposure": "中等（Nvidia是重要客户但非最大）",
+    "products": [
+      "精密ADC/DAC",
+      "时钟发生器",
+      "隔离器",
+      "RF IC"
+    ],
+    "color": "#009688",
+    "financial": {
+      "price": 415.63,
+      "marketCap": "202.9B",
+      "marketCapVal": 202900000000,
+      "ps": 17.26,
+      "pe": 75.93,
+      "ytd": 51.1,
+      "1y": 112.49
+    }
+  },
+  {
+    "ticker": "ON",
+    "company": "ON Semiconductor (安森美)",
+    "cn": "安森美",
+    "category": "功率半导体",
+    "ecosystemLayer": 7,
+    "description": "智能电源和感知技术领导者",
+    "role": "电源管理+ADAS图像传感器供应商",
+    "nvidiaRelation": "GPU电源管理IC + DRIVE平台ADAS图像传感器",
+    "investment": "-",
+    "revenueExposure": "中高（汽车47%营收含Nvidia DRIVE合作）",
+    "products": [
+      "电源管理IC",
+      "8MP车规图像传感器",
+      "MOSFET"
+    ],
+    "color": "#005f7f",
+    "financial": {
+      "price": 105.77,
+      "marketCap": "41.5B",
+      "marketCapVal": 41500000000,
+      "ps": 6.84,
+      "pe": 75.53,
+      "ytd": 91.44,
+      "1y": 174.66
+    }
+  },
+  {
+    "ticker": "STM",
+    "company": "STMicroelectronics",
+    "cn": "意法半导体",
+    "category": "半导体综合",
+    "ecosystemLayer": 7,
+    "description": "欧洲最大半导体IDM，汽车/工业/边缘AI芯片供应商",
+    "role": "功率+汽车+边缘AI配套 — SiC功率器件和STM32 MCU",
+    "nvidiaRelation": "SiC MOSFET用于服务器电源；STM32 MCU配套Nvidia DRIVE/Jetson",
+    "investment": "-",
+    "revenueExposure": "中等（汽车和工业业务与Nvidia有重叠）",
+    "products": [
+      "SiC MOSFET",
+      "STM32 MCU",
+      "MEMS传感器"
+    ],
+    "color": "#008acf",
+    "financial": {
+      "price": 57.95,
+      "marketCap": "52.7B",
+      "marketCapVal": 52700000000,
+      "ps": 4.25,
+      "pe": 370.79,
+      "ytd": 110.57,
+      "1y": 156.98
+    }
+  },
+  {
+    "ticker": "KEYS",
+    "company": "Keysight (是德科技)",
+    "cn": "是德科技",
+    "category": "测试测量",
+    "ecosystemLayer": 7,
+    "description": "全球领先的电子测试测量设备公司",
+    "role": "测试验证伙伴 — 高速信号测试/EDA仿真/网络认证",
+    "nvidiaRelation": "测试工具供应商（非芯片供应商）。Nvidia芯片设计依赖Keysight验证设备",
+    "investment": "-",
+    "revenueExposure": "低-中（间接，Nvidia是其重要客户之一）",
+    "products": [
+      "110GHz示波器",
+      "矢量网络分析仪",
+      "PathWave EDA"
+    ],
+    "color": "#ffe000",
+    "financial": {
+      "price": 366.68,
+      "marketCap": "62.9B",
+      "marketCapVal": 62900000000,
+      "ps": 11.08,
+      "pe": 65.94,
+      "ytd": 79.99,
+      "1y": 150.23
+    }
+  }
+];
+
+const LAYERS = [{"id": 0, "name": "芯片代工 & 设计", "icon": "🏭", "desc": "GPU设计与制造的核心"}, {"id": 1, "name": "存储 & 内存", "icon": "💾", "desc": "AI训练数据的存储与GPU显存"}, {"id": 2, "name": "半导体设备", "icon": "🔬", "desc": "晶圆制造与封装的关键设备"}, {"id": 3, "name": "网络 & 光通信", "icon": "🌐", "desc": "AI数据中心的互连基础"}, {"id": 4, "name": "封装 & 制造", "icon": "🏗️", "desc": "芯片封测与硬件集成"}, {"id": 5, "name": "基础设施 & 电源", "icon": "⚡", "desc": "AI工厂的电力与冷却"}, {"id": 6, "name": "云服务 & OEM", "icon": "☁️", "desc": "GPU算力的交付与服务"}, {"id": 7, "name": "其他半导体", "icon": "🔌", "desc": "电源管理、模拟芯片、测试设备"}];
+
+const LAYER_COLORS = ["#8e44ad", "#27ae60", "#2980b9", "#f39c12", "#e67e22", "#c0392b", "#2c3e50", "#16a085"];
+
+// ========== HELPERS ==========
+function fmt(num, suffix='', prefix='') {
+  if (num == null) return '<span class="num-na">—</span>';
+  return `<span class="num">${prefix}${Number(num).toFixed(2)}${suffix}</span>`;
+}
+
+function fmtMC(mc) {
+  if (!mc) return '<span class="num-na">—</span>';
+  if (mc >= 1e12) return `<span class="num">$${(mc/1e12).toFixed(1)}T</span>`;
+  if (mc >= 1e9) return `<span class="num">$${(mc/1e9).toFixed(1)}B</span>`;
+  return `<span class="num">$${(mc/1e6).toFixed(1)}M</span>`;
+}
+
+function pct(v) {
+  if (v == null) return '<span class="num-na">—</span>';
+  const cls = v >= 0 ? 'num-pos' : 'num-neg';
+  const sign = v >= 0 ? '+' : '';
+  return `<span class="num ${cls}">${sign}${v.toFixed(2)}%</span>`;
+}
+
+function getLayerName(layer) {
+  const l = LAYERS.find(x => x.id === layer);
+  return l ? l.name : '未知';
+}
+
+function getLayerIcon(layer) {
+  const l = LAYERS.find(x => x.id === layer);
+  return l ? l.icon : '❓';
+}
+
+function getLayerColor(layer) {
+  return LAYER_COLORS[layer] || '#666';
+}
+
+// ========== RENDER STATS ==========
+function renderStats(companies) {
+  const totalMC = companies.reduce((s, c) => s + (c.financial?.marketCapVal || 0), 0);
+  const psVals = companies.filter(c => c.financial?.ps != null).map(c => c.financial.ps);
+  const peVals = companies.filter(c => c.financial?.pe != null).map(c => c.financial.pe);
+  const avgPS = psVals.length ? (psVals.reduce((a,b) => a+b, 0) / psVals.length).toFixed(2) : '—';
+  const avgPE = peVals.length ? (peVals.reduce((a,b) => a+b, 0) / peVals.length).toFixed(2) : '—';
+  
+  document.getElementById('stats-bar').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-value" style="color:var(--accent)">${companies.length}</div>
+      <div class="stat-label">生态链公司</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$${(totalMC/1e12).toFixed(1)}T</div>
+      <div class="stat-label">总市值</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">${avgPS}x</div>
+      <div class="stat-label">平均 P/S</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">${avgPE}x</div>
+      <div class="stat-label">平均 P/E</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" style="color:var(--green)">${LAYERS.length}</div>
+      <div class="stat-label">生态层级</div>
+    </div>
+  `;
+}
+
+// ========== RENDER FLOW ==========
+function renderFlow() {
+  const container = document.getElementById('flow-nodes');
+  let html = '';
+  LAYERS.forEach((layer, i) => {
+    const count = COMPANIES.filter(c => c.ecosystemLayer === layer.id).length;
+    if (i > 0) html += '<div class="flow-arrow">→</div>';
+    html += `
+      <div class="flow-node" style="background:${getLayerColor(layer.id)}22; border: 1px solid ${getLayerColor(layer.id)}44" onclick="filterLayer(${layer.id})">
+        <div class="flow-node-icon">${layer.icon}</div>
+        <div class="flow-node-name">${layer.name}</div>
+        <div class="flow-node-count">${count} 家公司</div>
+        <div style="font-size:10px;color:var(--ink-faint);margin-top:2px">${layer.desc}</div>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+// ========== RENDER TABLE ==========
+let currentFilter = 'all';
+let currentSort = 'name';
+let searchTerm = '';
+
+function renderTable(companies) {
+  let filtered = [...companies];
+  
+  // Filter by layer
+  if (currentFilter !== 'all') {
+    filtered = filtered.filter(c => c.ecosystemLayer === parseInt(currentFilter));
+  }
+  
+  // Search
+  if (searchTerm) {
+    const q = searchTerm.toLowerCase();
+    filtered = filtered.filter(c => 
+      c.ticker.toLowerCase().includes(q) ||
+      c.company.toLowerCase().includes(q) ||
+      (c.cn && c.cn.toLowerCase().includes(q))
+    );
+  }
+  
+  // Sort
+  const [key, dir] = currentSort.split('-');
+  filtered.sort((a, b) => {
+    let va, vb;
+    if (key === 'name') {
+      va = a.ticker; vb = b.ticker;
+      return va.localeCompare(vb);
+    }
+    if (key === 'mcap') {
+      va = a.financial?.marketCapVal || 0;
+      vb = b.financial?.marketCapVal || 0;
+    } else if (key === 'price') {
+      va = a.financial?.price || 0;
+      vb = b.financial?.price || 0;
+    } else if (key === 'ps') {
+      va = a.financial?.ps || 0;
+      vb = b.financial?.ps || 0;
+    } else if (key === 'pe') {
+      va = a.financial?.pe || 99999;
+      vb = b.financial?.pe || 99999;
+    } else {
+      va = a.financial?.[key] != null ? a.financial[key] : -99999;
+      vb = b.financial?.[key] != null ? b.financial[key] : -99999;
+    }
+    return dir === 'asc' ? va - vb : vb - va;
+  });
+  
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = filtered.map(c => {
+    const f = c.financial || {};
+    const color = getLayerColor(c.ecosystemLayer);
+    return `
+      <tr onclick="openModal('${c.ticker}')">
+        <td>
+          <div class="ticker-cell">
+            <div class="layer-indicator" style="background:${color}"></div>
+            <div>
+              <div class="ticker-badge">${c.ticker}</div>
+              <div class="company-name" style="font-size:11px;color:var(--ink-muted)">${c.company}</div>
+            </div>
+          </div>
+        </td>
+        <td class="num-cell">${f.price != null ? '<span class="num">$'+f.price.toFixed(2)+'</span>' : '<span class="num-na">—</span>'}</td>
+        <td class="num-cell">${fmtMC(f.marketCapVal)}</td>
+        <td class="num-cell">${f.ps != null ? fmt(f.ps, 'x') : '<span class="num-na">—</span>'}</td>
+        <td class="num-cell">${f.pe != null ? fmt(f.pe, 'x') : '<span class="num-na">—</span>'}</td>
+        <td class="num-cell">${pct(f.ytd)}</td>
+        <td class="num-cell">${pct(f['1y'])}</td>
+        <td>
+          <span class="category-badge" style="background:${color}22; color:${color}">
+            ${getLayerIcon(c.ecosystemLayer)} ${getLayerName(c.ecosystemLayer)}
+          </span>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+// ========== MODAL ==========
+function openModal(ticker) {
+  const c = COMPANIES.find(x => x.ticker === ticker);
+  if (!c) return;
+  const f = c.financial || {};
+  const color = getLayerColor(c.ecosystemLayer);
+  
+  document.getElementById('modal-content').innerHTML = `
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-header">
+      <div class="modal-ticker-icon" style="background:${color}22; color:${color}">${c.ticker}</div>
+      <div>
+        <div class="modal-title">${c.company}</div>
+        <div class="modal-subtitle">${c.cn || ''} · ${getLayerIcon(c.ecosystemLayer)} ${getLayerName(c.ecosystemLayer)}层 · ${c.category}</div>
+      </div>
+    </div>
+    
+    <div class="modal-section">
+      <div class="modal-section-title">📋 公司简介</div>
+      <div class="modal-desc">${c.description || ''}</div>
+    </div>
+    
+    <div class="modal-section">
+      <div class="modal-section-title">🔗 在英伟达生态链中的角色</div>
+      <div class="modal-role" style="border-color:${color}">${c.role || ''}</div>
+      <div class="modal-desc" style="margin-top:8px;font-size:13px;color:var(--ink-muted)">
+        <strong>关系定位：</strong>${c.nvidiaRelation || ''}
+      </div>
+      ${c.investment ? '<div style="margin-top:8px;font-size:13px"><strong>💰 英伟达投资：</strong>'+c.investment+'</div>' : ''}
+      <div style="margin-top:4px;font-size:13px;color:var(--ink-muted)">
+        <strong>营收依赖：</strong>${c.revenueExposure || ''}
+      </div>
+    </div>
+    
+    <div class="modal-section">
+      <div class="modal-section-title">💰 财务数据</div>
+      <div class="modal-fin-grid">
+        <div class="modal-fin-item">
+          <div class="modal-fin-val">${f.price != null ? '$'+f.price.toFixed(2) : '—'}</div>
+          <div class="modal-fin-lbl">股价</div>
+        </div>
+        <div class="modal-fin-item">
+          <div class="modal-fin-val">${f.marketCap || '—'}</div>
+          <div class="modal-fin-lbl">市值</div>
+        </div>
+        <div class="modal-fin-item">
+          <div class="modal-fin-val" style="color:${f.ytd >= 0 ? 'var(--green)' : 'var(--red)'}">${f.ytd != null ? (f.ytd >= 0 ? '+' : '')+f.ytd.toFixed(2)+'%' : '—'}</div>
+          <div class="modal-fin-lbl">YTD 涨幅</div>
+        </div>
+        <div class="modal-fin-item">
+          <div class="modal-fin-val" style="color:${f['1y'] >= 0 ? 'var(--green)' : 'var(--red)'}">${f['1y'] != null ? (f['1y'] >= 0 ? '+' : '')+f['1y'].toFixed(2)+'%' : '—'}</div>
+          <div class="modal-fin-lbl">1年涨幅</div>
+        </div>
+        <div class="modal-fin-item">
+          <div class="modal-fin-val">${f.ps != null ? f.ps.toFixed(2)+'x' : '—'}</div>
+          <div class="modal-fin-lbl">P/S</div>
+        </div>
+        <div class="modal-fin-item">
+          <div class="modal-fin-val">${f.pe != null ? f.pe.toFixed(2)+'x' : '—'}</div>
+          <div class="modal-fin-lbl">P/E</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal-section">
+      <div class="modal-section-title">🔬 核心产品</div>
+      <div class="modal-products">
+        ${(c.products || []).map(p => '<span class="product-tag">'+p+'</span>').join('')}
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+// Close modal on overlay click
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// Close on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ========== FILTERS ==========
+function filterLayer(layer) {
+  currentFilter = layer.toString();
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.layer === currentFilter);
+  });
+  renderTable(COMPANIES);
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => filterLayer(btn.dataset.layer));
+});
+
+// ========== SEARCH ==========
+document.getElementById('search-input').addEventListener('input', function() {
+  searchTerm = this.value;
+  renderTable(COMPANIES);
+});
+
+// ========== SORT ==========
+document.getElementById('sort-select').addEventListener('change', function() {
+  currentSort = this.value;
+  renderTable(COMPANIES);
+});
+
+document.querySelectorAll('th[data-sort]').forEach(th => {
+  th.addEventListener('click', function() {
+    const key = this.dataset.sort;
+    const sel = document.getElementById('sort-select');
+    // Toggle direction
+    const opts = ['ytd','1y','mcap','ps','pe','name'];
+    if (opts.includes(key)) {
+      sel.value = key;
+      currentSort = key;
+      renderTable(COMPANIES);
+    }
+  });
+});
+
+// ========== INIT ==========
+document.getElementById('header-date').textContent = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+renderStats(COMPANIES);
+renderFlow();
+renderTable(COMPANIES);
+</script>
+</body>
+</html>

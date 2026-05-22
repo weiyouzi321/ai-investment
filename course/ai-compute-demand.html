@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MS&E 435 | AI 算力需求分析</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #05080F; --bg-surface: #0C1220; --bg-elevated: #131D2E;
+      --border: #1B2B44; --border-bright: #264166;
+      --accent: #00E676; --accent-glow: rgba(0,230,118,0.15);
+      --green: #00E676; --green-dim: #00A854; --red: #FF5252; --gold: #FFD600; --blue: #448AFF;
+      --text-primary: #E8ECF1; --text-secondary: #9BADC4; --text-muted: #7090AD;
+      --mono: 'IBM Plex Mono', monospace;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{font-size:16px;scroll-behavior:smooth}
+    body{
+      font-family:var(--mono);background:var(--bg-base);color:var(--text-primary);
+      line-height:1.6;-webkit-font-smoothing:antialiased;
+    }
+    body::after{
+      content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
+      background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
+    }
+    .container{max-width:900px;margin:0 auto;padding:0 2rem}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .page-header{padding:3rem 0 2rem;border-bottom:1px solid var(--border);margin-bottom:2.5rem}
+    .back-link{display:inline-block;font-size:0.6rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.5rem;text-decoration:none;transition:color 0.2s}
+    .back-link:hover{color:var(--accent);text-decoration:none}
+    .page-title{font-size:1.5rem;font-weight:700;color:var(--text-primary);line-height:1.2;margin-bottom:0.75rem}
+    .page-subtitle{font-size:0.75rem;color:var(--text-secondary);line-height:1.7;max-width:700px}
+
+    /* Widget */
+    .widget{background:var(--bg-surface);border:1px solid var(--border);padding:1.5rem;font-size:0.825rem;user-select:none;margin-bottom:2.5rem}
+    .slider-row{margin-bottom:0.6rem;position:relative}
+    .slider-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.25rem}
+    .slider-label{font-size:0.725rem;color:var(--text-primary);letter-spacing:0.05em}
+    .slider-value{font-size:0.725rem;font-weight:600;color:var(--green);letter-spacing:0.03em;min-width:55px;text-align:right;transition:color 0.3s}
+    .slider-value.bottleneck{color:var(--red)}
+    input[type="range"]{-webkit-appearance:none;appearance:none;width:100%;height:3px;background:transparent;outline:none;cursor:pointer;margin:0;padding:0}
+    input[type="range"]::-webkit-slider-runnable-track{height:3px;background:var(--border);border-radius:2px;border:none}
+    input[type="range"]::-moz-range-track{height:3px;background:var(--border);border-radius:2px;border:none}
+    input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:10px;height:10px;border-radius:50%;background:var(--text-secondary);border:1px solid var(--border-bright);cursor:pointer;transition:background 0.2s}
+    input[type="range"]::-webkit-slider-thumb:hover{background:var(--accent)}
+    input[type="range"]::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:var(--text-secondary);border:1px solid var(--border-bright);cursor:pointer}
+    .slider-row.is-bottleneck input[type="range"]::-webkit-slider-thumb{background:var(--red);border-color:var(--red)}
+    .slider-row.is-bottleneck input[type="range"]::-moz-range-thumb{background:var(--red);border-color:var(--red)}
+    .demand-row input[type="range"]::-webkit-slider-thumb{background:var(--accent);border-color:var(--accent)}
+    .demand-row input[type="range"]::-moz-range-thumb{background:var(--accent);border-color:var(--accent)}
+    .demand-value{color:var(--accent)!important}
+    .bottleneck-output{margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--border-bright)}
+    .bottleneck-label{font-size:0.675rem;color:var(--text-secondary);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem}
+    .bottleneck-result{display:flex;justify-content:space-between;align-items:center}
+    .bottleneck-name{font-size:0.825rem;font-weight:700;color:var(--red);letter-spacing:0.05em;transition:color 0.3s}
+    .bottleneck-indicator{font-size:0.625rem;color:var(--red);border:1px solid var(--red);padding:0.1rem 0.4rem;border-radius:2px;letter-spacing:0.1em}
+    .effective-rate{margin-top:0.5rem;display:flex;justify-content:space-between;font-size:0.675rem}
+    .effective-rate .er-label{color:var(--text-secondary)}
+    .effective-rate .er-val{color:var(--accent);font-weight:600}
+    .epoch-credit{margin-top:0.75rem;padding-top:0.5rem;border-top:1px solid rgba(27,43,68,0.3);font-size:0.725rem;color:var(--text-secondary);letter-spacing:0.05em;opacity:0.7}
+    .epoch-credit a{color:var(--text-muted);text-decoration:none}
+    .epoch-credit a:hover{color:var(--blue)}
+
+    .section{margin-bottom:2.5rem}
+    .section-title{font-size:0.65rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;font-weight:600;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
+    .section p{font-size:0.8rem;color:var(--text-secondary);line-height:1.8;margin-bottom:1rem}
+    .section p:last-child{margin-bottom:0}
+    .highlight{color:var(--accent);font-weight:500}
+    .factor-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.7rem}
+    .factor-table th{text-align:left;font-size:0.55rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 0.75rem;border-bottom:1px solid var(--border-bright);font-weight:600}
+    .factor-table td{padding:0.6rem 0.75rem;border-bottom:1px solid rgba(27,43,68,0.4);color:var(--text-secondary)}
+    .factor-table tr:last-child td{border-bottom:none}
+    .factor-table .factor-name{color:var(--text-primary);font-weight:500}
+    .factor-table .factor-rate{color:var(--green);font-weight:500}
+    .factor-table .factor-source{font-size:0.6rem;color:var(--text-muted)}
+    .factor-table tr.demand-row td{border-top:1px solid var(--border-bright)}
+    .factor-table tr.demand-row .factor-rate{color:var(--accent)}
+    .concept-box{background:var(--bg-surface);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1.25rem 1.5rem;margin:1.5rem 0}
+    .concept-box .concept-title{font-size:0.6rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;font-weight:600;margin-bottom:0.5rem}
+    .concept-box p{font-size:0.75rem;color:var(--text-secondary);line-height:1.7;margin-bottom:0}
+    .formula{background:var(--bg-surface);border:1px solid var(--border);padding:1.25rem 1.5rem;margin:1.5rem 0;font-size:0.75rem;color:var(--green);font-weight:500;letter-spacing:0.03em}
+    .formula .comment{color:var(--text-muted);font-weight:400;font-size:0.65rem}
+    .source-list{list-style:none;margin:1rem 0}
+    .source-list li{font-size:0.7rem;color:var(--text-secondary);padding:0.4rem 0;border-bottom:1px solid rgba(27,43,68,0.3)}
+    .source-list li:last-child{border-bottom:none}
+    .source-list li::before{content:'▸ ';color:var(--accent)}
+    .source-list a{color:var(--blue)}
+    footer{border-top:1px solid var(--border);padding:1rem 0;text-align:center;margin-top:1rem}
+    .footer-text{font-size:0.5rem;color:var(--text-muted);letter-spacing:0.08em}
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="page-header">
+    <a href="index.html" class="back-link">&larr; 返回 MS&E 435 首页</a>
+    <h1 class="page-title">AI 算力需求</h1>
+    <p class="page-subtitle">AI 算力栈包含多个层级，每个层级以不同速度增长。增长最慢的层级制约着整个系统的吞吐量——这就是瓶颈。用下面的计算器来模拟当这些增长率变化时会发生什么。</p>
+  </div>
+
+  <!-- Interactive Bottleneck Calculator -->
+  <div class="widget" id="bottleneck-widget">
+    <div class="slider-row" data-key="chips">
+      <div class="slider-header">
+        <span class="slider-label">芯片产量</span>
+        <span class="slider-value">&#9650; 45%/年</span>
+      </div>
+      <input type="range" min="-50" max="200" value="45">
+    </div>
+    <div class="slider-row" data-key="memory">
+      <div class="slider-header">
+        <span class="slider-label">内存带宽</span>
+        <span class="slider-value">&#9650; 28%/年</span>
+      </div>
+      <input type="range" min="-50" max="200" value="28">
+    </div>
+    <div class="slider-row" data-key="energy">
+      <div class="slider-header">
+        <span class="slider-label">能源容量</span>
+        <span class="slider-value">&#9650; 15%/年</span>
+      </div>
+      <input type="range" min="-50" max="200" value="15">
+    </div>
+    <div class="slider-row" data-key="network">
+      <div class="slider-header">
+        <span class="slider-label">网络/互连</span>
+        <span class="slider-value">&#9650; 35%/年</span>
+      </div>
+      <input type="range" min="-50" max="200" value="35">
+    </div>
+    <div class="slider-row demand-row" data-key="demand">
+      <div class="slider-header">
+        <span class="slider-label">算力需求</span>
+        <span class="slider-value demand-value">&#9650; 310%/年</span>
+      </div>
+      <input type="range" min="50" max="500" value="310">
+    </div>
+    <div class="bottleneck-output">
+      <div class="bottleneck-label">当前瓶颈</div>
+      <div class="bottleneck-result">
+        <span class="bottleneck-name" id="bn-name">能源容量</span>
+        <span class="bottleneck-indicator">制约中</span>
+      </div>
+      <div class="effective-rate">
+        <span class="er-label">有效供给增长：</span>
+        <span class="er-val" id="bn-rate">&#9650; 15%/年</span>
+      </div>
+      <div class="effective-rate">
+        <span class="er-label">供需缺口：</span>
+        <span class="er-val" id="bn-gap" style="color:var(--red);">&minus;295%/年</span>
+      </div>
+    </div>
+    <div class="epoch-credit"><a href="https://epoch.ai" target="_blank">epoch.ai</a> 估算 — CC BY 4.0</div>
+  </div>
+
+  <!-- Core Idea -->
+  <div class="section">
+    <div class="section-title">核心理念</div>
+    <p>AI 算力是一个<span class="highlight">依赖链</span>：你需要芯片来处理数据、内存带宽来供给芯片、能源来驱动数据中心、以及高速互连来连接一切。总的可用算力只能以其中最薄弱的环节的速度增长。</p>
+    <p>与此同时，由更大模型、更多用户和新应用驱动的算力需求正以惊人的速度增长。供给与需求之间的缺口告诉我们经济压力（和利润）集中在何处。</p>
+    <div class="concept-box">
+      <div class="concept-title">为什么这对AI经济至关重要</div>
+      <p>瓶颈决定了定价权。哪个环节最受限，哪个环节就能收取最高价格。这就是为什么 NVIDIA 一直拥有非凡的利润率——芯片曾是瓶颈。但随着芯片供应扩大，瓶颈可能转移到能源、互连或内存——随之而来的是价值创造的中心也会转移。</p>
+    </div>
+  </div>
+
+  <!-- Five Factors -->
+  <div class="section">
+    <div class="section-title">五大因素</div>
+    <p>计算器中的每个滑块代表 AI 算力栈中一个关键层级的年增长率。默认值来自 Epoch AI 的实证研究：</p>
+    <table class="factor-table">
+      <thead>
+        <tr><th>因素</th><th>默认值</th><th>衡量内容</th><th>来源</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="factor-name">芯片产量</td><td class="factor-rate">45%/年</td>
+          <td>所有AI加速器（GPU、TPU、定制ASIC）的年度总FLOPS产量</td>
+          <td class="factor-source">Epoch AI 芯片销售数据</td>
+        </tr>
+        <tr>
+          <td class="factor-name">内存带宽</td><td class="factor-rate">28%/年</td>
+          <td>GPU内存带宽逐代提升的速度（HBM2 → HBM3 → HBM3E）</td>
+          <td class="factor-source">Epoch AI 硬件数据库</td>
+        </tr>
+        <tr>
+          <td class="factor-name">能源容量</td><td class="factor-rate">15%/年</td>
+          <td>AI数据中心可用电力的增长，包括新建和电网扩容</td>
+          <td class="factor-source">IEA, Epoch AI 估算</td>
+        </tr>
+        <tr>
+          <td class="factor-name">网络/互连</td><td class="factor-rate">35%/年</td>
+          <td>GPU间和节点间带宽的提升（NVLink、InfiniBand、光学互连）</td>
+          <td class="factor-source">Epoch AI 硬件数据库</td>
+        </tr>
+        <tr class="demand-row">
+          <td class="factor-name">算力需求</td><td class="factor-rate">310%/年</td>
+          <td>AI训练和推理消耗的总FLOPS增长，由规模定律和应用驱动</td>
+          <td class="factor-source">Epoch AI 算力趋势</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Calculation -->
+  <div class="section">
+    <div class="section-title">计算逻辑</div>
+    <p>计算器应用了一个简单但强大的原则：<span class="highlight">有效供给增长 = min(所有供给因素)</span>。这是将 Liebig 最小因子定律应用于算力基础设施。</p>
+    <div class="formula">
+      <span class="comment">// 有效吞吐量增长</span><br>
+      supply_growth = min(chips, memory, energy, network)<br><br>
+      <span class="comment">// 缺口告诉你系统有多受限</span><br>
+      gap = supply_growth - demand_growth<br><br>
+      <span class="comment">// gap &lt; 0 → 需求超过供给 → 价格上升</span><br>
+      <span class="comment">// gap &gt; 0 → 供给超过需求 → 商品化</span>
+    </div>
+  </div>
+
+  <!-- Scenarios -->
+  <div class="section">
+    <div class="section-title">试试这些场景</div>
+    <p><span class="highlight">场景1：NVIDIA 解决芯片供给。</span> 将芯片产量推到 80%+。观察瓶颈转移到能源。这大致是 2025–2026 的轨迹——台积电扩大产能，但数据中心电力难以跟上。</p>
+    <p><span class="highlight">场景2：需求放缓。</span> 将需求拉到 100%/年。供给可能赶上，缺口关闭。这是"AI 寒冬" scenario——投资收益变得更难。</p>
+    <p><span class="highlight">场景3：能源突破。</span> 将能源推到 50%/年（核能复兴、模块化反应堆）。瓶颈转移到内存带宽——一些研究者认为这将是训练前沿模型的下一个壁垒。</p>
+    <p><span class="highlight">场景4：所有因素均衡提升。</span> 将所有供给因素设为 ~60%。系统没有单一堵点，各层竞争加剧，整个栈的利润率被压缩。</p>
+  </div>
+
+  <!-- Data Sources -->
+  <div class="section">
+    <div class="section-title">数据来源</div>
+    <p>所有默认值来自 <a href="https://epoch.ai">Epoch AI</a> 的公开研究，采用 CC BY 4.0 许可。</p>
+    <ul class="source-list">
+      <li><a href="https://epoch.ai/data/ai-chip-sales">AI 芯片销售数据</a> — 各加速器厂商的产量和市场份额</li>
+      <li><a href="https://epoch.ai/data/machine-learning-hardware">机器学习硬件数据库</a> — 170+ AI 加速器的规格（带宽、效率等）</li>
+      <li><a href="https://epoch.ai/data-insights/ai-chip-production">AI 算力容量</a> — 总可用 FLOPS 及翻倍时间分析</li>
+      <li><a href="https://epoch.ai/data-insights/cost-trend-large-scale">训练成本趋势</a> — 前沿模型的算力成本轨迹</li>
+      <li><a href="https://epoch.ai/trends">AI 趋势面板</a> — 所有追踪指标的交互式图表</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-text">MS&E 435 &mdash; Stanford University &mdash; Department of Management Science &amp; Engineering</div>
+    <div class="footer-text" style="margin-top:0.3rem;">本页为课程内容的翻译版，原始资料 © Stanford University / Apoorv Agrawal</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const widget = document.getElementById('bottleneck-widget');
+  if (!widget) return;
+  const supplyRows = widget.querySelectorAll('.slider-row:not(.demand-row)');
+  const demandRow = widget.querySelector('.demand-row');
+  const demandSlider = demandRow.querySelector('input[type="range"]');
+  const demandDisplay = demandRow.querySelector('.slider-value');
+  const bnName = document.getElementById('bn-name');
+  const bnRate = document.getElementById('bn-rate');
+  const bnGap = document.getElementById('bn-gap');
+  const labels = { chips: '芯片产量', memory: '内存带宽', energy: '能源容量', network: '网络/互连' };
+
+  function update() {
+    const demandGrowth = parseInt(demandSlider.value);
+    const dArrow = demandGrowth >= 0 ? '\u25B2' : '\u25BC';
+    demandDisplay.textContent = dArrow + ' ' + Math.abs(demandGrowth) + '%/年';
+    let minVal = Infinity, minKey = '';
+    supplyRows.forEach(function (row) {
+      const key = row.dataset.key;
+      const slider = row.querySelector('input[type="range"]');
+      const display = row.querySelector('.slider-value');
+      const val = parseInt(slider.value);
+      const arrow = val >= 0 ? '\u25B2' : '\u25BC';
+      display.textContent = arrow + ' ' + Math.abs(val) + '%/年';
+      if (val < minVal) { minVal = val; minKey = key; }
+      row.classList.remove('is-bottleneck');
+      display.classList.remove('bottleneck');
+    });
+    supplyRows.forEach(function (row) {
+      const val = parseInt(row.querySelector('input[type="range"]').value);
+      const display = row.querySelector('.slider-value');
+      if (val === minVal) { row.classList.add('is-bottleneck'); display.classList.add('bottleneck'); }
+    });
+    bnName.textContent = labels[minKey] || '未知';
+    const bnArrow = minVal >= 0 ? '\u25B2' : '\u25BC';
+    bnRate.textContent = bnArrow + ' ' + Math.abs(minVal) + '%/年';
+    const gap = minVal - demandGrowth;
+    bnGap.textContent = (gap > 0 ? '+' : '') + gap + '%/年';
+    bnGap.style.color = gap >= 0 ? 'var(--green)' : 'var(--red)';
+  }
+  supplyRows.forEach(function (row) { row.querySelector('input[type="range"]').addEventListener('input', update); });
+  demandSlider.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>

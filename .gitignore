@@ -1,0 +1,12 @@
+# Large media files
+*.mp4
+*.webm
+*.wav
+
+# Build artifacts
+*.log
+*_raw.html
+*_text.txt
+
+# OS files
+.DS_Store

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MS&E 435 | AI 超级周期经济学 — 中文版</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #05080F;
+      --bg-surface: #0C1220;
+      --bg-elevated: #131D2E;
+      --border: #1B2B44;
+      --border-bright: #264166;
+      --accent: #00E676;
+      --accent-glow: rgba(0, 230, 118, 0.15);
+      --green: #00E676;
+      --green-dim: #00A854;
+      --red: #FF5252;
+      --gold: #FFD600;
+      --blue: #448AFF;
+      --text-primary: #E8ECF1;
+      --text-secondary: #9BADC4;
+      --text-muted: #7090AD;
+      --mono: 'IBM Plex Mono', monospace;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--mono);
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 0; }
+
+    /* Hero */
+    .hero { padding: 3rem 0 3rem; position: relative; }
+    .hero-grid { display: block; }
+    .hero-dept { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase; }
+    .hero-course-num {
+      font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; line-height: 1;
+      color: var(--text-primary); margin-bottom: 0.5rem;
+    }
+    .hero-course-num .cursor { color: var(--accent); animation: blink 1s step-end infinite; }
+    .hero-name {
+      font-size: clamp(1rem, 2.2vw, 1.4rem); font-weight: 300;
+      color: var(--accent); line-height: 1.3; margin-bottom: 1rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-desc {
+      font-size: 0.72rem; color: var(--text-secondary);
+      line-height: 1.7; margin-bottom: 1.25rem;
+    }
+    .hero-people { display: flex; gap: 2.5rem; }
+    .hero-person-label { font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .hero-person-name { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+    .hero-person-name a { color: var(--text-primary); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    .hero-person-name a:hover { border-bottom-color: var(--accent); }
+    .hero-person-title { font-size: 0.7rem; color: var(--text-secondary); margin-top: 0.15rem; }
+    .hero-speakers { margin-top: 1.5rem; }
+    .hero-speakers-head { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 0.6rem; }
+    .hero-speaker-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 2rem; }
+    .hero-speaker-item { padding: 0.5rem 0; }
+    .hero-speaker-name { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.1rem; }
+    .hero-speaker-role { font-size: 0.6rem; color: var(--text-secondary); }
+    .hero-speaker-role .org { color: var(--accent); }
+
+    .site-nav { display: flex; align-items: center; gap: 1.5rem; }
+    .site-nav a {
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none; transition: color 0.2s;
+    }
+    .site-nav a:hover { color: var(--accent); }
+    .site-nav a.active { color: var(--accent); }
+    .hero-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+
+    .logistics-label { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.6rem; }
+    .logistics-info { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 3rem; font-size: 0.8rem; color: var(--text-primary); line-height: 1.7; }
+    .logistics-info .highlight { color: var(--accent); }
+    .logistics-info a { color: var(--text-primary); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    .logistics-info a:hover { border-bottom-color: var(--accent); }
+
+    /* Back link */
+    .back-link {
+      display: inline-block; font-size: 0.6rem; color: var(--text-muted);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    footer { border-top: 1px solid var(--border); padding: 1rem 0; text-align: center; margin-top: 2rem; }
+    .footer-text { font-size: 0.55rem; color: var(--text-muted); letter-spacing: 0.08em; }
+    .footer-link { display: block; font-size: 0.55rem; color: var(--text-muted); text-decoration: none; margin-top: 0.2rem; }
+    .footer-link:hover { color: var(--text-secondary); }
+
+    @media (max-width: 768px) {
+      .hero-speaker-grid { grid-template-columns: 1fr; }
+      .hero-people { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-top">
+            <div class="hero-dept">Stanford University</div>
+            <nav class="site-nav">
+              <a href="index.html" class="active">首页</a>
+              <a href="materials.html">课程表</a>
+              <a href="https://www.youtube.com/@MSE435EconomicsofAI" target="_blank" rel="noopener">YouTube</a>
+              <a href="../">◈ 门户</a>
+            </nav>
+          </div>
+          <a href="../" class="back-link">&larr; 返回导航门户</a>
+          <h1 class="hero-course-num">MS&E 435<span class="cursor">_</span></h1>
+          <div class="hero-name">AI 超级周期经济学 — 中文版</div>
+          <p class="hero-desc">
+            AI 是自 PC、互联网和移动时代以来最大的技术超级周期。MS&E 435 是一个研讨型课程，剖析 AI 技术栈每一层的经济学原理。
+            每周邀请一位具有独特视角的从业者，分享他们在技术栈各个环节的实践经验。
+          </p>
+          <div class="hero-people">
+            <div class="hero-person">
+              <div class="hero-person-label">授课教师</div>
+              <div class="hero-person-name"><a href="https://www.linkedin.com/in/apoorv03" target="_blank" rel="noopener">Apoorv Agrawal</a></div>
+              <div class="hero-person-title">合伙人, Altimeter Capital</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-speakers">
+          <div class="hero-speakers-head">嘉宾讲师</div>
+          <div class="hero-speaker-grid">
+            <div class="hero-speaker-item">
+              <div class="hero-speaker-name">Ali Ghodsi</div>
+              <div class="hero-speaker-role">创始人/CEO, <span class="org">Databricks</span></div>
+            </div>
+            <div class="hero-speaker-item">
+              <div class="hero-speaker-name">Guillermo Rauch</div>
+              <div class="hero-speaker-role">创始人/CEO, <span class="org">Vercel</span></div>
+            </div>
+            <div class="hero-speaker-item">
+              <div class="hero-speaker-name">Brad Gerstner</div>
+              <div class="hero-speaker-role">创始人/CEO, <span class="org">Altimeter Capital</span></div>
+            </div>
+            <div class="hero-speaker-item">
+              <div class="hero-speaker-name">Sunny Madra</div>
+              <div class="hero-speaker-role">总裁/COO, <span class="org">Groq (现 NVIDIA)</span></div>
+            </div>
+            <div class="hero-speaker-item">
+              <div class="hero-speaker-name">Chase Lochmiller</div>
+              <div class="hero-speaker-role">联合创始人/CEO, <span class="org">Crusoe</span></div>
+            </div>
+            <div class="hero-speaker-item">
+              <div class="hero-speaker-name">Sachin Katti</div>
+              <div class="hero-speaker-role">工业计算主管, <span class="org">OpenAI</span></div>
+            </div>
+            <div class="hero-speaker-item">
+              <div class="hero-speaker-name">Tuhin Srivastava</div>
+              <div class="hero-speaker-role">创始人/CEO, <span class="org">Baseten</span></div>
+            </div>
+            <div class="hero-speaker-item">
+              <div class="hero-speaker-name">Yash Patil</div>
+              <div class="hero-speaker-role">创始人/CEO, <span class="org">Applied Compute</span></div>
+            </div>
+            <div class="hero-speaker-item">
+              <div class="hero-speaker-name">Eric Kauderer-Abrams</div>
+              <div class="hero-speaker-role">生命科学负责人, <span class="org">Anthropic</span></div>
+            </div>
+            <div class="hero-speaker-item">
+              <div class="hero-speaker-name">Josh Meier</div>
+              <div class="hero-speaker-role">联合创始人, <span class="org">Chai Discovery</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="logistics-label">课程信息</div>
+      <div class="logistics-info">
+        <div><span class="highlight">时间：</span>周四 16:30–17:20</div>
+        <div><span class="highlight">日期：</span>4月2日 – 5月28日</div>
+        <div><span class="highlight">地点：</span><a href="https://www.google.com/maps/search/Hewlett+Teaching+Center+Stanford+University" target="_blank">Hewlett 201</a></div>
+        <div><span class="highlight">助教：</span><a href="https://www.linkedin.com/in/chloe-f/" target="_blank" rel="noopener">Chloe Feng</a> (<a href="mailto:chloefn@stanford.edu">chloefn@stanford.edu</a>)</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-text">MS&E 435 &mdash; Stanford University &mdash; Department of Management Science &amp; Engineering</div>
+    <div class="footer-text" style="margin-top:0.3rem;">本网站为课程内容的中文翻译版，仅供学习参考</div>
+    <a href="ai-compute-demand.html" class="footer-link">AI 算力需求分析（交互计算器）</a>
+    <a href="../" class="footer-link">◈ 返回导航门户</a>
+  </div>
+</footer>
+</body>
+</html>
