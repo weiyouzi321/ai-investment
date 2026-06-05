@@ -27,8 +27,18 @@
     .article-meta a{color:var(--text-muted)}
     .article-meta a:hover{color:var(--accent)}
     .article-content{padding-bottom:3rem}
-    .article-content p{font-size:0.8rem;color:var(--text-secondary);line-height:2;margin-bottom:1.2rem;text-align:justify}
-    .article-content p:first-child{margin-top:0}
+    .article-content p{font-size:0.8rem;color:var(--text-secondary);line-height:2;margin-bottom:1.2rem;text-align:justify;text-indent:2em}
+    .article-content p.no-indent{text-indent:0}
+    .article-content p.lead{font-size:0.95rem;color:var(--text-primary);font-weight:500;text-indent:0;margin-bottom:1.8rem;padding-left:1rem;border-left:2px solid var(--accent)}
+    .article-content h2+p{margin-top:1rem}
+    .article-content h2+.toc{margin-top:0.5rem;margin-bottom:2rem}
+    .toc{background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;padding:1rem 1.2rem;font-size:0.7rem;color:var(--text-secondary)}
+    .toc p{margin:0 0 0.5rem;text-indent:0}
+    .toc li{margin:0.3rem 0;list-style:none}
+    .toc a{color:var(--text-secondary);text-decoration:none}
+    .toc a:hover{color:var(--accent)}
+    .article-figure{margin:1.8rem 0;text-align:center}
+    .article-figure img{max-width:100%;height:auto;border-radius:6px;border:1px solid var(--border)}
     .article-source{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:0.6rem;color:var(--text-muted)}
     .article-source a{color:var(--text-muted)}
     .article-source a:hover{color:var(--accent)}
@@ -57,7 +67,7 @@
   <main>
     <div class="article-content">
 <p>两年前，我曾提出消费级AI正走向一个熟悉的终局：分发渠道将胜过原始模型质量，因此谷歌和Meta等现有巨头最具优势。那时，ChatGPT大约有1亿周活跃用户。</p>
-<p>这场争论已经尘埃落定。我错了。</p>
+<p class="lead">这场争论已经尘埃落定。我错了。</p>
 <p>如今，AI应用已突破10亿周活跃用户，仅ChatGPT就占其中的9亿。它是从零开始建立的用户基础，没有任何现成的分发平台。下面我将通过分析各应用的使用数据来说明：ChatGPT是唯一一款既拥有庞大安装基础、又具备新用户增长动力的AI应用，有望成为像今天的WhatsApp和Chrome那样的核心工具。其他所有挑战者浪潮都已消退。ChatGPT则在持续积累。</p>
 <p>这是多篇系列文章的第一部分，聚焦于使用量。参与度、留存率和用户使用时长将在后续讨论。我从四个维度分析使用量：</p>
 
@@ -75,14 +85,14 @@
 
 <h2>1. ChatGPT在双雄AI竞赛中一骑绝尘</h2>
 
-<p>来源：Sensortower</p>
-<p>方法论说明：数据来源为Sensortower，因此本分析仅涵盖移动端，可能低估了以网页端为主的AI使用量。我选择周活跃用户数（WAU），因为它是日活跃用户数（DAU）和月活跃用户数（MAU）之间的有效折中，也是比较新兴AI产品与成熟消费应用的合理方式。</p>
+<p class="no-indent">来源：Sensortower</p>
+<p class="no-indent">方法论说明：数据来源为Sensortower，因此本分析仅涵盖移动端，可能低估了以网页端为主的AI使用量。我选择周活跃用户数（WAU），因为它是日活跃用户数（DAU）和月活跃用户数（MAU）之间的有效折中，也是比较新兴AI产品与成熟消费应用的合理方式。</p>
 <p>AI应用的总WAU已从2024年1月的约1亿增长至2026年2月的超过12亿。这是两年间约20倍的增长。历史上没有任何应用类别扩张得如此之快。</p>
 
 <figure class="article-figure"><img src="../assets/https_3A_2F_2Fsubstack-post-media.s3.amazonaws.com_2Fpublic_2Fimages_2Fe5e3bf29-c7e1-456d-845b-64a2127ebf95_2694x1382.png" alt="AI应用总WAU历史趋势" loading="lazy" /><figcaption>图 2：AI应用总WAU历史趋势</figcaption></figure>
 
 <p>ChatGPT拥有9亿WAU，超过了Spotify的约6亿，与TikTok（约15亿）和Instagram（约13亿）处于同一量级，并正在逼近我视为核心工具的WhatsApp和Chrome（各约25亿）。当我撰写最初那篇文章时，ChatGPT在消费级巨头面前还微不足道。而现在它已跻身同一梯队。大多数人，包括我自己，都曾以为这需要更长时间。</p>
-<p>来源：Sensortower</p>
+<p class="no-indent">来源：Sensortower</p>
 <p>ChatGPT占据了AI应用总WAU约70%的份额，并且在过去一年中一直保持这一水平。Gemini约占15-20%。其他所有应用（DeepSeek、Grok、Perplexity、Claude、Character AI）合计约占10%。</p>
 <p>AI类别增长了20倍，但几乎全部增长都流向了两个应用。ChatGPT从零开始建立用户基础，没有任何现成的分发平台。而Gemini则依靠谷歌40亿用户的庞大分发网络。</p>
 
@@ -118,7 +128,7 @@
 <h2>4. 在AI应用中，只有ChatGPT看起来像可行的新工具</h2>
 
 <p>我通过"存量与流量"的视角来思考消费应用。存量是你当前的用户基础。流量是新下载量。将两者绘制成图，就能清晰看到发展势头：</p>
-<p>来源：Sensortower</p>
+<p class="no-indent">来源：Sensortower</p>
 
 <figure class="article-figure"><img src="../assets/8381c240-fe04-4f11-aa9e-a8bee41b80fe.png" alt="存量与流量散点图" loading="lazy" /><figcaption>图 6：存量与流量散点图</figcaption></figure>
 
