@@ -3,163 +3,179 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MS&E 435 | 课程资料 — 中文版</title>
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <title>MS&E 435 中文站 — 课程表</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-base: #05080F; --bg-surface: #0C1220; --bg-elevated: #131D2E;
-      --border: #1B2B44; --border-bright: #264166;
-      --accent: #00E676; --accent-glow: rgba(0,230,118,0.15);
-      --green: #00E676; --green-dim: #00A854; --red: #FF5252; --gold: #FFD600; --blue: #448AFF;
-      --text-primary: #E8ECF1; --text-secondary: #9BADC4; --text-muted: #7090AD;
+      --bg-base: #05080F;
+      --bg-surface: #0C1220;
+      --bg-elevated: #131D2E;
+      --border: #1B2B44;
+      --border-bright: #264166;
+      --accent: #00E676;
+      --accent-glow: rgba(0, 230, 118, 0.15);
+      --text-primary: #E8ECF1;
+      --text-secondary: #9BADC4;
+      --text-muted: #7090AD;
       --mono: 'IBM Plex Mono', monospace;
     }
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    html{font-size:16px;scroll-behavior:smooth}
-    body{
-      font-family:var(--mono);background:var(--bg-base);color:var(--text-primary);
-      line-height:1.6;-webkit-font-smoothing:antialiased;
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--mono);
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    body::after{
-      content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
-      background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
+    header {
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-surface);
+      position: sticky;
+      top: 0;
+      z-index: 50;
     }
-    .container{max-width:1140px;margin:0 auto;padding:0 2rem}
-    a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
-
-    .page-header{padding:3rem 0 2rem;margin-bottom:2.5rem}
-    .page-title{font-size:1.5rem;font-weight:700;color:var(--text-primary);line-height:1.2;margin-bottom:0.75rem}
-    .page-subtitle{font-size:0.75rem;color:var(--text-secondary);line-height:1.7;max-width:700px}
-
-    .weeks{margin-bottom:4rem}
-    .week{padding:1.25rem 0}
-    .week:first-child{padding-top:0}
-    .week-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:0.4rem}
-    .week-num{font-size:0.65rem;font-weight:600;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase}
-    .week-date{font-size:0.6rem;color:var(--text-muted);letter-spacing:0.05em}
-    .week-title{font-size:0.9rem;font-weight:500;color:var(--text-primary);margin-bottom:0.5rem}
-    .week-links{display:flex;flex-direction:column;gap:0.35rem}
-    .week-links a{font-size:0.7rem;color:var(--accent);text-decoration:none;transition:color 0.2s}
-    .week-links a:hover{color:var(--text-primary);text-decoration:none}
-    .week-links a{display:block}
-    .week-link-group{margin-top:0.15rem}
-    .week-link-group a{display:block}
-    .week-link-group-label{font-size:0.6rem;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.2rem}
-
-    .site-nav{display:flex;align-items:center;gap:1.5rem}
-    .site-nav a{font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;transition:color 0.2s}
-    .site-nav a:hover{color:var(--accent)}
-    .site-nav a.active{color:var(--accent)}
-    .page-top{display:flex;justify-content:flex-end;align-items:center;padding-top:3rem;margin-bottom:1.5rem}
-
-    .back-link{display:inline-block;font-size:0.6rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.5rem;text-decoration:none;transition:color 0.2s}
-    .back-link:hover{color:var(--accent)}
-
-    .translation-note{font-size:0.55rem;color:var(--text-muted);margin-left:0.3rem;font-style:italic}
-
-    @media(max-width:768px){.week-header{flex-direction:column;gap:0.2rem}}
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 0;
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+    .brand .accent { color: var(--accent); }
+    .nav-links { display: flex; gap: 1rem; align-items: center; }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.5rem;
+      border-radius: 0.35rem;
+    }
+    .nav-links a:hover { color: var(--text-primary); background: var(--bg-elevated); }
+    .pill {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+    .hero {
+      position: relative;
+      padding: 2rem 0 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(1200px 600px at 10% -20%, rgba(0,230,118,0.08), transparent 60%),
+        linear-gradient(180deg, rgba(12,18,32,0.6), transparent);
+    }
+    .hero h1 { font-weight: 700; line-height: 1.1; }
+    .hero p.lead { color: var(--text-secondary); margin-top: 0.5rem; }
+    .schedule { padding: 1.5rem 0 3rem; }
+    .week { border: 1px solid var(--border); border-radius: 0.6rem; background: var(--bg-surface); padding: 1rem 1.25rem; margin-bottom: 1rem; }
+    .week-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .week-title { font-weight: 700; font-size: 1.05rem; }
+    .week-meta { color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem; }
+    .week-body { margin-top: 0.6rem; color: var(--text-secondary); font-size: 0.92rem; }
+    .week-links { margin-top: 0.6rem; display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .week-links a { color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-bright); padding-bottom: 1px; }
+    .week-links a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+    .back { margin-top: 0.75rem; }
+    .back a { color: var(--text-secondary); text-decoration: none; }
+    .back a:hover { color: var(--accent); }
+    footer { border-top: 1px solid var(--border); padding: 1.25rem 0; color: var(--text-muted); font-size: 0.82rem; }
   </style>
 </head>
 <body>
-<div class="container">
-  <div class="page-top">
-    <nav class="site-nav">
-      <a href="index.html">首页</a>
-      <a href="materials.html" class="active">课程表</a>
-      <a href="https://www.youtube.com/@MSE435EconomicsofAI" target="_blank" rel="noopener">YouTube</a>
-    </nav>
-  </div>
-
-  <a href="index.html" class="back-link">&larr; 返回课程首页</a>
-
-  <header class="page-header">
-    <h1 class="page-title">课程资料</h1>
-    <p class="page-subtitle">每讲包含讲座录像、参考资料链接及其中文翻译。点击「📖 中文翻译」阅读资料的中文版。</p>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="/nvidia-ecosystem/course/">MS&E 435<span class="accent">中文站</span></a>
+      <nav class="nav-links">
+        <a href="/nvidia-ecosystem/course/">首页</a>
+        <a href="/nvidia-ecosystem/course/materials.html">课程表</a>
+        <a href="https://mse435.stanford.edu/index.html" target="_blank" rel="noopener">英文原站</a>
+      </nav>
+    </div>
   </header>
 
-  <div class="weeks">
+  <section class="hero">
+    <div class="container">
+      <h1>课程表</h1>
+      <p class="lead">以下内容同步自 <a href="https://mse435.stanford.edu/index.html" style="color:var(--accent)">英文原站</a>，持续更新中。</p>
+    </div>
+  </section>
 
-    <!-- Week 1 -->
-    <div class="week">
-      <div class="week-header">
-        <span class="week-num">第1讲</span>
-        <span class="week-date">4月3日</span>
-      </div>
-      <div class="week-title">生成式AI经济学导论</div>
-      <div class="week-links">
-        <a href="https://www.youtube.com/watch?v=-ubIUNA-zRA">▶ 讲座录像</a>
-        <div class="week-link-group">
-          <div class="week-link-group-label">参考资料</div>
-          <a href="articles/apoorv03_economics_2024.html">📖 生成式AI的经济学 (2024) — Apoorv Agrawal</a>
-          <a href="https://apoorv03.com/p/the-economics-of-generative-ai" target="_blank">🔗 原文</a>
-          <a href="articles/apoorv03_economics_2025.html">📖 生成式AI的经济学：两年之后 — Apoorv Agrawal</a>
-          <a href="https://apoorv03.com/p/the-economics-of-generative-ai-two" target="_blank">🔗 原文</a>
-          <a href="articles/apoorv03_consumer_ai_p1.html">📖 消费级AI的现状 第1部分：使用情况</a>
-          <a href="https://apoorv03.com/p/the-state-of-consumer-ai-part-1-usage" target="_blank">🔗 原文</a>
-          <a href="articles/apoorv03_consumer_ai_p2.html">📖 消费级AI的现状 第2部分：参与度与留存</a>
-          <a href="https://apoorv03.com/p/the-state-of-consumer-ai-part-2-engagement" target="_blank">🔗 原文</a>
-          <a href="articles/apoorv03_consumer_ai_p3.html">📖 消费级AI的现状 第3部分：时间就是金钱</a>
-          <a href="https://apoorv03.com/p/the-state-of-consumer-ai-part-3-time" target="_blank">🔗 原文</a>
+  <section class="schedule">
+    <div class="container">
+
+      <div class="week">
+        <div class="week-head">
+          <div>
+            <div class="week-title">Week 5 — 5月8日</div>
+            <div class="week-meta">城市数据与交通规划</div>
+          </div>
+          <span class="pill">专题 III</span>
+        </div>
+        <div class="week-body">
+          <strong>嘉宾：</strong>Karen Van Dyke &amp; Victor M. Mwangi<br>
+          <strong>单位：</strong>University of Texas at Austin — Community and Regional Planning<br>
+          主题围绕城市数据、交通咨询与空间规划分析展开。
+        </div>
+        <div class="week-links">
+          <a href="https://mse435.stanford.edu/index.html" target="_blank" rel="noopener">查看原始页面</a>
         </div>
       </div>
-    </div>
 
-    <!-- Week 2 -->
-    <div class="week">
-      <div class="week-header">
-        <span class="week-num">第2讲</span>
-        <span class="week-date">4月10日</span>
-      </div>
-      <div class="week-title">芯片层 — GPU 算力经济</div>
-      <div class="week-links">
-        <a href="https://www.youtube.com/watch?v=4faCRNl9Bi4">▶ 讲座录像</a>
-        <div class="week-link-group">
-          <div class="week-link-group-label">参考资料</div>
-          <a href="https://www.youtube.com/watch?v=npBC3R-dOr0">▶ Acquired: Altimeter（与 Brad Gerstner 对谈）[播客]</a>
-          <a href="https://www.youtube.com/watch?v=VfIK5LFGnlk">▶ Groq 创始人 Jonathan Ross：OpenAI 和 Anthropic 将自研芯片，NVIDIA 会达到10万亿美元市值吗？</a>
-          <a href="articles/chris_paik_end_of_software.html">📖 Chris Paik — 软件的终结</a>
-          <a href="https://docs.google.com/document/d/103cGe8qixC7ZzFsRu5Ww2VEW5YgH9zQaiaqbBsZ1lcc/edit?tab=t.0" target="_blank">🔗 原文 (Google Doc)</a>
+      <div class="week">
+        <div class="week-head">
+          <div>
+            <div class="week-title">Week 6 — 5月15日</div>
+            <div class="week-meta">语言技术与大语言模型</div>
+          </div>
+          <span class="pill">NLP / LT</span>
+        </div>
+        <div class="week-body">
+          <strong>嘉宾：</strong>Suihan Li<br>
+          <strong>单位：</strong>Carnegie Mellon University — Language Technologies Institute<br>
+          主题围绕语言技术、大语言模型、NLP 研究前沿展开。
+        </div>
+        <div class="week-links">
+          <a href="https://mse435.stanford.edu/index.html" target="_blank" rel="noopener">查看原始页面</a>
         </div>
       </div>
-    </div>
 
-    <!-- Week 3 -->
-    <div class="week">
-      <div class="week-header">
-        <span class="week-num">第3讲</span>
-        <span class="week-date">4月17日</span>
-      </div>
-      <div class="week-title">Chase Lochmiller (Crusoe) — AI 数据中心</div>
-      <div class="week-links">
-        <a href="https://www.youtube.com/watch?v=4zk-hJ50vmU">▶ 讲座录像</a>
-        <div class="week-link-group">
-          <div class="week-link-group-label">参考资料</div>
-          <a href="articles/generativevalue_ai_datacenters.html">📖 AI 数据中心入门 — Eric Flaningam</a>
-          <a href="https://www.generativevalue.com/p/a-primer-on-ai-data-centers" target="_blank">🔗 原文</a>
-          <a href="https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/the-ai-infrastructure-of-the-future" target="_blank">▶ McKinsey：未来 AI 基础设施 — Crusoe 如何利用废弃能源驱动和改造 AI [播客]</a>
+      <div class="week">
+        <div class="week-head">
+          <div>
+            <div class="week-title">Week 7 — 5月22日</div>
+            <div class="week-meta">交互式：设计与开发新的 LLM 应用</div>
+          </div>
+          <span class="pill">Lab</span>
+        </div>
+        <div class="week-body">
+          工作坊形式，实战构建面向用户的 LLM 应用原型；内容聚焦产品设计、提示策略与最小可用评估闭环。
+        </div>
+        <div class="week-links">
+          <a href="https://mse435.stanford.edu/index.html" target="_blank" rel="noopener">查看原始页面</a>
+          <a href="/nvidia-ecosystem/course/articles/generativevalue_ai_datacenters.html">参考文章：AI 数据中心入门</a>
         </div>
       </div>
-    </div>
 
-    <!-- Week 4 -->
-    <div class="week">
-      <div class="week-header">
-        <span class="week-num">第4讲</span>
-        <span class="week-date">4月24日</span>
-      </div>
-      <div class="week-title">Ali Ghodsi (Databricks) — 嘉宾讲座</div>
-      <div class="week-links">
-        <a href="https://www.youtube.com/watch?v=1-v5ODNx9fM">▶ 讲座录像</a>
-        <div class="week-link-group">
-          <div class="week-link-group-label">参考资料</div>
-          <a href="https://www.youtube.com/watch?v=WLrRhc6hig4">▶ Ali Ghodsi 与 David Solomon（高盛董事长兼CEO）对谈</a>
-        </div>
-      </div>
     </div>
+  </section>
 
-  </div>
-</div>
+  <footer>
+    <div class="container">
+      本页面基于 <a href="https://mse435.stanford.edu/index.html" style="color:var(--text-secondary)">https://mse435.stanford.edu/index.html</a> 整理，内容版权归原站所有。
+    </div>
+  </footer>
 </body>
 </html>
