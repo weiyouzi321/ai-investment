@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI 生态导航 | AI Ecosystem Portal</title>
+  <title>AI Investment Research</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
@@ -13,7 +13,6 @@
       --accent: #00E676; --accent-glow: rgba(0,230,118,0.15);
       --text-primary: #E8ECF1; --text-secondary: #9BADC4; --text-muted: #7090AD;
       --mono: 'IBM Plex Mono', monospace;
-      --nvidia: #76B900;
     }
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     html{font-size:16px;scroll-behavior:smooth}
@@ -47,7 +46,6 @@
       padding:0.2rem 0.5rem;margin-top:1rem;border:1px solid var(--border-bright);color:var(--text-muted);
     }
     .card-tag.stanford{border-color:var(--accent);color:var(--accent)}
-    .card-tag.nvidia{border-color:var(--nvidia);color:var(--nvidia)}
     .status-bar{display:flex;justify-content:center;gap:2rem;padding:1.5rem 0;border-top:1px solid var(--border);font-size:0.55rem;color:var(--text-muted)}
     .status-item{display:flex;align-items:center;gap:0.5rem}
     .status-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
@@ -62,9 +60,9 @@
 <body>
 <div class="container">
   <section class="hero">
-    <div class="hero-title">AI 生态导航<span class="cursor">_</span></div>
-    <div class="hero-sub">AI Ecosystem Portal</div>
-    <p class="hero-desc">从斯坦福课堂到英伟达生态链 — 系统化理解人工智能产业的经济学与技术栈</p>
+    <div class="hero-title">AI Investment Research<span class="cursor">_</span></div>
+    <div class="hero-sub">课程翻译 · 产业链研究 · 数据面板</div>
+    <p class="hero-desc">系统化研究人工智能产业的投资逻辑：从斯坦福课堂到产业链公司分析，再到实时市场数据。</p>
   </section>
 
   <div class="cards">
@@ -72,43 +70,44 @@
       <div class="card-icon">📚</div>
       <div class="card-title">MS&E 435<br>AI 超级周期经济学</div>
       <div class="card-desc">
-        斯坦福大学课程的中文版。涵盖生成式AI经济学、GPU算力经济、AI数据中心等讲座。
-        包含完整课程表、7篇参考资料中文翻译、交互式AI算力需求计算器。
+        斯坦福课程中文版。涵盖生成式 AI 经济学、GPU 算力经济、AI 数据中心等主题。
+        包含课程表、参考资料翻译、交互式计算器。
       </div>
       <span class="card-tag stanford">人工智能经济学课程</span>
     </a>
     <a href="ecosystem/" class="card">
       <div class="card-icon">🏭</div>
-      <div class="card-title">英伟达生态链分析</div>
+      <div class="card-title">AI 产业链公司目录</div>
       <div class="card-desc">
-        30家英伟达生态链公司的深度分析：业务介绍、金融数据、生态位关系图谱。
-        覆盖芯片制造、云计算、AI应用、数据中心等全产业链，含8层生态链流视图。
+        覆盖半导体、云计算、AI 应用、数据中心等细分领域的公司目录与生态位关系图谱。
+        每个条目包含业务定位、生态位与财务数据。
       </div>
-      <span class="card-tag nvidia">英伟达生态链全景</span>
+      <span class="card-tag">产业链研究</span>
     </a>
     <a href="dashboard/" class="card">
       <div class="card-icon">📊</div>
-      <div class="card-title">英伟达生态链数据面板</div>
+      <div class="card-title">数据面板</div>
       <div class="card-desc">
-        30家英伟达生态链公司的实时数据面板：股价、市值、涨跌幅、PS/PE估值。
-        可按层级筛选、多维排序，快速掌握生态链各层级的市场表现。
+        产业链相关公司的实时数据面板：股价、市值、涨跌幅、PS/PE 估值。
+        支持按层级筛选和多维排序。
       </div>
-      <span class="card-tag nvidia">英伟达数据面板</span>
+      <span class="card-tag">市场数据</span>
     </a>
   </div>
 
   <div class="status-bar">
-    <div class="status-item"><span class="status-dot"></span> 课程翻译已完成</div>
-    <div class="status-item"><span class="status-dot"></span> 7篇参考资料已翻译</div>
-    <div class="status-item"><span class="status-dot"></span> 英伟达生态30家分析</div>
+    <div class="status-item"><span class="status-dot"></span> MS&E 435 中文站运行中</div>
+    <div class="status-item"><span class="status-dot"></span> 产业链公司目录维护中</div>
+    <div class="status-item"><span class="status-dot"></span> 数据面板待自动刷新接入</div>
   </div>
 </div>
 <footer>
   <div class="container">
-    <div class="footer-text">AI Ecosystem Portal &mdash; 基于公开资料整理 &mdash; 仅供学习参考</div>
+    <div class="footer-text">AI Investment Research &mdash; 基于公开资料整理 &mdash; 仅供学习参考</div>
     <div class="footer-links">
       <a href="https://mse435.stanford.edu/" target="_blank">原始课程网站</a>
-      <a href="https://www.youtube.com/@MSE435EconomicsofAI" target="_blank">YouTube频道</a>
+      <a href="https://www.youtube.com/@MSE435EconomicsofAI" target="_blank">YouTube 频道</a>
+      <a href="https://github.com/weiyouzi321/ai-investment" target="_blank">GitHub</a>
     </div>
   </div>
 </footer>

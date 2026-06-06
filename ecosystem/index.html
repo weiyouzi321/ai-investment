@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nvidia Ecosystem — 英伟达生态链金融分析</title>
-<meta property="og:title" content="Nvidia Ecosystem — 英伟达生态链金融分析">
-<meta property="og:description" content="30家英伟达生态链公司的完整分析：业务介绍、金融数据、生态位关系">
-<meta name="description" content="30家英伟达生态链公司的完整分析：业务介绍、金融数据、生态位关系">
+<title>AI Investment Ecosystem — AI 产业链金融分析</title>
+<meta property="og:title" content="AI Investment Ecosystem — AI 产业链金融分析">
+<meta property="og:description" content="30家AI 产业链公司的完整分析：业务介绍、金融数据、生态位关系">
+<meta name="description" content="30家AI 产业链公司的完整分析：业务介绍、金融数据、生态位关系">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -480,8 +480,8 @@ tr:hover { background: var(--bg-hover); }
     <div class="header-left">
       <div class="logo">NV</div>
       <div>
-        <h1>Nvidia Ecosystem</h1>
-        <div class="header-meta">英伟达生态链 · 30家公司全景分析</div>
+        <h1>AI Investment Ecosystem</h1>
+        <div class="header-meta">AI 产业链 · 30家公司全景分析</div>
       </div>
     </div>
     <div class="header-actions">
@@ -501,7 +501,7 @@ tr:hover { background: var(--bg-hover); }
 
   <!-- ========== ECOSYSTEM FLOW ========== -->
   <div class="ecosystem-flow">
-    <div class="flow-title">🏗️ 英伟达生态链结构</div>
+    <div class="flow-title">🏗️ AI 产业链结构</div>
     <div class="flow-nodes" id="flow-nodes"></div>
   </div>
 
@@ -556,7 +556,7 @@ tr:hover { background: var(--bg-hover); }
 <footer class="footer">
   <div class="container">
     <p>Data source: speculator_io | May 6, 2026</p>
-    <p>Built with ❤️ by Hermes Agent — Interactive Nvidia Ecosystem Analysis</p>
+    <p>Built with ❤️ by Hermes Agent — Interactive AI Investment Ecosystem Analysis</p>
   </div>
 </footer>
 
@@ -569,11 +569,11 @@ const COMPANIES = [
     "cn": "台湾积体电路制造",
     "category": "芯片代工",
     "ecosystemLayer": 0,
-    "description": "全球最大的半导体晶圆代工厂，Nvidia GPU独家制造商",
+    "description": "全球最大的半导体晶圆代工厂，AI Investment GPU独家制造商",
     "role": "独家核心代工厂 — H100/B200/RTX50 全部由 TSMC 4N/3nm 制造",
-    "nvidiaRelation": "供应商-客户（不可替代）。Nvidia是其前三大客户，CoWoS先进封装成供应链瓶颈",
+    "nvidiaRelation": "供应商-客户（不可替代）。AI Investment是其前三大客户，CoWoS先进封装成供应链瓶颈",
     "investment": "-",
-    "revenueExposure": "极高（Nvidia是其Top 3客户，占营收10%+）",
+    "revenueExposure": "极高（AI Investment是其Top 3客户，占营收10%+）",
     "products": [
       "3nm/5nm制程代工",
       "CoWoS先进封装",
@@ -596,10 +596,10 @@ const COMPANIES = [
     "cn": "英特尔",
     "category": "芯片代工/设计",
     "ecosystemLayer": 0,
-    "description": "全球最大的CPU制造商，Nvidia竞争对手+潜在代工厂",
-    "role": "竞合伙伴 — 2025年Nvidia投资$50亿共同开发CPU；Intel Foundry开始为Nvidia代工",
+    "description": "全球最大的CPU制造商，AI Investment竞争对手+潜在代工厂",
+    "role": "竞合伙伴 — 2025年AI Investment投资$50亿共同开发CPU；Intel Foundry开始为AI Investment代工",
     "nvidiaRelation": "竞合（复杂多面）：Gaudi加速器直接竞争 vs Intel Foundry潜在代工关系",
-    "investment": "Nvidia投资$50亿",
+    "investment": "AI Investment投资$50亿",
     "revenueExposure": "低（主要仍是竞争对手关系）",
     "products": [
       "Xeon CPU",
@@ -623,11 +623,11 @@ const COMPANIES = [
     "cn": "安谋控股",
     "category": "芯片IP授权",
     "ecosystemLayer": 0,
-    "description": "全球CPU架构IP领导者，Nvidia全线ARM产品的架构授权方",
-    "role": "核心CPU架构授权方 — Nvidia Grace CPU、Jetson、DRIVE全线采用ARM架构",
+    "description": "全球CPU架构IP领导者，AI Investment全线ARM产品的架构授权方",
+    "role": "核心CPU架构授权方 — AI Investment Grace CPU、Jetson、DRIVE全线采用ARM架构",
     "nvidiaRelation": "IP授权商-客户（深度绑定）。2020年$400亿收购ARM未果，转为深度合作",
     "investment": "-（2020年收购未果）",
-    "revenueExposure": "高（Nvidia是大客户，ARM架构用于Nvidia全部CPU产品线）",
+    "revenueExposure": "高（AI Investment是大客户，ARM架构用于AI Investment全部CPU产品线）",
     "products": [
       "ARM CPU架构",
       "Neoverse服务器核",
@@ -651,10 +651,10 @@ const COMPANIES = [
     "category": "存储/内存",
     "ecosystemLayer": 1,
     "description": "全球三大DRAM制造商之一，美国唯一DRAM制造商",
-    "role": "核心直接供应商 — GPU内存层。HBM3E用于H100/B200 AI GPU，GDDR6X为Nvidia联合开发",
-    "nvidiaRelation": "直接供应商 | HBM3E显存决定GPU出货能力；与Nvidia联合开发GDDR6X/GDDR7",
+    "role": "核心直接供应商 — GPU内存层。HBM3E用于H100/B200 AI GPU，GDDR6X为AI Investment联合开发",
+    "nvidiaRelation": "直接供应商 | HBM3E显存决定GPU出货能力；与AI Investment联合开发GDDR6X/GDDR7",
     "investment": "-",
-    "revenueExposure": "高度直接（HBM收入主要来自Nvidia，占营收20-30%+）",
+    "revenueExposure": "高度直接（HBM收入主要来自AI Investment，占营收20-30%+）",
     "products": [
       "HBM3E高带宽内存",
       "GDDR6X/GDDR7显存",
@@ -732,10 +732,10 @@ const COMPANIES = [
     "category": "半导体设备",
     "ecosystemLayer": 2,
     "description": "全球唯一EUV光刻机制造商，半导体制造的核心设备供应商",
-    "role": "核心基础设施 — EUV光刻机是TSMC制造Nvidia GPU不可或缺的设备",
-    "nvidiaRelation": "Nvidia→TSMC→ASML。EUV光刻机决定了Nvidia芯片能否在3nm制程制造",
+    "role": "核心基础设施 — EUV光刻机是TSMC制造AI Investment GPU不可或缺的设备",
+    "nvidiaRelation": "AI Investment→TSMC→ASML。EUV光刻机决定了AI Investment芯片能否在3nm制程制造",
     "investment": "-",
-    "revenueExposure": "间接但关键（Nvidia增长推动TSMC扩产→ASML设备订单）",
+    "revenueExposure": "间接但关键（AI Investment增长推动TSMC扩产→ASML设备订单）",
     "products": [
       "EUV (极紫外)光刻机",
       "DUV (深紫外)光刻机"
@@ -758,10 +758,10 @@ const COMPANIES = [
     "category": "半导体设备",
     "ecosystemLayer": 2,
     "description": "全球领先的半导体刻蚀和沉积设备制造商",
-    "role": "核心制造设备 — 刻蚀/沉积设备用于TSMC制造Nvidia GPU的晶体管结构",
-    "nvidiaRelation": "Nvidia→TSMC→Lam。3nm/5nm晶体管成形依赖Lam刻蚀技术",
+    "role": "核心制造设备 — 刻蚀/沉积设备用于TSMC制造AI Investment GPU的晶体管结构",
+    "nvidiaRelation": "AI Investment→TSMC→Lam。3nm/5nm晶体管成形依赖Lam刻蚀技术",
     "investment": "-",
-    "revenueExposure": "间接（与TSMC/Nvidia产能扩张正相关）",
+    "revenueExposure": "间接（与TSMC/AI Investment产能扩张正相关）",
     "products": [
       "刻蚀设备",
       "薄膜沉积设备",
@@ -785,8 +785,8 @@ const COMPANIES = [
     "category": "半导体设备",
     "ecosystemLayer": 2,
     "description": "全球半导体工艺控制和良率管理领导者",
-    "role": "质量守门员 — 晶圆缺陷检测设备确保Nvidia GPU的高良率",
-    "nvidiaRelation": "Nvidia→TSMC→KLA。每步工艺缺陷检测直接影响Nvidia GPU出货量",
+    "role": "质量守门员 — 晶圆缺陷检测设备确保AI Investment GPU的高良率",
+    "nvidiaRelation": "AI Investment→TSMC→KLA。每步工艺缺陷检测直接影响AI Investment GPU出货量",
     "investment": "-",
     "revenueExposure": "间接（AI芯片复杂度推高检测需求）",
     "products": [
@@ -813,7 +813,7 @@ const COMPANIES = [
     "ecosystemLayer": 2,
     "description": "先进封装检测设备（AOI自动光学检测）专业供应商",
     "role": "封装检测专家 — CoWoS先进封装质量把关",
-    "nvidiaRelation": "Nvidia→封测厂→Camtek。HBM堆叠和CoWoS封装需要Camtek检测",
+    "nvidiaRelation": "AI Investment→封测厂→Camtek。HBM堆叠和CoWoS封装需要Camtek检测",
     "investment": "-",
     "revenueExposure": "中高（先进封装检测需求随AI芯片爆发）",
     "products": [
@@ -841,8 +841,8 @@ const COMPANIES = [
     "description": "磷化铟(InP)激光器和硅光子学技术领导者",
     "role": "硅光子学生态核... — 高能效激光器集成于Spectrum-X/Quantum-X光交换机",
     "nvidiaRelation": "战略投资$20亿+生态合作。激光器用于AI工厂光互连",
-    "investment": "Nvidia投资$20亿",
-    "revenueExposure": "极高（Nvidia是其最大客户，1.6T光模块需求暴增）",
+    "investment": "AI Investment投资$20亿",
+    "revenueExposure": "极高（AI Investment是其最大客户，1.6T光模块需求暴增）",
     "products": [
       "InP激光器",
       "共封装光学(CPO)",
@@ -868,8 +868,8 @@ const COMPANIES = [
     "description": "全球光子学领导者，硅光子交换芯片创新者",
     "role": "CPO创新伙伴 — 共封装光学技术消除DSP功耗瓶颈",
     "nvidiaRelation": "战略投资$20亿。GTC 2025被列为CPO生态创新合作伙伴",
-    "investment": "Nvidia投资$20亿",
-    "revenueExposure": "极高（Nvidia CPO合作直接驱动营收）",
+    "investment": "AI Investment投资$20亿",
+    "revenueExposure": "极高（AI Investment CPO合作直接驱动营收）",
     "products": [
       "硅光子交换芯片",
       "共封装光学",
@@ -895,7 +895,7 @@ const COMPANIES = [
     "description": "175年历史的光学玻璃和光纤制造巨头",
     "role": "光纤战略伙伴 — 用玻璃光纤替代AI机架内5000根铜缆",
     "nvidiaRelation": "投资最高$32亿联合建3座美国工厂，产能提升10倍",
-    "investment": "Nvidia最高投资$32亿",
+    "investment": "AI Investment最高投资$32亿",
     "revenueExposure": "极高（AI光纤化是核心增长驱动力）",
     "products": [
       "光学玻璃光纤",
@@ -920,9 +920,9 @@ const COMPANIES = [
     "category": "通信网络",
     "ecosystemLayer": 3,
     "description": "全球通信设备巨头，5G/6G + AI-RAN技术领导者",
-    "role": "AI-RAN与6G合作伙伴 — 5G/6G软件适配Nvidia芯片",
-    "nvidiaRelation": "Nvidia投资$10亿，合作AI-RAN联合开发和6G技术",
-    "investment": "Nvidia投资$10亿",
+    "role": "AI-RAN与6G合作伙伴 — 5G/6G软件适配AI Investment芯片",
+    "nvidiaRelation": "AI Investment投资$10亿，合作AI-RAN联合开发和6G技术",
+    "investment": "AI Investment投资$10亿",
     "revenueExposure": "中高（AI-RAN是Nokia战略转型方向）",
     "products": [
       "5G/6G基站",
@@ -948,7 +948,7 @@ const COMPANIES = [
     "ecosystemLayer": 4,
     "description": "全球最大半导体封装测试服务商（OSAT）",
     "role": "封装扩容伙伴 — CoWoS替补产能，CoWoP联合开发",
-    "nvidiaRelation": "Nvidia与ASE子公司矽品联合开发CoWoP封装技术",
+    "nvidiaRelation": "AI Investment与ASE子公司矽品联合开发CoWoP封装技术",
     "investment": "-",
     "revenueExposure": "高（先进封装收入翻倍至$16亿，75%来自先进封装）",
     "products": [
@@ -974,8 +974,8 @@ const COMPANIES = [
     "category": "封装测试",
     "ecosystemLayer": 4,
     "description": "美国最大OSAT封装测试服务商",
-    "role": "关键封装伙伴 — Nvidia指定先进封装合作伙伴，$70亿亚利桑那工厂",
-    "nvidiaRelation": "Nvidia明确指定为AI芯片关键封装伙伴；与TSMC签署美国工厂MOU",
+    "role": "关键封装伙伴 — AI Investment指定先进封装合作伙伴，$70亿亚利桑那工厂",
+    "nvidiaRelation": "AI Investment明确指定为AI芯片关键封装伙伴；与TSMC签署美国工厂MOU",
     "investment": "投资$70亿亚利桑那工厂（获芯片法案支持）",
     "revenueExposure": "高（先进封装是核心增长引擎）",
     "products": [
@@ -1002,7 +1002,7 @@ const COMPANIES = [
     "ecosystemLayer": 4,
     "description": "全球领先的电子制造服务（EMS）和系统工程公司",
     "role": "AI工厂集成商 — 模块化AI数据中心系统设计与制造",
-    "nvidiaRelation": "正式合作伙伴。开发Nvidia Omniverse DSX蓝图参考设计",
+    "nvidiaRelation": "正式合作伙伴。开发AI Investment Omniverse DSX蓝图参考设计",
     "investment": "-",
     "revenueExposure": "高（AI基础设施是核心增长驱动）",
     "products": [
@@ -1029,7 +1029,7 @@ const COMPANIES = [
     "ecosystemLayer": 4,
     "description": "全球工程与制造解决方案提供商",
     "role": "AI硬件幕后制造商 — 服务器/光模块EMS",
-    "nvidiaRelation": "关键供应链合作伙伴。制造Nvidia AI服务器硬件、网络系统",
+    "nvidiaRelation": "关键供应链合作伙伴。制造AI Investment AI服务器硬件、网络系统",
     "investment": "$5亿北卡罗来纳AI生产基地",
     "revenueExposure": "极高（FY2025 AI营收预计75-85亿美元）",
     "products": [
@@ -1082,8 +1082,8 @@ const COMPANIES = [
     "category": "数据中心基础设施",
     "ecosystemLayer": 5,
     "description": "数据中心关键基础设施供应商，电力与冷却解决方案",
-    "role": "电力与冷却伙伴 — 确保Nvidia GPU在高密度下稳定运行",
-    "nvidiaRelation": "加入Nvidia合作伙伴网络(NPN)，参与ARPA-E COOLERCHIPS冷却项目",
+    "role": "电力与冷却伙伴 — 确保AI Investment GPU在高密度下稳定运行",
+    "nvidiaRelation": "加入AI Investment合作伙伴网络(NPN)，参与ARPA-E COOLERCHIPS冷却项目",
     "investment": "-",
     "revenueExposure": "高（GPU功率>1000W推动冷却需求暴增）",
     "products": [
@@ -1110,7 +1110,7 @@ const COMPANIES = [
     "ecosystemLayer": 5,
     "description": "全球智能电力管理公司，UPS/配电解决方案领导者",
     "role": "HVDC电力架构伙伴 — 800V高压直流方案赋能AI工厂",
-    "nvidiaRelation": "与Nvidia合作开发800V HVDC电力基础设施",
+    "nvidiaRelation": "与AI Investment合作开发800V HVDC电力基础设施",
     "investment": "-",
     "revenueExposure": "中高（AI数据中心UPS/配电需求激增）",
     "products": [
@@ -1137,7 +1137,7 @@ const COMPANIES = [
     "ecosystemLayer": 5,
     "description": "氮化镓(GaN)和碳化硅(SiC)功率半导体领导者",
     "role": "功率半导体核心供应商 — 用于800V HVDC AI工厂架构",
-    "nvidiaRelation": "Nvidia选择Navitas开发下一代800V HVDC数据中心电力",
+    "nvidiaRelation": "AI Investment选择Navitas开发下一代800V HVDC数据中心电力",
     "investment": "-",
     "revenueExposure": "高（GaN/SiC器件直接用于Rubin平台电源方案）",
     "products": [
@@ -1163,10 +1163,10 @@ const COMPANIES = [
     "category": "AI云服务",
     "ecosystemLayer": 6,
     "description": "专注于AI和高性能计算的GPU云服务提供商",
-    "role": "Nvidia战略投资的旗舰级AI云伙伴，最新GPU首发平台",
-    "nvidiaRelation": "Nvidia战略投资+重大股东。CoreWeave商业模式即出租Nvidia GPU",
-    "investment": "Nvidia投资$1亿+",
-    "revenueExposure": "极高（核心商业模式即出租Nvidia GPU算力）",
+    "role": "AI Investment战略投资的旗舰级AI云伙伴，最新GPU首发平台",
+    "nvidiaRelation": "AI Investment战略投资+重大股东。CoreWeave商业模式即出租AI Investment GPU",
+    "investment": "AI Investment投资$1亿+",
+    "revenueExposure": "极高（核心商业模式即出租AI Investment GPU算力）",
     "products": [
       "GPU云服务",
       "AI超级计算机",
@@ -1190,14 +1190,14 @@ const COMPANIES = [
     "category": "AI云服务",
     "ecosystemLayer": 6,
     "description": "前Yandex重组后的AI基础设施公司，欧洲AI云平台",
-    "role": "Nvidia重金投资的欧洲AI云平台，全栈AI工程合作伙伴",
-    "nvidiaRelation": "Nvidia投资$20亿支持其部署5GW+容量的AI工厂",
-    "investment": "Nvidia投资$20亿",
-    "revenueExposure": "极高（Nvidia是最大投资方和技术提供商）",
+    "role": "AI Investment重金投资的欧洲AI云平台，全栈AI工程合作伙伴",
+    "nvidiaRelation": "AI Investment投资$20亿支持其部署5GW+容量的AI工厂",
+    "investment": "AI Investment投资$20亿",
+    "revenueExposure": "极高（AI Investment是最大投资方和技术提供商）",
     "products": [
       "GPU云服务",
       "AI工厂建设",
-      "Nvidia全栈方案部署"
+      "AI Investment全栈方案部署"
     ],
     "color": "#744fb3",
     "financial": {
@@ -1217,8 +1217,8 @@ const COMPANIES = [
     "category": "服务器OEM",
     "ecosystemLayer": 6,
     "description": "全球最大服务器制造商之一，PowerEdge系列GPU服务器",
-    "role": "核心OEM制造商 — Dell AI Factory整合Nvidia加速计算",
-    "nvidiaRelation": "Dell AI Factory with NVIDIA。提供PowerEdge XE系列GPU服务器",
+    "role": "核心OEM制造商 — Dell AI Factory整合AI Investment加速计算",
+    "nvidiaRelation": "Dell AI Factory with AI Investment。提供PowerEdge XE系列GPU服务器",
     "investment": "-",
     "revenueExposure": "高（PowerEdge GPU服务器是增长最快的产品线）",
     "products": [
@@ -1243,11 +1243,11 @@ const COMPANIES = [
     "cn": "芯源系统",
     "category": "电源管理IC",
     "ecosystemLayer": 7,
-    "description": "GPU核心电源管理IC供应商，Nvidia最关键的电源芯片伙伴",
+    "description": "GPU核心电源管理IC供应商，AI Investment最关键的电源芯片伙伴",
     "role": "核心电源IC供应商 — GPU供电最关键的外部芯片供应商",
-    "nvidiaRelation": "Nvidia GPU核心电源方案商。DC-DC转换技术用于H100/B200等",
+    "nvidiaRelation": "AI Investment GPU核心电源方案商。DC-DC转换技术用于H100/B200等",
     "investment": "-",
-    "revenueExposure": "极高（Nvidia占营收25-35%，业绩高度联动）",
+    "revenueExposure": "极高（AI Investment占营收25-35%，业绩高度联动）",
     "products": [
       "多相电源控制器",
       "Intelli-Phase功率级",
@@ -1272,9 +1272,9 @@ const COMPANIES = [
     "ecosystemLayer": 7,
     "description": "全球顶级高性能模拟/混合信号半导体公司",
     "role": "高性能模拟方案商 — 精密数据转换/时钟/RF/BMS",
-    "nvidiaRelation": "Nvidia首选模拟方案商，覆盖信号链/时钟/隔离/汽车",
+    "nvidiaRelation": "AI Investment首选模拟方案商，覆盖信号链/时钟/隔离/汽车",
     "investment": "-",
-    "revenueExposure": "中等（Nvidia是重要客户但非最大）",
+    "revenueExposure": "中等（AI Investment是重要客户但非最大）",
     "products": [
       "精密ADC/DAC",
       "时钟发生器",
@@ -1302,7 +1302,7 @@ const COMPANIES = [
     "role": "电源管理+ADAS图像传感器供应商",
     "nvidiaRelation": "GPU电源管理IC + DRIVE平台ADAS图像传感器",
     "investment": "-",
-    "revenueExposure": "中高（汽车47%营收含Nvidia DRIVE合作）",
+    "revenueExposure": "中高（汽车47%营收含AI Investment DRIVE合作）",
     "products": [
       "电源管理IC",
       "8MP车规图像传感器",
@@ -1327,9 +1327,9 @@ const COMPANIES = [
     "ecosystemLayer": 7,
     "description": "欧洲最大半导体IDM，汽车/工业/边缘AI芯片供应商",
     "role": "功率+汽车+边缘AI配套 — SiC功率器件和STM32 MCU",
-    "nvidiaRelation": "SiC MOSFET用于服务器电源；STM32 MCU配套Nvidia DRIVE/Jetson",
+    "nvidiaRelation": "SiC MOSFET用于服务器电源；STM32 MCU配套AI Investment DRIVE/Jetson",
     "investment": "-",
-    "revenueExposure": "中等（汽车和工业业务与Nvidia有重叠）",
+    "revenueExposure": "中等（汽车和工业业务与AI Investment有重叠）",
     "products": [
       "SiC MOSFET",
       "STM32 MCU",
@@ -1354,9 +1354,9 @@ const COMPANIES = [
     "ecosystemLayer": 7,
     "description": "全球领先的电子测试测量设备公司",
     "role": "测试验证伙伴 — 高速信号测试/EDA仿真/网络认证",
-    "nvidiaRelation": "测试工具供应商（非芯片供应商）。Nvidia芯片设计依赖Keysight验证设备",
+    "nvidiaRelation": "测试工具供应商（非芯片供应商）。AI Investment芯片设计依赖Keysight验证设备",
     "investment": "-",
-    "revenueExposure": "低-中（间接，Nvidia是其重要客户之一）",
+    "revenueExposure": "低-中（间接，AI Investment是其重要客户之一）",
     "products": [
       "110GHz示波器",
       "矢量网络分析仪",
@@ -1568,7 +1568,7 @@ function openModal(ticker) {
     </div>
     
     <div class="modal-section">
-      <div class="modal-section-title">🔗 在英伟达生态链中的角色</div>
+      <div class="modal-section-title">🔗 在AI 产业链中的角色</div>
       <div class="modal-role" style="border-color:${color}">${c.role || ''}</div>
       <div class="modal-desc" style="margin-top:8px;font-size:13px;color:var(--ink-muted)">
         <strong>关系定位：</strong>${c.nvidiaRelation || ''}

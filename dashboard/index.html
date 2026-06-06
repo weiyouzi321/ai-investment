@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nvidia's Ecosystem — 英伟达生态链数据面板</title>
-<meta property="og:title" content="Nvidia's Ecosystem — 英伟达生态链数据面板">
-<meta property="og:description" content="30家英伟达生态链公司实时数据：股价、市值、估值、涨跌幅">
+<title>AI Investment Research — AI 产业链数据面板</title>
+<meta property="og:title" content="AI Investment Research — AI 产业链数据面板">
+<meta property="og:description" content="30家AI 产业链公司实时数据：股价、市值、估值、涨跌幅">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -249,8 +249,8 @@ tr:hover td{background:var(--bg-hover)}
     <a href="../ecosystem/" class="nav-back">← 返回生态链全景</a>
     <div class="nav-logo">NE</div>
     <div>
-      <div class="nav-title">Nvidia's Ecosystem</div>
-      <div class="nav-meta">英伟达生态链 · 实时数据面板</div>
+      <div class="nav-title">AI Investment Research</div>
+      <div class="nav-meta">AI 产业链 · 实时数据面板</div>
     </div>
   </div>
   <div class="nav-right">
@@ -263,8 +263,8 @@ tr:hover td{background:var(--bg-hover)}
 
 <!-- Title -->
 <div class="title-section">
-  <h1>Nvidia's Ecosystem</h1>
-  <div class="subtitle">英伟达生态链 · 30家公司实时金融数据面板</div>
+  <h1>AI Investment Research</h1>
+  <div class="subtitle">AI 产业链 · 30家公司实时金融数据面板</div>
 </div>
 
 <!-- Stats -->
@@ -537,7 +537,7 @@ function openModal(ticker) {
   document.getElementById('m-icon').style.background = d.c;
   document.getElementById('m-icon').textContent = d.t.slice(0,2);
   document.getElementById('m-title').textContent = `${d.t} — ${d.n}`;
-  document.getElementById('m-sub').textContent = `英伟达生态链成员 · ${d.c}`;
+  document.getElementById('m-sub').textContent = `AI 产业链成员 · ${d.c}`;
   
   const mc = MARKET_CAPS[d.t] || '—';
   const ps = d.ps !== null ? d.ps.toFixed(2) : '—';
