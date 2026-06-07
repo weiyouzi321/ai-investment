@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Perry Mehrling · 货币金融学公开课</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap');
+
+  :root {
+    --bg: #0b0c10;
+    --panel: #1f2833;
+    --ink: #c5c6c7;
+    --muted: #6d6f72;
+    --accent: #66fcf1;
+    --accent2: #45a29e;
+    --line: #2e3a47;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1.55;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .topbar a { font-size: 13px; }
+
+  .hero { margin-top: 28px; margin-bottom: 22px; }
+  .hero h1 { font-size: 28px; font-weight: 700; color: var(--accent); margin: 0 0 8px; letter-spacing: -0.5px; }
+  .hero p { margin: 0; color: var(--muted); font-size: 14px; }
+
+  .stats { margin: 10px 0 24px; }
+  .stat { display: inline-block; background: var(--panel); border: 1px solid var(--line); padding: 10px 14px; margin: 0 12px 12px 0; border-radius: 6px; }
+  .stat strong { display: block; font-size: 18px; color: var(--accent); }
+  .stat span { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  .week { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; margin: 14px 0; overflow: hidden; }
+  .week-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; cursor: pointer; user-select: none; }
+  .week-header:hover { background: #252f3b; }
+  .week-title { font-weight: 700; color: var(--ink); font-size: 15px; }
+  .week-count { color: var(--muted); font-size: 12px; }
+
+  .week-body { display: none; padding: 0 16px 14px; border-top: 1px solid var(--line); }
+  .week.open + .week-body { display: block; }
+
+  .video { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+  .video:last-child { border-bottom: none; }
+  .video-left { flex: 1; }
+  .video-title { font-size: 13.5px; color: var(--ink); }
+  .video-meta { color: var(--muted); font-size: 12px; margin-top: 4px; }
+  .video-link { white-space: nowrap; margin-left: 16px; padding: 6px 10px; background: #0f222a; border: 1px solid var(--accent2); border-radius: 5px; font-size: 12px; color: var(--accent); }
+  .video-link span { color: var(--muted); margin-right: 6px; }
+
+  .empty { color: var(--muted); padding: 14px 16px; font-size: 13px; }
+  footer { margin-top: 30px; padding: 18px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; text-align: center; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <a href="../index.html">← 返回 AI Investment 首页</a>
+      <a href="https://b23.tv/jkDR7Xw" target="_blank" rel="noopener">🔗 B站合集</a>
+    </div>
+
+    <div class="hero">
+      <h1>Perry Mehrling · 货币金融学公开课</h1>
+      <p>Columbia University / Bilibili 合集 · 22 Weeks · 189 Video Lectures</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><strong id="weeks">0</strong><span>Weeks</span></div>
+      <div class="stat"><strong id="videos">0</strong><span>Videos</span></div>
+      <div class="stat"><strong id="last-updated">—</strong><span>Updated</span></div>
+    </div>
+
+    <div id="weeks-root"></div>
+
+    <footer>
+      Data sourced from <a href="https://b23.tv/jkDR7Xw" target="_blank">https://b23.tv/jkDR7Xw</a>. Non-commercial academic use only.
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      const root = document.getElementById('weeks-root');
+      const weeksEl = document.getElementById('weeks');
+      const videosEl = document.getElementById('videos');
+      const updatedEl = document.getElementById('last-updated');
+
+      let data = null;
+      try {
+        data = JSON.parse(JSON.stringify(window.__MONEY_BANKING__ || {}));
+      } catch (e) { data = null; }
+
+      // Fallback loader tries playlist.json by same path
+      if (!data || !Array.isArray(data.weeks)) {
+        const xhr = new XMLHttpRequest();
+        xhr.overrideMimeType('application/json');
+        xhr.open('GET', 'playlist.json', true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            try { data = JSON.parse(xhr.responseText); } catch (e) { data = null; }
+            render(data);
+          } else {
+            root.innerHTML = '<div class="empty">无法加载 playlist.json，请确认文件已部署。</div>';
+          }
+        };
+        xhr.send();
+      } else {
+        render(data);
+      }
+
+      function render(src) {
+        if (!src) {
+          root.innerHTML = '<div class="empty">无效数据格式。</div>';
+          return;
+        }
+        const weeks = Array.isArray(src.weeks) ? src.weeks : [];
+        weeksEl.textContent = weeks.length;
+        const total = weeks.reduce((s, w) => s + (Array.isArray(w.videos) ? w.videos.length : 0), 0);
+        videosEl.textContent = total;
+        updatedEl.textContent = src.generated_at || '—';
+
+        if (!weeks.length) {
+          root.innerHTML = '<div class="empty">暂无周次数据。</div>';
+          return;
+        }
+
+        const frag = document.createDocumentFragment();
+        weeks.forEach((w, idx) => {
+          const vids = Array.isArray(w.videos) ? w.videos : [];
+          const week = document.createElement('div');
+          week.className = 'week';
+
+          const header = document.createElement('div');
+          header.className = 'week-header';
+          header.innerHTML = '<div><div class="week-title">' + escapeHtml((w.title || ('Week ' + w.week))) + '</div><div class="week-count">' + vids.length + ' 个视频</div></div><div class="week-count">▸</div>';
+          header.addEventListener('click', function() {
+            const open = week.classList.toggle('open');
+            header.querySelector('.week-count').textContent = open ? '▾' : '▸';
+          });
+          week.appendChild(header);
+
+          const body = document.createElement('div');
+          body.className = 'week-body';
+          if (!vids.length) {
+            body.innerHTML = '<div class="empty">本周期无视频</div>';
+          } else {
+            vids.forEach(function(v) {
+              const row = document.createElement('div');
+              row.className = 'video';
+              const url = (typeof v === 'string') ? v : (v.url || ('https://www.bilibili.com/video/' + (v.bvid || '')));
+              const title = (typeof v === 'string') ? v : (v.title || 'Untitled');
+              const bvid = (typeof v === 'string') ? '' : (v.bvid || '');
+              const duration = (typeof v === 'string') ? '' : (v.duration || '');
+              row.innerHTML =
+                '<div class="video-left"><div class="video-title">' + escapeHtml(title) + '</div>' +
+                '<div class="video-meta">' + escapeHtml(bvid) + (duration ? (' · ' + escapeHtml(duration)) : '') + '</div></div>' +
+                '<a class="video-link" href="' + escapeHtml(url) + '" target="_blank" rel="noopener"><span>Bilibili</span>' + escapeHtml(bvid) + '</a>';
+              body.appendChild(row);
+            });
+          }
+          week.appendChild(body);
+          frag.appendChild(week);
+        });
+        root.appendChild(frag);
+      }
+
+      function escapeHtml(str) {
+        return String(str || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+    })();
+  </script>
+</body>
+</html>

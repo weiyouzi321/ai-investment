@@ -1,115 +1,351 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Investment Research</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Investment</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛</text></svg>" />
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #161a22;
+    --panel-2: #1c212c;
+    --border: #2a303b;
+    --text: #e6e9f0;
+    --muted: #9aa0a8;
+    --accent: #7aa2ff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background:
+      radial-gradient(1200px 600px at 20% -10%, rgba(122,162,255,0.08), transparent) ,
+      radial-gradient(1000px 800px at 120% 20%, rgba(122,162,255,0.06), transparent) ,
+      var(--bg);
+    color: var(--text);
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 36px 28px 60px;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 28px;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .brand h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  }
+  .brand .sub {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .search {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 14px;
+    border-radius: 10px;
+    min-width: 260px;
+    outline: none;
+  }
+  .search::placeholder { color: #8a919b; }
+  .chip-btn {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .chip-btn.active {
+    color: #fff;
+    border-color: rgba(122,162,255,0.45);
+    background: rgba(122,162,255,0.12);
+  }
+  .ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 9px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+  }
+  .section {
+    grid-column: span 4;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 120ms ease, box-shadow 120ms ease;
+  }
+  .section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+  }
+  .section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .section-head h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffe7a0;
+  }
+  .section-head .count {
+    color: var(--muted);
+    font-size: 12px;
+    background: rgba(255,255,255,0.04);
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tag {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    transition: border-color 120ms ease, background 120ms ease;
+  }
+  .link:hover {
+    border-color: rgba(122,162,255,0.55);
+    background: #1f2633;
+  }
+  .link .name {
+    font-size: 14px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .link .icon::after {
+    content: "↗";
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .hidden { display: none !important; }
+
+  @media (max-width: 860px) {
+    .section { grid-column: span 6; }
+  }
+  @media (max-width: 520px) {
+    .section { grid-column: span 12; }
+    .search { min-width: 220px; width: 100%; }
+    header { flex-direction: column; align-items: flex-start; }
+  }
+
   <style>
-    :root {
-      --bg-base: #05080F; --bg-surface: #0C1220; --bg-elevated: #131D2E;
-      --border: #1B2B44; --border-bright: #264166;
-      --accent: #00E676; --accent-glow: rgba(0,230,118,0.15);
-      --text-primary: #E8ECF1; --text-secondary: #9BADC4; --text-muted: #7090AD;
-      --mono: 'IBM Plex Mono', monospace;
+    .site-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px; border-bottom: 1px solid var(--border);
+      background: rgba(15,17,21,0.85); backdrop-filter: blur(6px);
+      position: sticky; top: 0; z-index: 50;
     }
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    html{font-size:16px;scroll-behavior:smooth}
-    body{
-      font-family:var(--mono);background:var(--bg-base);color:var(--text-primary);
-      line-height:1.6;-webkit-font-smoothing:antialiased;
+    .site-nav .brand {
+      font-weight: 700; font-size: 15px; color: var(--text); letter-spacing: 0.2px;
     }
-    body::after{
-      content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
-      background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
+    .site-nav .links a {
+      color: var(--muted); font-size: 13px; text-decoration: none; margin-left: 14px;
     }
-    @keyframes blink{50%{opacity:0}}
-    .container{max-width:1140px;margin:0 auto;padding:0 2rem}
-    .hero{padding:4rem 0 3rem;text-align:center}
-    .hero-title{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.1;margin-bottom:0.5rem}
-    .hero-title .cursor{color:var(--accent);animation:blink 1s step-end infinite}
-    .hero-sub{font-size:0.85rem;color:var(--text-secondary);margin-bottom:0.5rem}
-    .hero-desc{font-size:0.7rem;color:var(--text-muted);max-width:600px;margin:0 auto;line-height:1.8}
-    .cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;padding:2rem 0 4rem}
-    .card{
-      background:var(--bg-surface);border:1px solid var(--border);
-      padding:2rem;text-decoration:none;color:var(--text-primary);
-      transition:all 0.3s ease;position:relative;overflow:hidden;
-    }
-    .card:hover{border-color:var(--border-bright);transform:translateY(-2px);background:var(--bg-elevated)}
-    .card-icon{font-size:2rem;margin-bottom:1rem}
-    .card-title{font-size:1.1rem;font-weight:600;margin-bottom:0.5rem}
-    .card-desc{font-size:0.65rem;color:var(--text-secondary);line-height:1.7}
-    .card-tag{
-      display:inline-block;font-size:0.5rem;letter-spacing:0.1em;text-transform:uppercase;
-      padding:0.2rem 0.5rem;margin-top:1rem;border:1px solid var(--border-bright);color:var(--text-muted);
-    }
-    .card-tag.stanford{border-color:var(--accent);color:var(--accent)}
-    .status-bar{display:flex;justify-content:center;gap:2rem;padding:1.5rem 0;border-top:1px solid var(--border);font-size:0.55rem;color:var(--text-muted)}
-    .status-item{display:flex;align-items:center;gap:0.5rem}
-    .status-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
-    footer{border-top:1px solid var(--border);padding:1.5rem 0;text-align:center}
-    .footer-text{font-size:0.5rem;color:var(--text-muted);letter-spacing:0.08em}
-    .footer-links{margin-top:0.5rem;font-size:0.5rem}
-    .footer-links a{color:var(--text-muted);text-decoration:none;margin:0 0.5rem}
-    .footer-links a:hover{color:var(--accent)}
-    @media(max-width:768px){.cards{grid-template-columns:1fr}}
+    .site-nav .links a:hover, .site-nav .links a.active { color: var(--accent); }
   </style>
+</style>
 </head>
 <body>
-<div class="container">
-  <section class="hero">
-    <div class="hero-title">AI Investment Research<span class="cursor">_</span></div>
-    <div class="hero-sub">课程翻译 · 产业链研究 · 数据面板</div>
-    <p class="hero-desc">系统化研究人工智能产业的投资逻辑：从斯坦福课堂到产业链公司分析，再到实时市场数据。</p>
-  </section>
 
-  <div class="cards">
-    <a href="course/index.html" class="card">
-      <div class="card-icon">📚</div>
-      <div class="card-title">MS&E 435<br>AI 超级周期经济学</div>
-      <div class="card-desc">
-        斯坦福课程中文版。涵盖生成式 AI 经济学、GPU 算力经济、AI 数据中心等主题。
-        包含课程表、参考资料翻译、交互式计算器。
-      </div>
-      <span class="card-tag stanford">人工智能经济学课程</span>
-    </a>
-    <a href="ecosystem/" class="card">
-      <div class="card-icon">🏭</div>
-      <div class="card-title">AI 产业链公司目录</div>
-      <div class="card-desc">
-        覆盖半导体、云计算、AI 应用、数据中心等细分领域的公司目录与生态位关系图谱。
-        每个条目包含业务定位、生态位与财务数据。
-      </div>
-      <span class="card-tag">产业链研究</span>
-    </a>
-    <a href="dashboard/" class="card">
-      <div class="card-icon">📊</div>
-      <div class="card-title">数据面板</div>
-      <div class="card-desc">
-        产业链相关公司的实时数据面板：股价、市值、涨跌幅、PS/PE 估值。
-        支持按层级筛选和多维排序。
-      </div>
-      <span class="card-tag">市场数据</span>
-    </a>
-  </div>
-
-  <div class="status-bar">
-    <div class="status-item"><span class="status-dot"></span> MS&E 435 中文站运行中</div>
-    <div class="status-item"><span class="status-dot"></span> 产业链公司目录维护中</div>
-    <div class="status-item"><span class="status-dot"></span> 数据面板待自动刷新接入</div>
-  </div>
-</div>
-<footer>
-  <div class="container">
-    <div class="footer-text">AI Investment Research &mdash; 基于公开资料整理 &mdash; 仅供学习参考</div>
-    <div class="footer-links">
-      <a href="https://mse435.stanford.edu/" target="_blank">原始课程网站</a>
-      <a href="https://www.youtube.com/@MSE435EconomicsofAI" target="_blank">YouTube 频道</a>
-      <a href="https://github.com/weiyouzi321/ai-investment" target="_blank">GitHub</a>
+  <nav class="site-nav">
+    <div class="brand">AI Investment</div>
+    <div class="links">
+      <a href="course/index.html" class="active">MS&E 435</a>
+      <a href="ecosystem/index.html">AI 产业链</a>
+      <a href="dashboard/index.html">数据面板</a>
+      <a href="money-banking/index.html">货币金融学</a>
     </div>
-  </div>
-</footer>
+  </nav>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <h1>AI Investment</h1>
+      <span class="sub">Home · Index</span>
+    </div>
+    <div class="controls">
+      <input class="search" id="q" placeholder="搜索入口或关键词…" />
+      <button class="ghost" id="openAll">Open all</button>
+      <a class="ghost" href="money-banking/index.html" target="_blank">货币金融学</a>
+    </div>
+  </header>
+
+  <div class="grid" id="sections"></div>
+</div>
+
+<script>
+  const projects = {
+    "课程翻译": [
+      { name: "货币金融学", url: "money-banking/index.html" },
+    ],
+    "产业链": [],
+    "数据面板": []
+  };
+
+  const colors = {
+    "课程翻译": "#d8b4fe",
+    "产业链": "#93c5fd",
+    "数据面板": "#86efac"
+  };
+
+  const sectionEl = document.getElementById('sections');
+  const qEl = document.getElementById('q');
+  const openAllBtn = document.getElementById('openAll');
+
+  qEl.addEventListener('input', filter);
+  openAllBtn.addEventListener('click', () => {
+    document.querySelectorAll('.link').forEach(a => a.target = '_blank');
+  });
+
+  render(Object.entries(projects));
+
+  function render(items) {
+    sectionEl.innerHTML = '';
+    for (const [key, links] of items) {
+      const filtered = links.filter(l => visible(l, qEl.value));
+      const card = document.createElement('section');
+      card.className = 'section';
+      card.dataset.key = key;
+
+      const tags = [];
+      if (links.some(l => /bilibili|b站|b 站|bvid/i.test(l.name + ' ' + l.url))) tags.push('Bilibili');
+      if (links.some(l => /pdf|论文|paper/i.test(l.name + ' ' + l.url))) tags.push('PDF');
+      if (links.some(l => /python|script|脚本/i.test(l.name + ' ' + l.url))) tags.push('Script');
+
+      card.innerHTML = `
+        <div class="section-head">
+          <h2>${esc(key)}</h2>
+          <span class="count">${filtered.length}/${links.length}</span>
+        </div>
+        ${tags.length ? `<div class="tags">${tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>` : ''}
+        <div class="links"></div>
+      `;
+
+      const list = card.querySelector('.links');
+      for (const l of filtered) {
+        const a = document.createElement('a');
+        a.className = 'link';
+        a.href = esc(l.url);
+        a.target = '_self';
+        a.title = l.name;
+        a.dataset.name = l.name;
+        a.dataset.url = l.url;
+        a.innerHTML = `
+          <span class="name">${esc(l.name)}</span>
+          <span class="icon"></span>
+        `;
+        list.appendChild(a);
+      }
+      sectionEl.appendChild(card);
+    }
+  }
+
+  function visible(link, q) {
+    const s = (link.name + ' ' + link.url).toLowerCase();
+    if (!q) return true;
+    return s.includes(q.toLowerCase().trim());
+  }
+
+  function filter() {
+    const cards = Array.from(sectionEl.children);
+    let any = false;
+    for (const card of cards) {
+      const links = Array.from(card.querySelectorAll('.link'));
+      let count = 0;
+      links.forEach(a => {
+        if (visible(a.dataset, qEl.value)) {
+          a.classList.remove('hidden');
+          count++;
+        } else {
+          a.classList.add('hidden');
+        }
+      });
+      const countEl = card.querySelector('.count');
+      if (countEl) countEl.textContent = `${count}/${links.length}`;
+      if (count > 0) {
+        card.classList.remove('hidden');
+        any = true;
+      } else {
+        card.classList.add('hidden');
+      }
+    }
+  }
+
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+</script>
 </body>
 </html>
