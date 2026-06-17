@@ -5,92 +5,387 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Perry Mehrling · 货币金融学公开课</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
   :root {
-    --bg: #0b0c10;
-    --panel: #1f2833;
-    --ink: #c5c6c7;
-    --muted: #6d6f72;
-    --accent: #66fcf1;
-    --accent2: #45a29e;
-    --line: #2e3a47;
+    --bg: #faf9f7;
+    --surface: #ffffff;
+    --ink: #1a1a1a;
+    --muted: #6b7280;
+    --accent: #b45309;
+    --accent-light: #fef3c7;
+    --border: #e5e7eb;
+    --hover: #f3f4f6;
+    --serif: 'Noto Serif SC', serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html, body {
-    margin: 0; padding: 0;
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
     background: var(--bg);
     color: var(--ink);
-    font-family: 'IBM Plex Mono', monospace;
-    line-height: 1.55;
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
 
-  .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  /* Header */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
 
-  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
-  .topbar a { font-size: 13px; }
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+  }
 
-  .hero { margin-top: 28px; margin-bottom: 22px; }
-  .hero h1 { font-size: 28px; font-weight: 700; color: var(--accent); margin: 0 0 8px; letter-spacing: -0.5px; }
-  .hero p { margin: 0; color: var(--muted); font-size: 14px; }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
 
-  .stats { margin: 10px 0 24px; }
-  .stat { display: inline-block; background: var(--panel); border: 1px solid var(--line); padding: 10px 14px; margin: 0 12px 12px 0; border-radius: 6px; }
-  .stat strong { display: block; font-size: 18px; color: var(--accent); }
-  .stat span { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .back-link:hover {
+    color: var(--ink);
+  }
 
-  .week { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; margin: 14px 0; overflow: hidden; }
-  .week-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; cursor: pointer; user-select: none; }
-  .week-header:hover { background: #252f3b; }
-  .week-title { font-weight: 700; color: var(--ink); font-size: 15px; }
-  .week-count { color: var(--muted); font-size: 12px; }
+  .back-link svg {
+    width: 20px;
+    height: 20px;
+  }
 
-  .week-body { display: none; padding: 0 16px 14px; border-top: 1px solid var(--line); }
-  .week.open > .week-body { display: block; }
+  .external-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
 
-  .video { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--line); }
-  .video:last-child { border-bottom: none; }
-  .video-left { flex: 1; }
-  .video-title { font-size: 13.5px; color: var(--ink); }
-  .video-meta { color: var(--muted); font-size: 12px; margin-top: 4px; }
-  .video-link { white-space: nowrap; margin-left: 16px; padding: 6px 10px; background: #0f222a; border: 1px solid var(--accent2); border-radius: 5px; font-size: 12px; color: var(--accent); }
-  .video-link span { color: var(--muted); margin-right: 6px; }
+  .external-link:hover {
+    background: var(--accent);
+    color: white;
+  }
 
-  .empty { color: var(--muted); padding: 14px 16px; font-size: 13px; }
-  footer { margin-top: 30px; padding: 18px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; text-align: center; }
+  /* Hero */
+  .hero {
+    padding: 64px 0 48px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .hero .subtitle {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto 32px;
+  }
+
+  /* Stats */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Week List */
+  .weeks {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 64px;
+  }
+
+  .week {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .week:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .week-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+
+  .week-header:hover {
+    background: var(--hover);
+  }
+
+  .week-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .week-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .video-count {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .toggle-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--muted);
+    transition: transform 0.3s ease;
+  }
+
+  .week.open .toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .week-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .week.open .week-body {
+    max-height: 2000px;
+  }
+
+  .video-list {
+    padding: 0 24px 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .video-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+
+  .video-item:last-child {
+    border-bottom: none;
+  }
+
+  .video-info {
+    flex: 1;
+    margin-right: 16px;
+  }
+
+  .video-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+
+  .video-bvid {
+    font-size: 13px;
+    color: var(--muted);
+    font-family: monospace;
+  }
+
+  .video-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--accent-light);
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .video-link:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .video-link svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .hero h1 {
+      font-size: 28px;
+    }
+
+    .stats {
+      gap: 24px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+    }
+
+    .week-header {
+      padding: 16px;
+    }
+
+    .video-list {
+      padding: 0 16px 16px;
+    }
+
+    .video-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .video-link {
+      align-self: flex-start;
+    }
+  }
 </style>
 </head>
 <body>
-  <div class="container">
-    <div class="topbar">
-      <a href="../index.html">← 返回 AI Investment 首页</a>
-      <a href="https://b23.tv/jkDR7Xw" target="_blank" rel="noopener">🔗 B站合集</a>
+  <header>
+    <div class="container header-inner">
+      <a href="../index.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        返回首页
+      </a>
+      <a href="https://b23.tv/jkDR7Xw" target="_blank" rel="noopener" class="external-link">
+        B站合集
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+        </svg>
+      </a>
     </div>
+  </header>
 
-    <div class="hero">
-      <h1>Perry Mehrling · 货币金融学公开课</h1>
-      <p>Columbia University / Bilibili 合集 · 22 Weeks · 189 Video Lectures</p>
+  <main>
+    <div class="container">
+      <section class="hero">
+        <h1>货币金融学公开课</h1>
+        <p class="subtitle">Perry Mehrling · 哥伦比亚大学 · 22 周系统课程</p>
+      </section>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value" id="weeks-count">22</div>
+          <div class="stat-label">周次</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="videos-count">189</div>
+          <div class="stat-label">视频</div>
+        </div>
+      </div>
+
+      <div class="weeks" id="weeks-root"></div>
     </div>
+  </main>
 
-    <div class="stats">
-      <div class="stat"><strong id="weeks">0</strong><span>Weeks</span></div>
-      <div class="stat"><strong id="videos">0</strong><span>Videos</span></div>
-      <div class="stat"><strong id="last-updated">—</strong><span>Updated</span></div>
+  <footer>
+    <div class="container">
+      <p>数据来源：<a href="https://b23.tv/jkDR7Xw" target="_blank">Bilibili 合集</a> · 仅供学术用途</p>
     </div>
+  </footer>
 
-    <div id="weeks-root"></div>
-
-    <footer>
-      Data sourced from <a href="https://b23.tv/jkDR7Xw" target="_blank">https://b23.tv/jkDR7Xw</a>. Non-commercial academic use only.
-    </footer>
-  </div>
-
-    <script id="playlist-data" type="application/json">
+  <script id="playlist-data" type="application/json">
 {
   "course_title": "Perry Mehrling · 货币金融学公开课",
   "source": "https://b23.tv/jkDR7Xw",
@@ -1180,9 +1475,6 @@
   <script>
     (function() {
       const root = document.getElementById('weeks-root');
-      const weeksEl = document.getElementById('weeks');
-      const videosEl = document.getElementById('videos');
-      const updatedEl = document.getElementById('last-updated');
 
       let data = null;
       try {
@@ -1192,29 +1484,21 @@
       } catch (e) { data = null; }
 
       if (!data || !Array.isArray(data.weeks)) {
-        root.innerHTML = '<div class="empty">无法读取课程数据。</div>';
+        root.innerHTML = '<p style="text-align:center;color:#6b7280;padding:40px;">无法读取课程数据。</p>';
         return;
       }
 
       render(data);
 
       function render(src) {
-        if (!src) {
-          root.innerHTML = '<div class="empty">无效数据格式。</div>';
-          return;
-        }
         const weeks = Array.isArray(src.weeks) ? src.weeks : [];
-        weeksEl.textContent = weeks.length;
         const total = weeks.reduce((s, w) => s + (Array.isArray(w.videos) ? w.videos.length : 0), 0);
-        videosEl.textContent = total;
-        updatedEl.textContent = src.generated_at || '—';
-
-        if (!weeks.length) {
-          root.innerHTML = '<div class="empty">暂无周次数据。</div>';
-          return;
-        }
+        
+        document.getElementById('weeks-count').textContent = weeks.length;
+        document.getElementById('videos-count').textContent = total;
 
         const frag = document.createDocumentFragment();
+        
         weeks.forEach((w, idx) => {
           const vids = Array.isArray(w.videos) ? w.videos : [];
           const week = document.createElement('div');
@@ -1222,35 +1506,53 @@
 
           const header = document.createElement('div');
           header.className = 'week-header';
-          header.innerHTML = '<div><div class="week-title">' + escapeHtml((w.title || ('Week ' + w.week))) + '</div><div class="week-count">' + vids.length + ' 个视频</div></div><div class="week-count">▸</div>';
+          header.innerHTML = 
+            '<div class="week-title">第 ' + w.week + ' 周</div>' +
+            '<div class="week-meta">' +
+              '<span class="video-count">' + vids.length + ' 个视频</span>' +
+              '<svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>' +
+            '</div>';
+          
           header.addEventListener('click', function() {
-            const open = week.classList.toggle('open');
-            header.querySelector('.week-count').textContent = open ? '▾' : '▸';
+            week.classList.toggle('open');
           });
           week.appendChild(header);
 
           const body = document.createElement('div');
           body.className = 'week-body';
+          
+          const videoList = document.createElement('div');
+          videoList.className = 'video-list';
+          
           if (!vids.length) {
-            body.innerHTML = '<div class="empty">本周期无视频</div>';
+            videoList.innerHTML = '<p style="text-align:center;color:#6b7280;padding:20px;">本周期无视频</p>';
           } else {
             vids.forEach(function(v) {
-              const row = document.createElement('div');
-              row.className = 'video';
-              const url = (typeof v === 'string') ? v : (v.url || ('https://www.bilibili.com/video/' + (v.bvid || '')));
-              const title = (typeof v === 'string') ? v : (v.title || 'Untitled');
-              const bvid = (typeof v === 'string') ? '' : (v.bvid || '');
-              const duration = (typeof v === 'string') ? '' : (v.duration || '');
-              row.innerHTML =
-                '<div class="video-left"><div class="video-title">' + escapeHtml(title) + '</div>' +
-                '<div class="video-meta">' + escapeHtml(bvid) + (duration ? (' · ' + escapeHtml(duration)) : '') + '</div></div>' +
-                '<a class="video-link" href="' + escapeHtml(url) + '" target="_blank" rel="noopener"><span>Bilibili</span>' + escapeHtml(bvid) + '</a>';
-              body.appendChild(row);
+              const item = document.createElement('div');
+              item.className = 'video-item';
+              
+              const url = v.url || ('https://www.bilibili.com/video/' + (v.bvid || ''));
+              const title = v.title || 'Untitled';
+              const bvid = v.bvid || '';
+              
+              item.innerHTML = 
+                '<div class="video-info">' +
+                  '<div class="video-title">' + escapeHtml(title) + '</div>' +
+                  '<div class="video-bvid">' + escapeHtml(bvid) + '</div>' +
+                '</div>' +
+                '<a class="video-link" href="' + escapeHtml(url) + '" target="_blank" rel="noopener">' +
+                  '观看' +
+                  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>' +
+                '</a>';
+              videoList.appendChild(item);
             });
           }
+          
+          body.appendChild(videoList);
           week.appendChild(body);
           frag.appendChild(week);
         });
+        
         root.appendChild(frag);
       }
 
