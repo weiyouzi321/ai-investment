@@ -51,6 +51,14 @@
     footer.pagefoot{margin-top:3rem;padding:1.5rem 0;border-top:1px solid var(--border);color:var(--text-muted);font-size:.85rem;text-align:center}
     a.back{display:inline-block;margin-top:1rem;color:var(--text-secondary);text-decoration:none;border:1px solid var(--border);padding:.4rem .8rem;border-radius:6px}
     a.back:hover{color:var(--accent);border-color:var(--accent)}
+
+    /* topic grid */
+    .topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.5rem;margin:1.25rem 0}
+    .topic-col h4{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.5rem}
+    .topic-col ul{padding-left:1rem;font-size:.85rem}
+    .topic-col li{margin-bottom:.2rem}
+    .topic-col li strong{color:var(--accent);font-weight:600}
+
     @media (max-width: 860px){
       .toc{display:none}
       .toc-wrap{display:block}
@@ -81,7 +89,7 @@
           <li><a href="#intro">简介</a></li>
           <li><a href="#getting-interviews">如何拿到面试</a></li>
           <li><a href="#companies">初创 vs 大厂</a>
-            <ul><li><a href="#compensation" class="toc-sub">关于薪酬：RSU vs 期权</a></li></ul>
+            <ul><li><a href="#compensation" class="toc-sub">RSU vs 期权</a></li></ul>
           </li>
           <li><a href="#interview-structure">面试结构</a></li>
           <li><a href="#prep-technical">技术准备</a></li>
@@ -95,138 +103,387 @@
       </aside>
 
       <article>
+
+        <!-- INTRO -->
         <section id="intro">
-          <p>我觉得记录一下自己在 Machine Learning 博士毕业后找 Research Scientist 工作的经历可能会有帮助。网上关于这部分的资料几乎为零，我刚开始时也希望有人写过类似内容。如果你正在准备，或者只是好奇整个过程，希望这篇能帮到你。</p>
-          <p>总体而言，我的求职过程是成功的：凡是我完成全部面试的公司，都发了 offer，包括 DeepMind（已接受）、Isomorphic Labs、Cohere、Meta 以及一家 stealth 模式初创。需要补充一点的例外是：Anthropic、Mistral 和 TeslaAI 回复太晚，我没有完成流程；ReflectionAI 则是我唯一的真正拒信——他们不认可我的 RS 岗位，但把我转到了 Engineering 通道。</p>
-          <p>我大多数申请都拿到了面试邀请，除了 SpaceXAI、Waymo 和 Wayve。至于 SpaceXAI，我当时确实让一位朋友帮我写了申请材料……</p>
+          <p>我觉得把自己在机器学习博士毕业后找 Research Scientist 工作的经历记录下来可能会有帮助。关于这方面的信息网上<a href="https://gordicaleksa.medium.com/how-i-got-a-job-at-deepmind-as-a-research-engineer-without-a-machine-learning-degree-1a45f2a781de">几乎</a>为零，我刚开始的时候也希望有人写过类似的内容。希望这篇文章对正在求职或正打算开始的你都有用。</p>
+
+          <p>总体而言，我的求职过程是成功的：凡是完成全部面试流程的公司都给了我 offer，包括 DeepMind（已接受）、Isomorphic Labs、Cohere、Meta 以及一家处于 stealth 模式的初创公司。需要补充几个例外：Anthropic、Mistral 和 TeslaAI 回复太晚，我没有走完流程。ReflectionAI 是我唯一真正的拒信——他们不认可我适合 RS 岗位，但把我转到了 Engineering 通道。</p>
+
+          <p>大多数我申请的公司都邀请了我去面试，以下几家除外：SpaceXAI、Waymo 和 Wayve。SpaceXAI 那个，我确实让一个朋友帮我以开玩笑的方式写了申请材料，但我也没觉得写得那么差。Waymo 和 Wayve：我是真心喜欢自动驾驶。整个博士期间我每隔六个月就申请一次 Waymo（先是实习，后来是全职），一次回音都没有收到，尽管我们实验室里确实有人拿到了回复。Waymo，如果你看到了这篇文章，我愿意原谅你。我的<s>情书</s>求职信堪称艺术品。你可以用你档案里已有的那个邮箱联系我，那个邮箱你已经收到过很多次了。</p>
         </section>
 
+        <hr class="section-break" />
+
+        <!-- GETTING INTERVIEWS -->
         <section id="getting-interviews">
           <h2>如何拿到面试</h2>
-          <p>拿到面试的核心线索是：内推和主动联系（cold email）比海投有效得多。尽可能找你认识的同事或校友内部推荐，降低筛选门槛。</p>
-          <p>另一方面，如果是冷启动，一封包含 2-3 个工作相关洞见、且简短到可以快速读完的邮件，更容易获得回复。常见误区是写得像求职信一样冗长。</p>
+          <p>拿到面试本身就是一项挑战，如果你在这方面有困难，常规的杠杆就是：更多论文、更热门的方向、更好的实习经历。你可以在我的个人网站上查看我的简历作为参考，简要来说：我在博士期间有 4 篇第一作者（或共同第一作者）论文，发表在 ICLR / NeurIPS / ICML，涵盖热门方向（LLM、RL）和相对冷门的方向（Meta-Learning、Evolution Strategies）。我还有在 Apple 的实习经历，以及之前在 Meta 担任 Software Engineer 的行业经验。如果要给一个粗略的基准：3+ 篇第一作者论文，以及至少一次实习或行业经历，似乎是在顶级实验室持续拿到面试邀请的门槛。</p>
+
+          <p>话虽如此，如果你已经能拿到面试了：更多论文在这个阶段对你没有帮助。你需要通过面试，而且面试官通常甚至不会看你的简历。所以，停止纠结于你的研究和论文，开始专注于面试准备吧！我理解那种想要拖延的心情，但你永远不会觉得自己准备好了，所以<strong>现在</strong>就开始准备吧。</p>
+
+          <h3>其他值得了解的细节：求职信、内推、冷邮件以及 LinkedIn/X</h3>
+
+          <p><strong>LinkedIn / X：</strong>很多公司在这些平台上发布职位信息，尤其是实习岗位，有时候这是唯一的申请方式。你需要填写帖子链接中的 Google 表单，申请才会真正被记录。关注你感兴趣的公司中你欣赏的人，这样你就不会错过这些信息。</p>
+
+          <p><strong>内推（Referrals）：</strong>有了更好，但不是必须的。在 DeepMind，我有两个岗位拿到了内推，第三个没有，但最终我被邀请面试的是其中一个有内推的和那个没有内推的。在 Anthropic，一开始石沉大海，直到我发现一位前同事最近加入了，才请他帮我做了内推。所以，如果能拿到就去争取，但不要因为没有内推就不敢投。</p>
+
+          <p><strong>冷邮件（Cold emails）：</strong>直接给 Hiring Manager 或团队成员发邮件（如果你知道他们是谁的话）通常会受到欢迎。不要只是复述你的简历（你可以附上），用邮件来解释你为什么适合这个特定团队，以及你对他们工作的真实热情。举个例子：在 DeepMind 我给 Hiring Manager 发了邮件，他很高兴并回复了我。另一个岗位，我在 X 上看到 Hiring Manager 明确鼓励大家给他发邮件……但我实在懒得发了，因为我已经在跟另一个团队走面试流程了。最终我还是拿到了他们的面试邀请，尽管我并没有发那封邮件。</p>
+
+          <p><strong>求职信（Cover letters）：</strong>很少被要求，但当确实需要的时候，请认真写。拜托，千万不要直接让 Claude / Gemini / ChatGPT 替你写。你完全可以自己写好初稿，然后请它们帮你润色，这样没问题。但尽量让你的个性和热情能够透出来。</p>
         </section>
 
+        <hr class="section-break" />
+
+        <!-- COMPANIES -->
         <section id="companies">
           <h2>初创 vs 大厂</h2>
-          <p>如果你在意长期成长空间和系统性基础设施，大厂通常提供更深的领域积累和资源；但初创能让你更早接触完整产品和业务链路。</p>
-          <p>不要只盯着品牌。建议从“做的事情 + 团队 + 你的直属领导”三个维度评估，而不是只看公司名字。</p>
-          <section id="compensation">
-            <h3>关于薪酬：RSU vs 期权</h3>
-            <div class="callout"><strong>RSU</strong> 更常见于上市前后阶段公司，发放时期权结构简单；<strong>期权（Options）</strong> 通常增值空间更大但伴随不确定性，需评估行权成本和税务影响。</div>
-            <p>许多候选人会直接用“总薪酬（TC）”来比较，但要注意 sign-on、 relocation、refresh 频率等因素。</p>
-          </section>
+          <p>总结起来就是：要看具体情况，比我这里列出的任何通用利弊清单都要复杂。但以下是需要考虑的主要因素。</p>
+
+          <p><strong>找初创更难。</strong>没有一个集中的地方可以查找。问问你的实验室同学、朋友和前同事……口碑传播是在你研究方向上找到好初创的最佳方式。同时，正因为更难找到，这些岗位的竞争通常也不那么激烈。</p>
+
+          <p><strong>初创的面试流程差异更大。</strong>大厂遵循相对可预测的结构，而初创则各行其是。难度水平平均来说差不多，但方差很大。留意面试流程本身透露出的公司信息：如果感觉太容易，这可能是你实际工作复杂度的一个信号。跟面试一样，我认为初创在工作质量和人才方面相比大厂有更大的方差。</p>
+
+          <p><strong>工作本身有好有坏。</strong>在合适的初创，研究可能比你在大厂做的任何事情都更有趣、更有影响力。但同时也可能伴随着更大的压力、更多你并没有预期到的工程和基础设施工作，以及频繁变动的研究议程。面试时要多问问题！谁来决定研究优先级？盈利路径是什么？竞争对手是谁？如果 OpenAI 明天决定做同样的事情怎么办？</p>
+
+          <p><strong>成长空间。</strong>初创通常提供更快成长、承担更多责任、塑造工作方向的机会。在大厂你是众多研究员之一，在初创你更加显眼。这可以是一件大事（至少对我来说是这样）。</p>
+
+          <p><strong>简历的分量。</strong>简历上写着 OpenAI 或 Anthropic，任何人都能一眼认出。一家没人听说过的 stealth 初创需要解释。这不是说你应该避开初创（如果你是创业者类型，那就完全不同了），但值得诚实地考虑这一点。</p>
+
+          <p><strong>关于"稳定性"：</strong>我不想做这个论证。大厂在过去几年里毫不犹豫地进行了多次大规模裁员，两条路都不是100%安全的。</p>
+
+          <h3 id="compensation">关于薪酬：RSU vs 期权</h3>
+          <p>这个东西我花了令人尴尬的长时间才搞明白，所以尽量帮你省去困惑。以下我以英国法律和税收为例来说明。</p>
+
+          <p><strong>RSU</strong>（大厂常见）：你在 vesting 计划中获得公司实际股票。当它们 vest 时，你可以卖出或持有。大约一半会立刻被卖掉来缴纳所得税（因为没错，当我23岁拿到第一批 Meta 股票时……RSU 算作收入，这绝对震惊了我）。</p>
+
+          <p><strong>期权（Stock options）</strong>（初创常见）：你不是获得股票。你获得的是以固定价格 X 购买股票的<em>机会</em>，不管当时的市场价格 Y 是多少。如果 Y &gt; X，很好！你可以行使期权，以 X 买入，以 Y 卖出，赚取差价。如果 Y &lt; X，你的期权一文不值。</p>
+
+          <p>接下来就是事情变得疯狂的地方。期权通常在你离开公司后 90 天过期。如果公司还没有上市，你买入股票后无法卖出，这意味着你可能需要花费（X × 期权数量）的现金来行权（= 使用），但没有任何保证你能卖出去。而在英国，你行使期权的那一刻，就要为 Y−X 的差额缴纳所得税，<em>即使你还没有卖出一股，还没有看到一分钱</em>。</p>
+
+          <p>所以，如果你在一家初创工作两年后离开，行使了期权，但公司还没有上市，你需要支付：购买股票的成本（X × 期权数量）<em>加上</em>纸上收益的所得税（(Y−X) × 期权数量 × 你的税率）。在你还没有赚到任何钱之前。</p>
+
+          <p>几个补充说明：大多数公司提供无现金行权（cashless exercise）选项，你交回一部分期权来覆盖剩余的行权成本。很多公司也有流动性事件，会回购一部分股票。但记住：每一轮新融资都会稀释你的股份，而且超出所得税应税部分的收益还要另外缴纳资本利得税（约20%）。流动性事件对你的股票估值通常也低于公司的官方估值。</p>
+
+          <div class="callout"><strong>总结：</strong>当招聘人员给你一个包含初创股权的总薪酬数字时，礼貌地微笑，然后在心里大幅打折。最可能的情况是：你明年不会退休。但祝你好运。</div>
         </section>
 
+        <hr class="section-break" />
+
+        <!-- INTERVIEW STRUCTURE -->
         <section id="interview-structure">
           <h2>面试结构</h2>
-          <p>典型的 Research Scientist 面试流程常包括：</p>
-          <ol>
-            <li> Hiring manager / 团队聊天</li>
-            <li> 论文深挖（paper presentation + Q&A）</li>
-            <li> 算法 / LeetCode 题目</li>
-            <li> 机器学习系统或实现题（coding + ML reasoning）</li>
-            <li> 行为 / 情商类问题</li>
-            <li> 全流程之后往往还有 negotiation 阶段</li>
-          </ol>
-          <p>不同公司对结构会有增减。例如 DeepMind 更看重复现论文思路的清晰度；Meta 则加系统设计类题目。</p>
+          <p>大多数公司遵循大致相同的结构，尽管每个阶段的权重差异很大。</p>
+
+          <p><strong>Recruiter 初筛。</strong>这通常只是一次轻松、低压力的聊天。这是一个展示你技能与岗位匹配的机会，也是展现你确实了解并能讨论自己论文的机会。</p>
+
+          <p><strong>技术面试。</strong>这是整个流程的核心部分，也是准备最为关键的地方。根据公司不同，预计会有 3-8 轮技术面试：</p>
+          <ul>
+            <li><em>Coding。</em>LeetCode 类题目，通常是 Medium 或 Hard 难度</li>
+            <li><em>ML 编码和调试。</em>实现 attention、编写反向传播、在训练循环中找 bug</li>
+            <li><em>ML 知识。</em>基础理论、应用 ML、系统设计</li>
+          </ul>
+
+          <p><strong>行为面试。</strong>分为两种类型：经典行为问题（"讲讲你经历过的冲突"、"讲讲你收到过的反馈"……）和研究类面试（"你对哪些方向感兴趣？"、"你觉得这个领域未来往哪走？"）。相比技术面试，这些更随意，但请不要低估它们，请认真反思和准备你的回答。</p>
         </section>
 
+        <hr class="section-break" />
+
+        <!-- PREP TECHNICAL -->
         <section id="prep-technical">
           <h2>技术准备</h2>
 
-          <h3>Flashcards</h3>
-          <p>把常见概念、论文的核心图表、常见误区做成闪卡（anki 等），利用碎片时间反复记忆。</p>
+          <div class="callout"><strong>这是最关键的部分！不要跳过。</strong>我认识非常优秀的研究人员，纯粹因为没有准备就在面试中被拒了。每天做 ML 和准备好从零实现 attention、推导反向传播、或编写 flash attention 完全是两回事。请至少安排<strong>一个月</strong>的规律学习时间。</div>
 
-          <h3>用 LLM 做模拟面试</h3>
-          <p>让 Claude 或 Gemini 作为面试官来问问题，练习在大约 30 分钟内把逻辑说清楚。重点不是背诵，而是训练“一句话把问题讲明白”的节奏。</p>
+          <p><strong>一个对我很有帮助的元策略：</strong>我几乎不做泛泛的准备。几乎所有内容都针对接下来的特定面试或公司。这让我保持专注，也意味着被问到的内容在脑海中是新鲜的（对于我这种金鱼记忆来说至关重要）。到最后，你基本上还是覆盖了所有材料。但我知道有些人更喜欢不同的策略，所以选适合你的方式！</p>
+
+          <p>到面试旅程结束时，我已经积累了一套相当全面的资源和策略，下面会分享。我知道，内容很多。但 ML Research Scientist / Engineer 面试的现实就是，你可能被问到几乎任何东西，从过拟合这样的基础概念，到 LeetCode，到从零实现 transformer，再到关于相当新的架构（Griffin、TransformerXL、S4）的具体问题。下面的列表反映了这个范围。</p>
+
+          <h3>闪卡（Flashcards）</h3>
+          <p>用于 ML 基础、应用 ML 和研究讨论。我先试了 Anki，不太适合我，实体闪卡效果好得多。更重要的是，<strong>自己写卡片本身就是一半的学习</strong>，不要只是下载别人的卡片组。如果需要一个起点，我后面会链接完整的主题列表。复习时要保持好奇心：给自己提问，确保你深入理解每个主题。我在学习过程中多次问自己的问题，后来在面试中真的被问到了。提前解决疑问总比事后后悔好！</p>
+
+          <h3>LLM 模拟面试（Claude / Gemini）</h3>
+          <p>每次面试前，我会把岗位描述、面试内容和公司信息粘贴到我当天最喜欢的 LLM（通常是 Claude）里，让它面试我。令人惊讶的是，练习题和面试官实际问的问题之间有很高的重合度。我建议每次面试都这样做。如果难度不合适，开一个新对话，更明确地说明你的水平和背景。我觉得 Claude 是最适合学习的 LLM，它的反馈总体上很公正。Gemini 有点过于奉承了（"他们能面试你是他们的荣幸" ~ 引自 Gemini）。</p>
 
           <h3>LeetCode / NeetCode</h3>
-          <p>建议按公司标记高频题，并进行时间约束练习。许多工程师岗位考得更深，RS 一般只要求中等难度，但基础 MUST PASS。</p>
+          <p>至少做 Blind 75，可选 NeetCode 150，重点放在 Medium 难度上。尽量为每道题找到最优解——TwoSum 的 O(N²) 解法不算合格。Hard 题不要花太多时间。如果你之前没做过 LeetCode：一开始会感觉很糟糕，你会觉得自己很笨，这很正常，会过去的。到第100题你就会自信很多。关键是掌握基本模式（DFS、BFS、图、回溯、DP、二分查找……），确保你能自信且快速地实现它们。目标是每道 Medium 在20分钟以内完成。如果卡了超过15分钟，看答案，理解它，标记复习，然后继续。<strong>广度比深度更重要！</strong>我总共做了大约150道 Medium。</p>
 
           <h3>书籍</h3>
           <ul>
-            <li><em>Algorithm Design</em> — Kleinberg & Tardos</li>
-            <li><em>Deep Learning</em> — Goodfellow, Bengio, Courville</li>
-            <li><em>Designing Data-Intensive Applications</em> — Martin Kleppmann</li>
+            <li><em>Designing Machine Learning Systems</em>，Chip Huyen 著：覆盖了你会遇到的大量基础和应用 ML 问题。做好标注和笔记。</li>
+            <li><em><a href="https://jax-ml.github.io/scaling-book/">JAX Scaling Book</a></em>：我在面试后才发现这本书，遗憾，但它非常优秀，如果早点发现我会大量使用它。</li>
+            <li><em>Reinforcement Learning</em>，Sutton &amp; Barto 著：只推荐给 RL 新手。如果你已经在做 RL 研究了，我觉得这本书有点过度了。</li>
           </ul>
 
           <h3>课程</h3>
-          <p>需要的课程很多，真正受益的反而不是某一门，而是建立“从数学推导到工程实现”的桥接理解。</p>
+          <ul>
+            <li><strong>线性代数：</strong><a href="https://www.youtube.com/watch?v=7UJ4CFRGd-U&list=PLE7DDD91010BC51F8">Gilbert Strang 的 YouTube 课程</a>。你可以在2倍速下一天内看完全部课程（我说的可能是亲身经历）。他是我本科线性代数及格的唯一原因。祝他再活91年。</li>
+            <li><strong>Diffusion / Flow Matching：</strong><a href="https://www.youtube.com/watch?v=9eJQQVrUUoI&list=PL57nT7tSGAAXwjhDYcxEycx5W7YoSrZyt">MIT</a> 和 <a href="https://www.youtube.com/watch?v=tr-CUpw--ck&list=PLoROMvodv4rNdy8rt2rZ4T2xM0OjADnfu">Stanford</a> 的课程都不错，但数学比较重。如果你不是在做这个方向的研究，面试问题可能比较浅层，所以只要建立高层次的直觉并记住基础就行（比如 diffusion SDEs 和 flow matching ODEs）。</li>
+          </ul>
 
-          <h3>机器学习代码和调试</h3>
-          <p>面试前确保 batchnorm 的 moving average、随机种子、分布式数据并行这些细节能讲清楚。能被问到的机会比预期高。</p>
+          <h3>ML 编码和调试</h3>
+          <p>这是我找到的好资源最少的地方，也是实际经验最重要的地方。调试面试尤其难以练习——当你让 LLM 生成有 bug 的代码时，它们无法可靠地生成令人信服的有 bug 代码。回顾你自己的代码库（或朋友的）可能是最好的办法。<a href="https://www.deep-ml.com/problems">DeepML</a> 上有一些题目，但我印象不深。我还发现这些 <a href="https://github.com/srush/Tensor-Puzzles">Tensor Puzzles</a> 非常有帮助。你至少应该达到的基准：</p>
+          <ul>
+            <li>端到端实现一个 transformer</li>
+            <li>实现 causal attention、cross attention 和 self attention</li>
+            <li>实现 flash attention</li>
+            <li>实现 attention 的反向传播</li>
+            <li>实现 MLP 的前向和反向传播</li>
+            <li>用 PyTorch 或 JAX 实现一个带 SGD 的简单训练循环</li>
+          </ul>
+          <p>如果你能在时间压力下从零完成所有这些，你就准备得不错了。</p>
         </section>
 
+        <hr class="section-break" />
+
+        <!-- PREP EMOTIONAL -->
         <section id="prep-emotional">
           <h2>心理准备</h2>
+          <p>我不能代表所有人，但对我来说，这个过程让我的心理韧性彻底崩塌。我一直很擅长应对面试和考试，不需要什么特别的策略……但这次不一样。</p>
 
-          <h3>先处理现实问题</h3>
-          <p>不要等状态完美再投。焦虑本身会形成“等状态好一点再开始”的死循环。建议设置固定申请量（例如每天 2–3 家），保持节奏。</p>
+          <div class="callout">如果你情绪状态还不错，跳过这一节。我不想在没有焦虑的地方制造焦虑。</div>
+
+          <h3>先处理实际问题</h3>
+          <p>我最大的问题是睡眠：面试前一晚我根本睡不好，当你一周有10场面试时这就变成了严重的问题。我也吃不下东西，面试前看到食物就会恶心。我的解决办法是灌几升可乐补充糖分。我并不声称这是最优方案，但这是我能想到的最好办法。</p>
+
+          <p>除此之外，我建议：规律运动、固定的晚间作息，以及不要在社交上把自己隔离。面试前跑步对我帮助很大，它消耗了紧张的能量，重置了我的心态。（如果你也这样做的话：悠着点，吃够碳水）。在最糟糕的几周里，我给自己定了一个规矩：只要第二天早上没有面试，就约朋友一起吃晚饭。这对我帮助很大。</p>
 
           <h3>面试前的仪式</h3>
-          <p>建立一个稳定流程：环境、白噪音、桌面状态、摆放水杯；在正式开始前做 2 分钟呼吸。这些细节对压力下的表达稳定性有帮助。</p>
+          <p>我发现建立一个固定的面试前仪式让我感到很安心。我会在背景里放鲜花（收到过不少好评），化个妆（专注于别的事情让我放松——男士们可以试试护肤？），然后看几个治愈视频。我的播放循环：Alysa Liu 的<a href="https://www.youtube.com/watch?v=n-I6fkQcUL4">花滑</a>和<a href="https://www.youtube.com/watch?v=PhsGMgZtTYY">人生感悟</a>，以及经典的<a href="https://www.youtube.com/watch?v=EmTz7EAYLrs">指环王</a>、<a href="https://www.youtube.com/watch?v=dQ_-rmuPZC4">指环王</a>、<a href="https://www.youtube.com/watch?v=DgNrvnY1mo0">指环王</a>。想要更多治愈视频推荐请给我发邮件。</p>
 
           <h3>更难的部分</h3>
-          <p>被拒是常见体验。把每次面试当成一次信息收集，而非考试；收集“我对这个领域理解不足”的精确问题，然后集中补。</p>
+          <p>到了某个阶段，焦虑对我造成的阻碍比准备不足更大。我的大脑偶尔会在面试中途一片空白。我认真考虑过在过程中开始心理咨询，但时间不够，没来得及。事后想来，那种自我反思应该在你<em>开始之前</em>就做好（了解你的触发点、你与失败的关系、你的自我价值感真正系于何处），而不是像我一样在实战中才发现。不推荐 lol</p>
+
+          <p>但这引出了我最想说的一句话：你作为一个人的价值，不会被这些面试所决定（我知道几个月前我也会对此翻白眼，但这是真的！）。这个过程本质上是随机的，有时候宇宙还会跟你开个玩笑。DeepMind 面试那天早上我凌晨5点冷汗惊醒，突然想起我还没复习主题 X。我拿起手机让 Claude 帮我总结了主题 X，然后又睡了回去。当我9点加入面试时，面试官说："你对主题 X 了解多少？"。我不是说有上帝，但如果有，那天祂显然站在我这边。不过话说回来，你被允许有糟糕的一天。在面试中没能解释清楚为什么 forward KL 是 mean-covering 而 reverse KL 是 mode-seeking，并不意味着你是一个糟糕的 ML 研究者。在处理过两篇分别涉及 forward vs reverse KL 的论文之后，我居然在面试中搞砸了那个问题，事后我哭得稀里哗啦。你会搞砸的，即使是你本来知道的东西，这没关系。</p>
 
           <h3>有帮助的书籍</h3>
-          <ul>
-            <li><em>Thinking, Fast and Slow</em> — Daniel Kahneman</li>
-            <li><em>Atomic Habits</em> — James Clear</li>
-            <li><em>The Charisma Myth</em> — Olivia Fox Cabane</li>
-          </ul>
+          <p>不完全针对面试焦虑，但对底层心态建设很有用：<em>The Now Habit</em>，Neil Fiore 著；<em>The Gifts of Imperfection</em>，Brené Brown 著；<em>Mindset</em>，Carol Dweck 著；以及 <em>The Tyranny of Merit</em>，Michael Sandel 著。</p>
         </section>
 
+        <hr class="section-break" />
+
+        <!-- PREP LOGISTICS -->
         <section id="prep-logistics">
           <h2>流程准备</h2>
-          <p>面试前确认时区、平台、网络、备用设备。把面试链接和公司联系人信息放在同一个文件夹里，减少临场搜索。</p>
-          <p>行为问题的准备建议写成 8-10 条故事模板，每条覆盖：</p>
-          <ul>
-            <li>情境 / 任务 / 行动 / 结果</li>
-            <li>你在决策中的个人具体贡献</li>
-            <li>量化指标（即使只是近似）</li>
-          </ul>
+
+          <p><strong>每天只面试一场。</strong>就个人而言，能安排的话我更倾向这种方式。不是每次都能做到，但面试很消耗精力，一天中第三场面试你必然会表现打折扣。我的节奏是：早上面试，然后用剩下的一天准备下一场。这帮我避免了整天不停切换上下文的感觉。</p>
+
+          <p><strong>先面你不太在意的公司。</strong>小一点的初创、你不太想去的城市的公司、有趣但不是首选的岗位。你会对流程是什么样的有个感觉，校准你的自信心，并在你为真正想要的 offer 谈判之前，对薪酬水平有一个真实的感知。</p>
+
+          <p><strong>注意时间安排。</strong>有些公司动作很快，有些则极其（而且不可预测地）慢。一旦流程开始，进度通常是可预测的，所以如果公司 A 给你发了一个可以随时做的测试链接来启动面试流程，而你还在等公司 B 的回复……那就等公司 B 安排好第一次面试再去做公司 A 的测试。目标是让 offer 在大致相同的时间窗口内到来，这样你才有真正的筹码和真正的选择。显然，这个过程再次非常随机，所以时间安排在实践中很难。举个例子：我试着联系我在 Anthropic 的一个熟人来加速他们的流程，但最终在 DeepMind 的截止日期之前还是没能启动 Anthropic 的面试。</p>
+
+          <p><strong>告诉每家公司你在跟其他公司走流程。</strong>我知道对一些人来说这感觉不太舒服，但这完全是正常的、预期中的。它让时间线保持清晰，推动流程顺利进行，而且如果公司对你感兴趣的话，通常会促使他们加快进度。我认为如果公司知道多个其他公司也把你视为认真考虑的候选人，他们也会把你视为更认真的候选人。</p>
         </section>
 
+        <hr class="section-break" />
+
+        <!-- NEGOTIATION -->
         <section id="negotiation">
           <h2>谈判</h2>
-          <p>拿到第一个 offer 后应积极同步其他流程，创造竞争性压力。</p>
-          <p>谈判不仅是数字游戏，还涉及 you-know-what 的其他条件：签字费（sign-on）、股票 refresh、搬家支持、试用期条款等。如果公司诚意足够，relocation 和 sign-on 最容易成谈判杠杆。</p>
+          <p>我觉得<a href="https://haseebq.com/my-ten-rules-for-negotiating-a-job-offer/" target="_blank">这篇博文</a>是一个很好的起点，不过说实话，我并没有按它的建议来做。那篇文章建议把它当作暗标拍卖，不要透露竞争 offer。这对我来说没用：有几家公司明确要求提供其他 offer 的证明才会加价，甚至有一家质疑了我的截图（lol）。扑克脸策略也就到此为止了。</p>
+
+          <p>我学到的几件事：</p>
+
+          <p><strong>如果公司想要你，他们可以大幅提升数字</strong>……比我预期的更多。永远值得开口问。大多数公司都愿意谈。</p>
+
+          <p><strong>截止日期各不相同</strong>，从一周到两周到模糊的"给你合理的时间"都有。在我的经验中，公司对延期不太灵活（但我有些朋友的公司是灵活的！），所以把这个因素纳入你的时间安排。</p>
+
+          <p><strong>Recruiter 意外地善于读懂你。</strong>有几个人只是通过问模糊的问题就推断出了我的真实偏好，但平心而论我确实非常透明，大概很容易被读懂。要小心，即使是小信号也很重要：你提到一家公司的频率、你谈论他们的方式，所有这些都会被记录下来。如果 recruiter 知道他们的公司已经是你首选，谈判就会更难。</p>
+
+          <p><strong>公司会追踪候选人选择的历史数据。</strong>如果你告诉 Anthropic 你在认真考虑<a href="https://www.bbc.co.uk/news/articles/cp8p2gmvv37o" target="_blank">Peppers Burgers</a> 的 offer，他们有数据知道同时拿到两个 offer 的候选人实际上有多少选了后者。如果答案是"几乎没有"，你的虚张声势就不起作用了。这也是为什么来自真正同级别竞争对手（OpenAI 或其他顶级实验室）的 offer 比其他 offer 有更大分量的原因。但再说一次，要让这些流程在时间上对齐非常困难。</p>
         </section>
 
+        <hr class="section-break" />
+
+        <!-- DECISION -->
         <section id="decision">
           <h2>决策过程</h2>
-          <p>我按以下权重维度做排序：</p>
-          <ul>
-            <li>研究自由度 + 资源充足度</li>
-            <li>团队能力与导师质量</li>
-            <li>长期影响（是否让你变得更值钱）</li>
-            <li>地理位置 / 生活成本 / 税率</li>
-          </ul>
-          <p>只有在两个选项都能改善你未来形态时，这才是一个好决策问题。如果只能“赌大公司光环”，那决策其实是被动接受。</p>
+          <p>我无法替你做判断，但就我个人而言，这个过程刚开始时我相当没有安全感，我很想接受一些早期 offer（而不是让它们过期然后继续面试），因为我害怕找不到更好的。但我确实找到了更好的。显然不可能预测未来的面试会怎样，但请相信你的直觉。</p>
+
+          <p>在 offer 之间做选择：每个人权重不同：地点、薪酬、声望、工作类型、免费食物和可乐（最后两项对我来说非常重要）。我在开始之前有一个粗略的偏好排序，随着我对团队、文化和薪酬了解更多，这个排序在不断变化。然后我那套非常复杂的"氛围感"排名系统在我爱上 Isomorphic Labs 之后彻底崩塌了，接着 DeepMind 又给了我 offer。</p>
+
+          <p>我的解决方案是跟两家公司几乎所有人都聊了一遍。在一个令人震惊的剧情转折中，DeepMind 的每一个人都告诉我他们会选 DeepMind，Isomorphic 的每一个人都告诉我他们会选 Isomorphic。非常有帮助。最终最有用的是跟真正了解你的人好好谈谈（对我来说是我的男朋友），然后从那里理清思路。</p>
         </section>
 
+        <hr class="section-break" />
+
+        <!-- WHAT I'D DO DIFFERENTLY -->
         <section id="differently">
           <h2>如果要重来</h2>
-          <ul>
-            <li>更早开始系统投；不要等论文投出去再做求职。</li>
-            <li>与面试官建立连接，而不只是展示能力。</li>
-            <li> greedy 地主动提出想做的方向，而不是等分配。</li>
-            <li>更重视获客渠道：内推和作者身份（blog / GitHub）带来高质量信号。</li>
-          </ul>
+          <p>即使整个过程总体上是成功的，如果让我重来，有几件事我会改变：</p>
+
+          <p><strong>维护一个表格。</strong>我当初以为我能把所有事情记在脑子里。技术上确实可以，但一个简单的表格（要申请的公司、每个流程走到哪了、截止日期、联系人）能避免我忘记申请真正感兴趣的地方。不是什么高深的道理，我知道。</p>
+
+          <p><strong>做好心理准备，不只是技术准备。</strong>面试过程有一种能力，让你觉得它是对你研究能力的最终裁决，以及你的博士学位到底有没有价值。这不是理性的框架，但当你身处其中时很难避免。我没有处理好，我认为在开始之前做一些心理咨询或者至少认真的内省（而不是在过程中才开始）会有很大帮助。</p>
+
+          <p><strong>对那些忽略我的公司要更主动。</strong>事后想来，我应该给公司里的人发冷邮件，直接表达我的兴趣，试图真正进入某人的视野，而不是指望申请表替我完成这些。如果你真的想在某家公司工作，但一直没有回音，做点什么吧。</p>
         </section>
 
+        <hr class="section-break" />
+
+        <!-- TECHNICAL TOPICS -->
         <section id="topics">
           <h2>技术主题</h2>
-          <p>以下是我在面试中被问到的高频主题集群：</p>
-          <ul>
-            <li>统计学基础：概率、假设检验、贝叶斯思维、分布直觉</li>
-            <li>优化：凸优化、随机优化、梯度下降变体、正则化</li>
-            <li>深度学习：反向传播、初始化、归一化、正则化、注意力机制</li>
-            <li>ML 系统：数据 pipeline、特征存储、离线/在线评估、延迟与吞吐权衡</li>
-            <li>论文阅读：能复述关键实验、对照基线、局限性和改进方向</li>
-          </ul>
+          <p>以下是我在面试前整理的主题列表。就我个人而言，我被问到了很多关于 LLM 和 RL 的问题，这反映了我的背景。如果你有 diffusion 方向的背景，预计那边的问题会更多。我基本上在至少一场面试中被问到了（某种形式或程度上）几乎每一个我学习过的主题。所以……确保全面覆盖！</p>
+
+          <div class="topic-grid">
+            <div class="topic-col">
+              <h4>强化学习 (RL)</h4>
+              <ul>
+                <li>Q-Learning / TD Learning</li>
+                <li>贝尔曼方程 (Bellman Equations)</li>
+                <li>PPO</li>
+                <li>GRPO</li>
+                <li>GAE</li>
+                <li>RL 中的方差缩减 (Variance Reduction)</li>
+                <li>DPO (Direct Preference Optimisation)</li>
+                <li>策略梯度定理 (Policy Gradient Theorem)</li>
+                <li>On-Policy vs Off-Policy</li>
+                <li>探索与利用困境 (Exploration vs Exploitation)</li>
+                <li>信用分配问题 (Credit Assignment Problem)</li>
+                <li>MuZero</li>
+                <li>World Models / Dreamer</li>
+                <li>AlphaGo</li>
+                <li>Soft Actor-Critic</li>
+                <li>基于模型 vs 无模型 (Model-Based vs Model-Free)</li>
+                <li>马尔可夫性质 (Markov Property)</li>
+                <li>Monte Carlo vs TD</li>
+                <li>Actor Critic</li>
+                <li>SARSA</li>
+                <li>重要性采样 (Importance Sampling)</li>
+                <li>马尔可夫决策过程 (MDP)</li>
+                <li>课程学习 (Curriculum Learning)</li>
+              </ul>
+            </div>
+
+            <div class="topic-col">
+              <h4>大语言模型 (LLMs)</h4>
+              <ul>
+                <li>Flash Attention</li>
+                <li>LoRA</li>
+                <li>TransformerXL</li>
+                <li>Griffin</li>
+                <li>Perceiver</li>
+                <li>缩放定律 (Scaling Laws)</li>
+                <li>混合专家 (Mixture of Experts)</li>
+                <li>LLM 缩放因子</li>
+                <li>RoPE</li>
+                <li>正弦位置编码 (Sinusoidal embeddings)</li>
+                <li>相对位置编码 (Relative positional embeddings)</li>
+                <li>LLM vs RNN vs S4</li>
+                <li>分词 (Tokenisation)</li>
+                <li>预训练 (Pretraining)</li>
+                <li>微调 (Finetuning)</li>
+                <li>RLHF</li>
+                <li>解码技术 (Decoding techniques)</li>
+                <li>因果注意力 (Causal Attention)</li>
+                <li>交叉注意力 (Cross Attention)</li>
+              </ul>
+            </div>
+
+            <div class="topic-col">
+              <h4>生成模型 (Generative Modelling)</h4>
+              <ul>
+                <li>GANs</li>
+                <li>VAEs 与 VAE ELBO</li>
+                <li>分数函数 (Score Function)</li>
+                <li>Diffusion 前向过程</li>
+                <li>Diffusion 反向过程 (DDIM / DDPM)</li>
+                <li>Diffusion 前向 / 反向 SDE</li>
+                <li>Flow Matching ODE</li>
+                <li>无分类器引导 (Classifier Free Guidance)</li>
+              </ul>
+
+              <h4 style="margin-top:1.25rem">应用 ML (Applied ML)</h4>
+              <ul>
+                <li>张量并行 (Tensor Parallelism)</li>
+                <li>FSDP</li>
+                <li>DDP</li>
+                <li>流水线并行 (Pipeline Parallelism)</li>
+                <li>通信原语 (Communication Primitives)</li>
+                <li>混合精度训练 (Mixed precision training)</li>
+                <li>梯度检查点 (Gradient checkpointing)</li>
+                <li>梯度累积 (Gradient accumulation)</li>
+                <li>性能分析 (Profiling)</li>
+                <li>梯度裁剪 (Gradient clipping)</li>
+                <li>数值精度技巧 (Numerical precision tricks)</li>
+                <li>梯度爆炸 / 消失 (Exploding / vanishing gradients)</li>
+                <li>浮点数表示 (Floating point representation)</li>
+                <li>JIT 编译</li>
+                <li>JAX, PyTorch, TensorFlow</li>
+              </ul>
+            </div>
+
+            <div class="topic-col">
+              <h4>通用 ML (General ML)</h4>
+              <ul>
+                <li>维度灾难 (Curse of dimensionality)</li>
+                <li>S4</li>
+                <li>CNNs</li>
+                <li>RNNs / LSTMs</li>
+                <li>自编码器 (Autoencoders)</li>
+                <li>Gumbel-Softmax</li>
+                <li>MLE vs MAP</li>
+                <li>牛顿法 (Newton's Method)</li>
+                <li>线性回归 (Linear Regression)</li>
+                <li>激活函数 (Activation Functions)</li>
+                <li>损失函数 (Loss Functions)</li>
+                <li>没有免费午餐定理 (No Free Lunch Theorem)</li>
+                <li>BatchNorm / LayerNorm / RMSNorm</li>
+                <li>方差与协方差 (Variance and Covariance)</li>
+                <li>Adam / AdamW / Adagrad</li>
+                <li>偏差-方差权衡 (Bias-Variance Tradeoff)</li>
+                <li>反向传播 (Backprop)</li>
+                <li>正则化方法 (Regularisation Methods)</li>
+                <li>无监督 vs 有监督</li>
+                <li>聚类算法（如 k-means）</li>
+                <li>K 近邻 (K-Nearest Neighbours)</li>
+                <li>SVMs</li>
+                <li>提升 (Boosting)</li>
+                <li>装袋 (Bagging)</li>
+                <li>决策树 (Decision Trees)</li>
+                <li>集成方法 (Ensembles)</li>
+                <li>贝叶斯定理 (Bayes Theorem)</li>
+                <li>Precision / Recall / F1 / AUC-ROC</li>
+                <li>KL 散度 (KL Divergence)</li>
+                <li>Jensen-Shannon 散度</li>
+                <li>权重初始化 (Weight initialisation)</li>
+                <li>梯度下降 / SGD</li>
+                <li>过拟合 / 欠拟合</li>
+                <li>交叉验证 (Cross validation)</li>
+                <li>数据白化 (Data Whitening)</li>
+                <li>凸函数 (Convex functions)</li>
+                <li>早停 (Early Stopping)</li>
+                <li>域适应 (Domain Adaptation)</li>
+                <li>降维 (Dimensionality Reduction)</li>
+                <li>迁移学习 (Transfer Learning)</li>
+                <li>少样本 / 零样本学习</li>
+                <li>二阶方法 (Second Order Methods)</li>
+                <li>期望 (Expectation)</li>
+                <li>熵 (Entropy)</li>
+                <li>PDF / PMF</li>
+                <li>置信区间 (Confidence Intervals)</li>
+              </ul>
+            </div>
+
+            <div class="topic-col">
+              <h4>线性代数 (Linear Algebra)</h4>
+              <ul>
+                <li>半正定 (Positive Semi-Definite)</li>
+                <li>雅可比矩阵 (Jacobian)</li>
+                <li>特征向量 / 特征值</li>
+                <li>海森矩阵 (Hessian)</li>
+                <li>矩阵的逆</li>
+                <li>点积 (Dot product)</li>
+                <li>零空间 / 像空间 (Null space / Image space)</li>
+                <li>正交性 (Orthogonality)</li>
+                <li>线性无关 (Linear independence)</li>
+                <li>奇异矩阵 (Singular matrices)</li>
+                <li>秩 / 张成空间 (Rank / Span)</li>
+                <li>行列式 (Determinant)</li>
+              </ul>
+            </div>
+          </div>
         </section>
 
         <footer class="pagefoot">
@@ -236,5 +493,24 @@
       </article>
     </div>
   </div>
+
+<script>
+  // Highlight active TOC link on scroll
+  const headings = document.querySelectorAll('section[id]');
+  const tocLinks = document.querySelectorAll('.toc a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector('.toc a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -80% 0px' });
+
+  headings.forEach(h => observer.observe(h));
+</script>
+
 </body>
 </html>
