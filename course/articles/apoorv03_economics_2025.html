@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>生成式AI的经济学：两年之后 | MS&E 435 中文版</title>
+  <title>生成式AI的经济学：两年之后 | MS&amp;E 435 中文版</title>
+  <meta name="description" content="《生成式AI的经济学：两年之后》中文翻译：更新 2024 年的原始分析，显示半导体层仍攫取约 70% 的收入与 79% 的毛利润，并讨论超大规模云厂商约 4430 亿美元的资本支出、定制 ASIC 的进展，以及价值向应用层迁移所需的时间表。作者 Apoorv Agrawal。">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
   <style>
     :root { --bg-base: #05080F; --bg-surface: #0C1220; --bg-elevated: #131D2E;
       --border: #1B2B44; --border-bright: #264166; --accent: #00E676;
@@ -29,6 +30,8 @@
     .article-content{padding-bottom:3rem}
     .article-content p{font-size:0.8rem;color:var(--text-secondary);line-height:2;margin-bottom:1.2rem;text-align:justify;text-indent:2em}
     .article-content p:first-child{margin-top:0}
+    .article-content p.no-indent{text-indent:0}
+    .article-content p.footnotes{font-size:0.68rem;color:var(--text-muted);line-height:1.8;margin-bottom:0.6rem}
     .article-source{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:0.6rem;color:var(--text-muted)}
     .article-source a{color:var(--text-muted)}
     .article-source a:hover{color:var(--accent)}
@@ -48,68 +51,69 @@
   <div class="article-header">
     <a href="../materials.html" class="back-link">&larr; 返回课程表</a>
     <h1 class="article-title">生成式AI的经济学：两年之后</h1>
-    <div class="article-meta">作者：Apoorv Agrawal | <a href="https://apoorv03.com/p/the-economics-of-generative-ai-two" target="_blank">阅读原文 →</a></div>
+    <div class="article-meta">作者：Apoorv Agrawal | <time datetime="2026-04-01">2026年4月1日</time> | <a href="https://apoorv03.com/p/the-economics-of-generative-ai-two" target="_blank" rel="noopener noreferrer">阅读原文 →</a></div>
     <p class="article-subtitle" style="font-size:0.75rem;color:var(--text-secondary);line-height:1.6;margin-top:0.5rem;font-style:italic;">半导体是单人游戏。应用是双人游戏。基础设施才是唯一具有竞争性的层面。</p>
   </div>
+  
   <div class="article-content">
-        <figure class="article-figure"><img src="../assets/48e9c94a-881a-4148-945f-8475bb485737.png" alt="" loading="lazy" /><figcaption>图 1</figcaption></figure>
-    <p>我很高兴能更新我2024年的原始分析：《生成式AI的经济学》。这是我写过的最常回顾的分析，因为它提醒着AI行业的"物理法则"。</p>
+    <p>我很高兴能更新我2024年的原始分析：<a href="https://apoorv03.com/p/the-economics-of-generative-ai" target="_blank" rel="noopener noreferrer">《生成式AI的经济学》</a>。这是我写过的最常回顾的分析，因为它提醒着AI行业的"物理法则"。</p>
     <p>两年前，我发现Gen AI价值链是倒挂的：计算层占据了约83%的总收入和约87%的总毛利润。应用层虽然离终端客户最近，却几乎一无所获。我预测这种情况会随着时间的推移而翻转，遵循此前每一次平台变革的规律。两年前，我曾说：</p>
-    <figure class="article-figure"><img src="../assets/48e9c94a-881a-4148-945f-8475bb485737.png" alt="" loading="lazy" /><figcaption>图 2：AI行业投资与AI基础设施投资</figcaption></figure>
-    
-    <h2><strong>#1 价值链依然倒挂</strong></h2>
-    <figure class="article-figure"><img src="../assets/0310bf44-2cfe-403a-a702-62cc7e499f48.png" alt="" loading="lazy" /><figcaption>图 3：AI相关并购总额</figcaption></figure>
-    <p>先把结论说清楚：半导体是单人游戏。应用是双人游戏。基础设施才是唯一具有竞争性的层面。AI行业最赚钱的策略仍然是卖铲子。:)</p>
-    <p><strong>两年过去了，AI生态系统已经增长了大约5倍，从年化收入约900亿美元增长到约4350亿美元。但值得注意的是，经济格局的变化微乎其微。</strong></p>
-    <p><strong>半导体（约3000亿美元）：</strong>
-这基本上就是英伟达。其数据中心业务上季度营收620亿美元，年化约2500亿美元。博通的AI半导体业务（为谷歌、Meta、字节跳动提供的定制加速器）增加约340亿美元。此外，超大规模云厂商为定制芯片项目直接采购的高带宽存储器估计约250亿美元。集中度极高：英伟达占据该层约80%的份额。</p>
-    <p><strong>基础设施（约750亿美元）：</strong>
-AI特定云基础设施。Azure、AWS、GCP、Oracle各贡献100-200亿美元的AI可归属收入。CoreWeave增加约60亿美元。Baseten、Together、Modal和其他推理提供商构成其余部分。与其他层面不同，这一层在各大云厂商之间相对均匀分布。</p>
-    <p><strong>应用（约600亿美元）：</strong>
-同样高度集中，但集中在两家公司。OpenAI和Anthropic合计年化收入约450亿美元，占该层约75%。排在第三位的是Cursor等AI编程工具，随后是快速增长的代理公司，如ElevenLabs、Glean、Sierra、Perplexity、Replit、Lovable、Harvey、Abridge等。</p>
-    <h2><strong>#2 AI增长了5倍，但英伟达捕获了大部分价值</strong></h2>
+    <figure class="article-figure"><img src="../assets/48e9c94a-881a-4148-945f-8475bb485737.png" alt="生成式AI栈与云堆栈的价值分布对比金字塔，Q1 2024 估算年化收入" loading="lazy" /><figcaption>图 1：[Q1&#39;2024] 生成式AI栈的价值在哪里（估算年化收入）。左为云堆栈——应用 4000 亿、基础设施 2000 亿、半导体 500 亿美元；右为生成式AI——应用 50 亿、基础设施 100 亿、半导体 750 亿美元。两者形状几乎完全镜像。（来源：英伟达 Q4&#39;24 数据中心营收、内部估算、Coatue 分析）</figcaption></figure>
+    <p>两年过去了，AI生态系统已经增长了大约5倍，从年化收入约900亿美元增长到约4350亿美元。但值得注意的是，经济格局的变化微乎其微。</p>
+    <p><strong>先把结论说清楚：半导体是单人游戏。应用是双人游戏。基础设施才是唯一具有竞争性的层面。AI行业最赚钱的策略仍然是卖铲子。:)</strong></p>
+    <p>让我们深入探讨！</p>
+    <h2 id="s1">#1 价值链依然倒挂</h2>
+    <figure class="article-figure"><img src="../assets/0310bf44-2cfe-403a-a702-62cc7e499f48.png" alt="AI 栈与云堆栈的价值分布对比金字塔，Q1 2026 估算年化收入" loading="lazy" /><figcaption>图 2：[Q1&#39;2026] AI 的价值在哪里（估算年化收入）。云堆栈为应用 6000 亿、基础设施 3000 亿、半导体 800 亿美元；AI 栈则反过来——半导体 3000 亿、基础设施 750 亿、应用 600 亿美元。（来源：英伟达、博通与 HBM 最新业绩；云、AI 基础设施与应用收入为内部估算）</figcaption></figure>
+    <p>以下是各个层面的拆解：</p>
+<ul>
+  <li><strong>半导体（约3000亿美元）：</strong>这基本上就是英伟达。其数据中心业务上季度营收620亿美元，年化约2500亿美元。博通的AI半导体业务（为谷歌、Meta、字节跳动提供的定制加速器）增加约340亿美元。此外，超大规模云厂商为定制芯片项目直接采购的高带宽存储器估计约250亿美元。集中度极高：英伟达占据该层约80%的份额。</li>
+  <li><strong>基础设施（约750亿美元）：</strong>AI特定云基础设施。Azure、AWS、GCP、Oracle各贡献100-200亿美元的AI可归属收入。CoreWeave增加约60亿美元。Baseten、Together、Modal和其他推理提供商构成其余部分。与其他层面不同，这一层在各大云厂商之间相对均匀分布。</li>
+  <li><strong>应用（约600亿美元）：</strong>同样高度集中，但集中在两家公司。OpenAI和Anthropic合计年化收入约450亿美元，占该层约75%。排在第三位的是Cursor等AI编程工具，随后是快速增长的代理公司，如ElevenLabs、Glean、Sierra、Perplexity、Replit、Lovable、Harvey、Abridge等。</li>
+</ul>
+    <p><strong>结论：半导体层仍占据AI总收入的约70%。</strong>在云计算栈中，半导体的份额仅为1/10：约8%。这一差距是本超级周期与上一周期之间的核心扭曲。</p>
+    <h2 id="s2">#2 AI增长了5倍，但英伟达捕获了大部分价值</h2>
     <p>尽管整个生态系统增长了5倍，但格局变化不大。应用层百分比增速最快（两年12倍）。但从绝对金额看，半导体层增加了约2250亿美元，而应用层仅增加约550亿美元。仅英伟达一家就增加了1750亿美元的增量收入，这大约是当前整个应用层规模的3倍。</p>
-    <figure class="article-figure"><img src="../assets/e5c4d9a9-d4d0-401b-9177-07529e5b6af7.png" alt="" loading="lazy" /><figcaption>图 7：美国进口乘用车年度统计</figcaption></figure>
-    <p><strong>结论：半导体层仍占据AI总收入的约70%。</strong>
-在云计算栈中，半导体的份额仅为1/10：约8%。这一差距是本超级周期与上一周期之间的核心扭曲。</p>
-    <figure class="article-figure"><img src="../assets/8df10c62-91e8-457f-bff0-ffd98dc2fe2d.png" alt="跨境资本流动与美国进口汽车" loading="lazy" /><figcaption>图 8：跨境资本流动与美国进口汽车</figcaption></figure>
-    <p>乘算下来：半导体层赚取约2250亿美元的毛利润。基础设施层约400亿美元。应用层约200亿美元。
-半导体层捕获了AI生态系统中全部毛利润的79%。
-作为对比，在云计算栈中，应用层捕获70%，半导体层仅6%。AI栈几乎正好是镜像。</p>
-        <h2><strong>#3 资本支出问题：值得吗？</strong></h2>
-    <p>前五大超大规模云厂商在2025年的资本支出约为4430亿美元，较2024年的2560亿美元增长73%。预计2026年将超过6000亿美元，其中约75%（约4500亿美元）投向AI基础设施。这就引出了一个显而易见的问题：所有这些资本支出能否产生正的投资回报率？</p>
-    <figure class="article-figure"><img src="../assets/54b528e3-82a4-4e13-bc21-34822c2b7f37.png" alt="" loading="lazy" /><figcaption>图 9：美国入境游客年度统计</figcaption></figure>
-    <p>CEO们认为这笔投资是值得的：</p>
-    <p>桑达尔·皮查伊，Alphabet
-（2025年Q4财报电话会，2026年2月）：
-"我们看到AI投资和基础设施正在全面推动收入和增长。"不过他也承认当前AI投资规模存在"非理性因素"。</p>
-    <p>马克·扎克伯格，Meta
-（2025年Q4财报电话会，2026年1月）：
-"我认为积极超前建设产能是正确的策略。最坏的情况下，我们只需要在一段时间内放缓建设新基础设施，直到我们增长到适应已建成的规模。"</p>
+    <figure class="article-figure"><img src="../assets/e5c4d9a9-d4d0-401b-9177-07529e5b6af7.png" alt="AI 收入 2024 与 2026 对比堆叠柱状图，按半导体、基础设施、应用拆分" loading="lazy" /><figcaption>图 3：AI 收入对比（单位：十亿美元），2024 vs 2026。总量从 900 亿增至 4350 亿美元；其中半导体从 750 亿增至 3000 亿，基础设施从 100 亿增至 750 亿，应用从 50 亿增至 600 亿美元。（来源：英伟达、博通与 HBM 业绩；云、AI 基础设施与应用收入为内部估算）</figcaption></figure>
+    <p>盈利状况更加失衡。半导体层毛利率约73%。基础设施层约55%。应用层根据我的估算约33%。</p>
+    <figure class="article-figure"><img src="../assets/8df10c62-91e8-457f-bff0-ffd98dc2fe2d.jpg" alt="AI 栈与云堆栈的毛利润分布对比金字塔，估算毛利润" loading="lazy" /><figcaption>图 4：AI 的毛利润在哪里（估算毛利润）。云堆栈为应用 4700 亿、基础设施 1600 亿、半导体 400 亿美元；AI 栈为半导体 2250 亿、基础设施 400 亿、应用 200 亿美元——与云堆栈正好相反。（来源：英伟达、博通与 HBM 最新业绩；云、AI 基础设施与应用为内部估算）</figcaption></figure>
+    <p>乘算下来：半导体层赚取约2250亿美元的毛利润。基础设施层约400亿美元。应用层约200亿美元。<strong>半导体层捕获了AI生态系统中全部毛利润的79%。</strong>作为对比，在云计算栈中，应用层捕获70%，半导体层仅6%。AI栈几乎正好是镜像。</p>
+    <p>两年间，基础设施和应用层各获得了约4个百分点的利润份额。半导体层从87%降至79%。按照这个速度，应用层要达到云计算中应用层的份额水平，还需要十多年的时间。</p>
+    <figure class="article-figure"><img src="../assets/54b528e3-82a4-4e13-bc21-34822c2b7f37.png" alt="毛利润份额堆叠柱状图：AI 2024、AI 2026 与云软件对比" loading="lazy" /><figcaption>图 5：毛利润份额（%）。AI 从 2024 年的半导体 87%、基础设施 10%、应用 3%，变为 2026 年的 79%、14%、7%；作为对照，云软件为半导体 6%、基础设施 24%、应用 70%。（来源：内部估算）</figcaption></figure>
+    <h2 id="s3">#3 资本支出问题：值得吗？</h2>
+    <p>前五大超大规模云厂商在2025年的资本支出约为<a href="https://epoch.ai/data-insights/hyperscaler-capex-trend" target="_blank" rel="noopener noreferrer">4430亿美元</a>，较2024年的2560亿美元增长73%。预计2026年将超过6000亿美元，其中约<a href="https://techblog.comsoc.org/2025/12/22/hyperscaler-capex-600-bn-in-2026-a-36-increase-over-2025-while-global-spending-on-cloud-infrastructure-services-skyrockets/" target="_blank" rel="noopener noreferrer">75%</a>（约4500亿美元）投向AI基础设施。这就引出了一个显而易见的问题：<strong>所有这些资本支出能否产生正的投资回报率？</strong></p>
+    <figure class="article-figure"><img src="../assets/a33a36fb-d608-478f-9932-d84986186281.png" alt="超大规模云厂商资本支出堆叠柱状图，2020 至 2026 年，按厂商拆分" loading="lazy" /><figcaption>图 6：超大规模云厂商资本支出（单位：十亿美元，2020—2026 年），按 Oracle、Microsoft、Amazon、Meta、Google 拆分。总额从 2020 年约 900 亿攀升至 2025 年约 4200 亿，2026 年预计达约 6500 亿美元。（来源：FactSet、Apollo 首席经济学家）</figcaption></figure>
+    <p>CEO们押注是值得的：</p>
+<ul>
+  <li><strong>安迪·贾西，亚马逊</strong>（2025年Q4财报电话会，<a href="https://www.cnbc.com/2026/02/05/aws-q4-earnings-report-2025.html" target="_blank" rel="noopener noreferrer">2026年2月</a>）：<em>"我们增加产能的速度有多快，变现就有多快。"</em></li>
+  <li><strong>桑达尔·皮查伊，Alphabet</strong>（2025年Q4财报电话会，<a href="https://www.cnbc.com/2026/02/04/alphabet-googl-q4-2025-earnings.html" target="_blank" rel="noopener noreferrer">2026年2月</a>）：<em>"我们看到AI投资和基础设施正在全面推动收入和增长。"</em>不过他也承认当前AI投资规模存在"非理性因素"。</li>
+  <li><strong>马克·扎克伯格，Meta</strong>（2025年Q4财报电话会，<a href="https://www.cnbc.com/2026/01/28/metas-zuckerberg-gets-green-light-from-wall-street-to-invest-in-ai.html" target="_blank" rel="noopener noreferrer">2026年1月</a>）：<em>"我认为积极超前建设产能是正确的策略。最坏的情况下，我们只需要在一段时间内放缓建设新基础设施，直到我们增长到适应已建成的规模。"</em></li>
+</ul>
     <p>以下是用这些钱购买的内容。下图显示了按芯片类型划分的累计AI计算能力。答案压倒性地指向英伟达，不过非英伟达的芯片开始在边缘出现：</p>
-    <p>安迪·贾西，亚马逊
-（2025年Q4财报电话会，2026年2月）：
-"我们增加产能的速度有多快，变现就有多快。"</p>
-    <figure class="article-figure"><img src="../assets/2b4e875a-1015-4982-b064-24a88a6f7d14.png" alt="" loading="lazy" /><figcaption>图 10：全球旅游业GDP占比</figcaption></figure>
-    <p>来源：Epoch AI。累计计算能力以H100等效值衡量。</p>
-    <p>各大超大规模云厂商都在通过开发定制芯片来对冲风险。按成熟度排序：</p>
-    <p><strong>谷歌TPU（最成熟）：</strong>第7代Ironwood现已普遍可用。Anthropic订购了多达100万颗TPU芯片，价值数百亿美元。谷歌现在将TPU作为商用硬件出售。据报道，TPU的竞争压力已迫使英伟达对部分客户降价约30%。</p>
-    <p><strong>亚马逊Trainium（快速扩展）：</strong>已部署140万颗Trainium2芯片，支撑Bedrock大部分推理工作。据亚马逊称，定制芯片业务已突破100亿美元年运行率，实现三位数增长。Trainium3（3nm）已投产，到2026年中期的供应几乎全部被预订。</p>
-    <p><strong>微软Maia + AMD：</strong>Maia 200已在Azure中部署（2026年1月）。声称推理性能是Trainium3的3倍。现已支撑ChatGPT部分工作负载。纳德拉表示微软除了Maia之外，仍将从英伟达和AMD采购。</p>
-    <p><strong>OpenAI定制ASIC（新入局者）+ AMD：</strong>与博通签署多年协议，从2026年开始交付10GW的定制加速器。另外与AMD签署6GW协议，采购Instinct MI450 GPU。</p>
-    <p><strong>Meta MTIA（仅内部使用）：</strong>MTIA v3已部署用于内部推理。2025年9月收购芯片初创公司Rivos，获取面向2026年的RISC-V设计方案。</p>
+    <figure class="article-figure"><img src="../assets/2b4e875a-1015-4982-b064-24a88a6f7d14.png" alt="全球 AI 累计算力按芯片类型拆分的堆叠柱状图，以 H100 等效单位计" loading="lazy" /><figcaption>图 7：全球 AI 算力容量每 7 个月翻一番。按芯片类型拆分的累计算力（H100 等效单位）：英伟达（B300、B200、H100/H200 等）占据绝对主导，谷歌 TPU、亚马逊 Trainium、AMD MI300X 与华为昇腾仅在边缘出现。拟合年化增速约 3.4 倍（90% 置信区间 2.8—4.1 倍）。（来源：Epoch AI）</figcaption></figure>
+    <p class="no-indent"><em>来源：<a href="https://epoch.ai/data-insights/hyperscaler-capex-trend" target="_blank" rel="noopener noreferrer">Epoch AI</a>。累计计算能力以H100等效单位衡量。</em></p>
+    <p>每家主要超大规模云厂商都在通过开发定制芯片进行对冲。按成熟度排序：</p>
+<ul>
+  <li><strong>谷歌TPU（最成熟）：</strong>第7代Ironwood现已<a href="https://www.constellationr.com/blog-news/insights/google-clouds-ironwood-ready-general-availability" target="_blank" rel="noopener noreferrer">普遍可用</a>。Anthropic订购了<a href="https://nvidianews.nvidia.com/news/rubin-platform-ai-supercomputer" target="_blank" rel="noopener noreferrer">多达100万颗TPU芯片</a>，价值数百亿美元。谷歌现在将TPU作为商用硬件出售。据报道，TPU的竞争压力已迫使英伟达对部分客户<a href="https://howaiworks.ai/blog/google-tpuv7-ironwood-announcement-2025" target="_blank" rel="noopener noreferrer">降价约30%</a>。</li>
+  <li><strong>亚马逊Trainium（快速扩展）：</strong><a href="https://futurumgroup.com/insights/amazon-q4-fy-2025-revenue-beat-aws-24-amid-200b-capex-plan/" target="_blank" rel="noopener noreferrer">已部署140万颗Trainium2芯片</a>，支撑Bedrock大部分推理工作。据亚马逊称，定制芯片业务已突破<a href="https://futurumgroup.com/insights/amazon-q4-fy-2025-revenue-beat-aws-24-amid-200b-capex-plan/" target="_blank" rel="noopener noreferrer">100亿美元年运行率</a>，实现三位数增长。Trainium3（3nm）已投产，<a href="https://fifthperson.com/amazon-q4-2025/" target="_blank" rel="noopener noreferrer">到2026年中期的供应几乎全部被预订</a>。</li>
+  <li><strong>OpenAI定制ASIC（新入局者）+ AMD：</strong>与博通签署<a href="https://www.tomshardware.com/openai-broadcom-to-co-develop-10gw-of-custom-ai-chips" target="_blank" rel="noopener noreferrer">多年协议</a>，从2026年开始交付10GW的定制加速器。另外与AMD签署<a href="https://www.sec.gov/Archives/edgar/data/0000002488/000000248825000163/q32025991.htm" target="_blank" rel="noopener noreferrer">6GW协议</a>，采购Instinct MI450 GPU。</li>
+  <li><strong>微软Maia + AMD：</strong><a href="https://techcrunch.com/2026/01/29/microsoft-wont-stop-buying-ai-chips-from-nvidia-amd-even-after-launching-its-own-nadella-says/" target="_blank" rel="noopener noreferrer">Maia 200已在Azure中部署</a>（2026年1月）。声称推理性能是Trainium3的3倍。现已支撑ChatGPT部分工作负载。纳德拉表示微软除了Maia之外，仍将从英伟达和AMD采购。</li>
+  <li><strong>Meta MTIA（仅内部使用）：</strong>MTIA v3已部署用于内部推理。2025年9月收购芯片初创公司<a href="https://www.sdxcentral.com/news/top-5-hardware-stories-of-2025-broadcom-openai-aws-doubles-down-on-custom-nvidia-marches-on/" target="_blank" rel="noopener noreferrer">Rivos</a>，获取面向2026年的RISC-V设计方案。</li>
+</ul>
+    <p>黄仁勋曾<a href="https://www.techbrew.com/stories/2025/11/13/custom-ai-chips-gpu-xpu" target="_blank" rel="noopener noreferrer">将定制ASIC斥为</a>"没有竞争力"，并指出"很多ASIC都被取消了"。从历史上看，他没错 :)</p>
+    <h2 id="s4">#4 栈终将翻转，但可能需要十年以上</h2>
+    <p>我仍然相信栈最终会翻转。我只是不太确定时间节点。</p>
+    <figure class="article-figure"><img src="../assets/98d38ab5-09ee-4d5f-9cfc-68ff00e54026.png" alt="云堆栈过去 10 年与 AI 未来 10 年的价值分布演变示意图" loading="lazy" /><figcaption>图 8：AI 未来 10 年将如何演变？左侧为云堆栈过去 10 年的路径——从半导体主导的窄底三角，翻转为应用层最大的倒三角；右侧为 AI 未来 10 年的预期路径，应用层被标注为最大的机会所在。（来源：Altimeter）</figcaption></figure>
     <p>要让格局逆转，要么应用层需要继续爆发式增长，要么半导体层需要变得更便宜。两者都在发生，但速度都不足以在本十年内改变格局。</p>
     <p>云计算栈从硬件主导演变为软件主导大约花了15年时间。AI栈可能遵循类似的时间线。定制芯片的努力是关键变量。如果TPU、Trainium和其他ASIC能够大规模成功，它们可能会压缩英伟达的利润率，并将利润向上推移。但除了谷歌的TPU之外，还没有任何定制芯片方案在训练工作负载方面证明能够在规模上与英伟达竞争。</p>
-    <h2><strong>#4 栈终将翻转，但可能需要十年以上</strong></h2>
     <p>最大的开放机遇仍然在应用层。这也是我投入大部分时间的地方。但投资者和建设者应该清醒地认识到当前的经济格局在哪里。AI行业最赚钱的公司仍然是卖铲子的那一家。</p>
-    <figure class="article-figure"><img src="../assets/https_3A_2F_2Fsubstack-post-media.s3.amazonaws.com_2Fpublic_2Fimages_2F98d38ab5-09ee-4d5f-9cfc-68ff00e54026_2048x936.png" alt="" loading="lazy" /><figcaption>图 11：中国入境游客人数月度趋势</figcaption></figure>
-    <p>黄仁勋曾将定制ASIC斥为"没有竞争力"，并指出"很多ASIC都被取消了"。从历史上看，他没错 :)</p>
-    <p>我仍然相信栈最终会翻转。我只是不太确定时间节点。</p>
+    <p class="footnotes"><em>如需本分析背后的原始数据，请联系我。很乐意分享完整的数据表。</em></p>
+    <p class="footnotes">本新闻通讯中呈现的信息仅代表作者观点，不代表任何其他人或实体的立场，包括Altimeter Capital Management, LP（"Altimeter"）。所提供的信息据信来自可靠来源，但对于任何不准确之处不承担任何责任。本文仅供参考，不应被解释为投资建议或投资推荐。过往业绩不代表未来表现。Altimeter是一家在美国证券交易委员会注册的投资顾问。注册并不意味着一定水平的技能或培训。Altimeter及其客户交易公开证券，已经做出和/或可能做出与本文提及公司相关的投资或投资决策。本文表达的观点仅代表作者本人，不代表Altimeter或其客户，Altimeter及其客户保留做出与本文表达观点一致和/或可能被解释为不一致的投资决策或从事交易活动的权利。</p>
+    <p class="footnotes">本文及其中呈现的信息仅供信息参考。本文表达的观点仅代表作者本人，不构成出售任何证券的要约、购买任何证券的建议或邀请，也不构成对任何投资产品或服务的推荐。虽然本文所载某些信息来自据信可靠的来源，但作者及其任何雇主或其关联方均未独立核实这些信息，且无法保证其准确性和完整性。因此，对此类信息的公平性、准确性、及时性或完整性，不做出任何明示或暗示的陈述或保证，也不应依赖于此。作者及所有雇主及其关联人员对此信息不承担任何责任，也没有义务将来更新本文所载信息或分析。</p>
+</div>
 <div class="article-source">
-    <p>本文为 <a href="https://apoorv03.com/p/the-economics-of-generative-ai-two" target="_blank">原文</a> 的中文翻译，仅供学习参考。原始版权归原作者所有。</p>
-    <p style="margin-top:0.3rem;">MS&E 435 — Stanford University — <a href="../index.html">返回课程首页</a></p>
+    <p>本文为 <a href="https://apoorv03.com/p/the-economics-of-generative-ai-two" target="_blank" rel="noopener noreferrer">原文</a> 的中文翻译，仅供学习参考。原始版权归原作者所有。</p>
+    <p style="margin-top:0.3rem;">MS&amp;E 435 — Stanford University — <a href="../index.html">返回课程首页</a></p>
   </div>
 </div>
-</main>
 </body>
 </html>

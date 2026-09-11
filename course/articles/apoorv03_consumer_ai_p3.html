@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>消费级AI的现状 第3部分：时间就是金钱 | MS&E 435 中文版</title>
+  <title>消费级AI的现状 第3部分：时间就是金钱 | MS&amp;E 435 中文版</title>
+  <meta name="description" content="《消费级AI的现状》第3部分中文翻译：把使用时长折算为广告库存，估算 ChatGPT 在移动端约 16 分钟/日的使用时长、68% 的注意力份额，推演 AI 原生广告的 CPM 与收入空间，并对比 Google 与 OpenAI 截然不同的变现策略。作者 Apoorv Agrawal。">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
   <style>
     :root { --bg-base: #05080F; --bg-surface: #0C1220; --bg-elevated: #131D2E;
       --border: #1B2B44; --border-bright: #264166; --accent: #00E676;
@@ -37,6 +38,9 @@
     .article-content h3{font-size:0.95rem;font-weight:600;color:var(--text-primary);margin:2rem 0 1rem;line-height:1.4}
     .article-content h4{font-size:0.85rem;font-weight:600;color:var(--accent);margin:1.5rem 0 0.8rem;line-height:1.4}
     .article-content p strong{color:var(--text-primary);font-weight:600}
+    .article-content p.footnotes{font-size:0.68rem;color:var(--text-muted);line-height:1.8;margin-bottom:0.6rem}
+    .article-content ol,.article-content ul{margin:0 0 1.4rem;padding-left:1.8rem;font-size:0.8rem;color:var(--text-secondary);line-height:2}
+    .article-content ol li,.article-content ul li{margin-bottom:0.5rem}
     .article-figure{margin:1.5rem 0;text-align:center}
     .article-figure img{max-width:100%;height:auto;border-radius:4px;border:1px solid var(--border)}
     .article-figure figcaption{font-size:0.65rem;color:var(--text-muted);margin-top:0.5rem;font-style:italic;line-height:1.5}
@@ -48,99 +52,103 @@
   <div class="article-header">
     <a href="../materials.html" class="back-link">&larr; 返回课程表</a>
     <h1 class="article-title">消费级AI的现状 第3部分：时间就是金钱</h1>
-    <div class="article-meta">作者：Apoorv Agrawal | <a href="https://apoorv03.com/p/the-state-of-consumer-ai-part-3-time" target="_blank">阅读原文 →</a></div>
+    <div class="article-meta">作者：Apoorv Agrawal | <time datetime="2026-03-30">2026年3月30日</time> | <a href="https://apoorv03.com/p/the-state-of-consumer-ai-part-3-time" target="_blank" rel="noopener noreferrer">阅读原文 →</a></div>
   </div>
   <div class="article-content">
-    <p>在
-第一部分
-中，我展示了ChatGPT在用户量上已经遥遥领先。9亿周活跃用户，约70%的市场份额，是唯一一个朝着核心实用工具地位迈进的AI应用。在
-第二部分
-中，我展示了这些数据背后的用户参与度是真实的。WAU:MAU比率的持续改善、罕见的留存微笑曲线，以及在工作场景媲美Slack和Gmail、在家用场景媲美X和Spotify的粘性指标。</p>
+    <p>在<a href="https://apoorv03.com/p/the-state-of-consumer-ai-part-1-usage" target="_blank" rel="noopener noreferrer">第一部分</a>中，我展示了ChatGPT在用户量上已经遥遥领先。9亿周活跃用户，约70%的市场份额，是唯一一个朝着核心实用工具地位迈进的AI应用。在<a href="https://apoorv03.com/p/the-state-of-consumer-ai-part-2-engagement" target="_blank" rel="noopener noreferrer">第二部分</a>中，我展示了这些数据背后的用户参与度是真实的。WAU:MAU比率的持续改善、罕见的留存微笑曲线，以及在工作场景媲美Slack和Gmail、在家用场景媲美X和Spotify的粘性指标。</p>
     <p>这两篇文章讨论的是收入=价格×数量这个公式中的Q（数量）。有多少用户，他们回来的频率有多高，以及使用习惯是否真实存在。这篇文章讨论的是P（价格）。你实际上能收多少钱？</p>
     <p>使用时间是连接这两者的桥梁。在消费科技领域，时间是货币化的原材料。订阅业务将时间转化为感知价值和支付意愿。广告业务将时间转化为广告库存。两者都始于同一个输入：你的产品占据了用户一天中的多少时间？</p>
-    <p>先给出结论：我认为领先消费级AI应用的广告收入机会可能大于订阅收入机会。
-原因很简单：消费级AI正在积累与那些最大的互联网企业相同的原材料——时间和注意力。广告收入公式很直接：广告收入=总时间×广告量×广告价格。从这三个变量来看，数据表明：</p>
-    <p>AI应用中的总使用时间正在爆发式增长。
-AI的用户心智份额遵循与用户数量相同的幂律分布，即使考虑到每个用户的使用时间差异也是如此。</p>
-    <p>每个用户的使用时间在增加→广告量巨大且持续增长。
-AI应用落后于消费级基准，但开始赶超企业级应用。ChatGPT的行为更像一个工作和生产力工具，而不是社交信息流。这是一个强烈的信号，表明其随时间增加广告负载的能力。</p>
-    <p>Apoorv Agrawal</p>
-    <h2>1. 总时间：ChatGPT占据消费级AI 68%的注意力</h2>
+    <p><strong>先给出结论：我认为领先消费级AI应用的广告收入机会可能大于订阅收入机会。</strong>原因很简单：消费级AI正在积累与那些最大的互联网企业相同的原材料——时间和注意力。广告收入公式很直接：广告收入=总时间×广告量×广告价格。从这三个变量来看，数据表明：</p>
+    <ol>
+      <li><strong>AI应用中的总使用时间正在爆发式增长。</strong>AI的用户心智份额遵循与用户数量相同的幂律分布，即使考虑到每个用户的使用时间差异也是如此。</li>
+      <li><strong>每个用户的使用时间在增加→广告量巨大且持续增长。</strong>AI应用落后于消费级基准，但开始赶超企业级应用。ChatGPT的行为更像一个工作和生产力工具，而不是社交信息流。这是一个强烈的信号，表明其随时间增加广告负载的能力。</li>
+      <li><strong>ChatGPT的查询具有比搜索更强的意图信号→有竞争力的广告定价。</strong>更多内容见下文第三节。</li>
+    </ol>
+    <p>让我们深入分析。</p>
+
+    <h2 id="s1">1. 总时间：ChatGPT占据消费级AI 68%的注意力</h2>
+
     <p>生成式AI应用的总使用时间在过去两年增长了约10倍，仅2025年一年就增长了3.6倍。没有任何应用类别发展得如此之快。</p>
-    <figure class="article-figure"><img src="../assets/9606cbd9-743a-43f6-b6b1-8373fca7f8d4.png" alt="" loading="lazy" /><figcaption>图 1</figcaption></figure>
+
+    <figure class="article-figure"><img src="../assets/9606cbd9-743a-43f6-b6b1-8373fca7f8d4.png" alt="生成式 AI 应用总使用时间堆叠面积图，两年增长约 10 倍" loading="lazy" /><figcaption>图 1：生成式 AI 应用的总使用时间（单位：年／天，堆叠面积图，2023 年 5 月—2026 年 3 月）。总量从近乎为零增长到约 20,000 年／天，其中 ChatGPT（深蓝）占据绝大部分，Gemini（绿）自 2024 年中起明显抬升，Character AI（浅橙）居于上层。（来源：Sensortower；制图：@apoorv03／Altimeter）</figcaption></figure>
+
     <p>有几个点值得注意。首先，2025年1月附近的拐点非常显著。2025年上半年总使用时间大约翻了一番，这得益于ChatGPT扩展到语音、图像生成和搜索功能。其次，Gemini大约在2024年中出现并取得了显著增长，但仍是一个遥远的第二名。</p>
-    <figure class="article-figure"><img src="../assets/94bdefde-7835-49db-8b0d-6a44923d1c2a.png" alt="" loading="lazy" /><figcaption>图 2</figcaption></figure>
+
+    <figure class="article-figure"><img src="../assets/94bdefde-7835-49db-8b0d-6a44923d1c2a.png" alt="生成式 AI 应用总使用时间相对份额堆叠面积图，ChatGPT 占 68%" loading="lazy" /><figcaption>图 2：生成式 AI 应用总使用时间的相对份额（2023 年 5 月—2026 年 3 月）。ChatGPT 稳定在 68%，Gemini 为 16%，character.ai 为 7%，其余应用瓜分剩余约 9%。（来源：Sensortower；制图：@apoorv03／Altimeter）</figcaption></figure>
+
     <p>ChatGPT占据了AI总使用时间的68%。Gemini占16%。其他所有应用合计约占16%。这种集中度使得ChatGPT最有可能成为第一个规模化AI原生广告业务诞生的地方。这也解释了为什么OpenAI比那些占据注意力份额较小的同行更早、更积极地尝试货币化。这一点也很重要，因为你无法在一个规模不足的平台上真正开展广告业务。</p>
-    <p>这张图表上的每一个AI应用都在上升。自2023年初以来，ChatGPT的每个用户使用时间大约增长了三倍。Claude、Gemini和Grok在过去一年中都大幅攀升。趋势很明确：人们在AI应用上花的时间越来越多，而不仅仅是下载后就离开。</p>
-    <h2>2. 每个用户的使用时间在上升。这意味着广告的展示面更大。</h2>
-    <figure class="article-figure"><img src="../assets/7747f1e9-7a65-443c-af4f-b1333016a1ea.png" alt="" loading="lazy" /><figcaption>图 3</figcaption></figure>
     <p>用户在哪里花费时间，哪里就是可供广告商使用的房地产。而其中68%的库存都在一个产品——ChatGPT之内。对于评估AI原生广告投放的广告商来说，注意力集中在单一产品这一事实不容忽视。</p>
-    <p>对比消费级应用：仍然低很多。
-ChatGPT每天16分钟，远低于TikTok、YouTube、Instagram等应用。但这种差距其实不太公平，因为ChatGPT缺少推动消费级应用大量使用时长的两样东西。</p>
-    <figure class="article-figure"><img src="../assets/c944e220-7ed9-4827-9b6a-9c909985cd1a.png" alt="" loading="lazy" /><figcaption>图 7</figcaption></figure>
+
+    <h2 id="s2">2. 每个用户的使用时间在上升。这意味着广告的展示面更大。</h2>
+
+    <figure class="article-figure"><img src="../assets/7747f1e9-7a65-443c-af4f-b1333016a1ea.png" alt="各 AI 应用人均每天使用时长折线图，均在上升" loading="lazy" /><figcaption>图 3：各 AI 应用的人均每天使用时长（分钟，2023 年 5 月—2026 年 3 月）。ChatGPT 从约 6 分钟增至约 19 分钟，接近三倍；Gemini 后来居上攀升至约 25 分钟，Claude 约 18 分钟，Grok 约 17 分钟，DeepSeek 约 16 分钟，Perplexity 约 8 分钟。所有应用均呈上升趋势。（来源：Sensortower；制图：@apoorv03／Altimeter）</figcaption></figure>
+
+    <p>这张图表上的每一个AI应用都在上升。自2023年初以来，ChatGPT的每个用户使用时间大约增长了三倍。Claude、Gemini和Grok在过去一年中都大幅攀升。趋势很明确：人们在AI应用上花的时间越来越多，而不仅仅是下载后就离开。</p>
+    <p>但是，相对于我们已经了解的消费级和企业级应用，这个使用时间处在什么水平呢？</p>
+
+    <figure class="article-figure"><img src="../assets/c944e220-7ed9-4827-9b6a-9c909985cd1a.png" alt="人均每天使用时长横向对比柱状图，分生成式 AI、消费级、企业级三组" loading="lazy" /><figcaption>图 4：人均每天使用时长（分钟）横向对比。生成式 AI 应用：Character AI 83、DeepSeek 25、Claude 19、Gemini 17、Grok 17、ChatGPT 16、Perplexity 8；消费级应用：TikTok 91、YouTube 83、Instagram 72、Facebook 45、WhatsApp 41、X 34、Google Chrome 26、Spotify 8；企业级应用：Zoom 24，其余均在 8 分钟及以下（Microsoft 8、Google Docs 7、Notion 6、Slack 6、Microsoft 4、Gmail 3、Google 日历 2）。（来源：Sensortower；制图：@apoorv03／Altimeter）</figcaption></figure>
+
+    <p><strong>对比消费级应用：仍然低很多。</strong>ChatGPT每天16分钟，远低于TikTok、YouTube、Instagram等应用。但这种差距其实不太公平，因为ChatGPT缺少推动消费级应用大量使用时长的两样东西。</p>
     <p>第一，它没有社交网络效应。TikTok和Instagram之所以有粘性，部分原因在于你的朋友、创作者和社区都在那里。内容是根据你个性化定制的，由你关注的人生成。这产生了一种吸引力，让你不断回来、不断刷下去。ChatGPT完全没有这些。没有信息流，没有关注者，没有社交图谱。</p>
     <p>第二，它没有多巴胺循环。你不会打开ChatGPT去刷猫咪视频或看看前男友/女友在做什么。消费级社交应用是为可变奖励参与度而设计的：你永远不知道下一次滑动是无聊还是有趣，这种不可预测性让你欲罢不能。AI助手则恰恰相反。你带着一个特定任务来，得到一个答案，然后离开。</p>
-    <p>对比企业级应用：高于大多数。
-与企业级应用的比较更有用，但有一个重要提醒：这是来自SensorTower的纯移动端数据，因此像Slack、Gmail和Google Docs这类以桌面端为主的产品在这里被低估了。即便如此，这个信号仍然值得注意。仅看在移动端，ChatGPT已经像一个高频生产力工具了。这很重要，因为生产力产品的货币化效果很好，即使使用时间远低于消费娱乐类应用。</p>
+    <p><strong>对比企业级应用：高于大多数。</strong>与企业级应用的比较更有用，但有一个重要提醒：这是来自SensorTower的纯移动端数据，因此像Slack、Gmail和Google Docs这类以桌面端为主的产品在这里被低估了。即便如此，这个信号仍然值得注意。仅看在移动端，ChatGPT已经像一个高频生产力工具了。这很重要，因为生产力产品的货币化效果很好，即使使用时间远低于消费娱乐类应用。</p>
     <p>Slack的收费是每用户每月7-12美元。如果AI助手已经达到这种水平的日常注意力，同时拥有消费级规模，那么货币化的空间是相当可观的。</p>
     <p>每个用户使用时间的上升对收入公式意味着两件事：更多的感知价值来支持订阅支付意愿，以及更多展示广告的空间。两者都指向正确的方向。</p>
+
+    <h2 id="s3">3. 收入机会</h2>
+
+    <h3>3a. 为什么广告可以超越订阅规模</h3>
+
     <p>现在来看价格方面：所有这些注意力到底值多少钱？在消费级规模下，最重要的两种货币化模式是订阅和广告。关键点不是订阅模式弱，而是最大的消费互联网企业在历史上通过广告获得的收入远高于通过订阅获得的收入。</p>
-    <h2>3. 收入机会</h2>
-    <p>3a. Why ads can outscale subscriptions</p>
+
+    <figure class="article-figure"><img src="../assets/f378eb7c-01fc-47d4-9aa4-ed7e2b9b2ffe.png" alt="消费级订阅业务与广告业务的收入、用户数与 ARPU 对照表" loading="lazy" /><figcaption>图 5：消费级订阅业务与广告业务的对照表。订阅侧（2025 年）：Amazon 收入约 500 亿美元／约 2.4 亿 Prime 会员／月 ARPU 约 17 美元；Netflix 约 450 亿美元／约 3.02 亿／约 12 美元；Disney+ 与 Hulu 合计约 250 亿美元／约 1.96 亿／约 8 美元（D+）、约 12 美元（Hulu）；Spotify 约 160 亿欧元／约 2.9 亿／约 4.85 欧元。广告侧：Google 广告收入约 2,950 亿美元／约 33 亿 DAU／年 ARPU 约 84 美元；Meta 约 1,950 亿美元／约 36 亿家庭日活／约 57 美元；Amazon 广告约 650 亿美元；TikTok 约 330 亿美元／约 9 亿 DAU／约 20 美元。资料来源：各公司财报。（制图：@apoorv03／Altimeter）</figcaption></figure>
+
     <p>规模差距是关键。仅Google的广告业务收入就大约是Netflix收入的5倍。Meta的广告业务大约是4倍。就连Amazon的广告业务——十年前几乎还不存在——如今也比Netflix大。自然而然的问题是：更高的订阅ARPU是否能弥补较小的付费用户基数？对某些业务来说确实如此。但在大规模下，来自广告的更大货币化基数往往胜出。</p>
-    <figure class="article-figure"><img src="../assets/f378eb7c-01fc-47d4-9aa4-ed7e2b9b2ffe.png" alt="" loading="lazy" /><figcaption>图 8</figcaption></figure>
-    <p>Alphabet和Amazon尤其有趣，因为它们两种模式都有。在这两个案例中，广告业务都比订阅业务更大，且增长更快。Netflix、Disney和Spotify几乎完全是订阅模式。Meta和TikTok几乎完全是广告模式。今天的OpenAI几乎完全是订阅
-收入
-，加上最近推出的
-一些广告收入
-，覆盖了其在美国
-95%
-免费用户中的一小部分。这意味着一大片注意力池目前几乎不产生任何收入。OpenAI在这里是先行者，但同样的免费用户货币化问题适用于每一个拥有大量未付费用户基础的AI应用。</p>
-    <figure class="article-figure"><img src="../assets/a24fa696-cb48-4bf3-8e65-8141988449dc.png" alt="" loading="lazy" /><figcaption>图 9</figcaption></figure>
-    <p>广告收入 = 总时间 × 广告量 × 广告价格</p>
-    <p>3b. How AI attention gets priced</p>
-    <p>总时间：
-我们从第一和第二节已经知道总时间。ChatGPT有约9亿周活跃用户，DAU:MAU为45%，移动端每天约16分钟。</p>
-    <p>广告量
-（或称广告负载）：是一个产品决策。你每个会话展示多少广告？Google在每个搜索结果页展示3-4个广告。Meta在信息流中每3-5条帖子展示一个广告。ChatGPT目前每个对话最多展示一个广告，且仅对约5%的移动用户展示。这种克制在维护信任方面是明智的，但这也意味着广告负载变量目前非常低。</p>
+
+    <figure class="article-figure"><img src="../assets/a24fa696-cb48-4bf3-8e65-8141988449dc.png" alt="各公司收入结构堆叠柱状图，区分广告、订阅与其他" loading="lazy" /><figcaption>图 6：各公司收入结构对比（2025 财年或最新可得数据，单位：十亿美元），按广告／订阅／其他拆分。Alphabet 403（广告为主）、Meta 201（几乎全为广告）、Amazon 638（广告约 65，订阅与零售「其他」占大头）、TikTok／ByteDance 广告约 33、Netflix 45（订阅）、Disney DTC 25（订阅）、Spotify 16（订阅）、OpenAI 20—25（订阅）。（来源：Alphabet、Meta、Amazon、Netflix、Spotify、Disney 财报及 ByteDance 估算；制图：@apoorv03／Altimeter）</figcaption></figure>
+
+    <p>Alphabet和Amazon尤其有趣，因为它们两种模式都有。在这两个案例中，广告业务都比订阅业务更大，且增长更快。Netflix、Disney和Spotify几乎完全是订阅模式。Meta和TikTok几乎完全是广告模式。今天的OpenAI几乎完全是订阅<a href="https://www.theinformation.com/articles/openai-tops-25-billion-annualized-revenue-anthropic-narrows-gap" target="_blank" rel="noopener noreferrer">收入</a>，加上最近推出的<a href="https://www.reuters.com/business/media-telecom/openais-us-ad-pilot-exceeds-100-million-annualized-revenue-six-weeks-2026-03-26/" target="_blank" rel="noopener noreferrer">一些广告收入</a>，覆盖了其在美国<a href="https://techcrunch.com/2025/10/14/openai-has-five-years-to-turn-13-billion-into-1-trillion/" target="_blank" rel="noopener noreferrer">95%</a>免费用户中的一小部分。这意味着一大片注意力池目前几乎不产生任何收入。OpenAI在这里是先行者，但同样的免费用户货币化问题适用于每一个拥有大量未付费用户基础的AI应用。</p>
+
+    <h3>3b. AI注意力如何定价</h3>
+
+    <p>广告收入 = <strong>总时间 × 广告量 × 广告价格</strong></p>
+    <ul>
+      <li><strong>总时间：</strong>我们从第一和第二节已经知道总时间。ChatGPT有约9亿周活跃用户，DAU:MAU为45%，移动端每天约16分钟。</li>
+      <li><strong>广告量</strong>（或称广告负载）：是一个产品决策。你每个会话展示多少广告？Google在每个搜索结果页展示3-4个广告。Meta在信息流中每3-5条帖子展示一个广告。ChatGPT目前每个对话最多展示一个广告，且仅对约5%的移动用户展示。这种克制在维护信任方面是明智的，但这也意味着广告负载变量目前非常低。</li>
+      <li><strong>广告价格</strong>（CPM）是广告商愿意为每千次展示支付的价格。这就是事情变得有趣的地方，因为并非所有注意力都被同等定价。CPM最终取决于一个问题：这个用户会买东西吗？这又分解为三个要素：意图（用户是否正在做决策？）、归因（广告商能否将广告追溯到购买行为？）、以及受众质量（这个用户有消费能力吗？）。</li>
+    </ul>
     <p>最大的广告业务各自在这方面有不同的优势。Google搜索具有强烈的意图信号，因为当有人输入"2026年最佳抵押贷款利率"时，他们是在实时宣示商业意图。CPM为15-200+美元，视品类而定。全球每用户年收入约84美元。Meta的意图较弱，但使用时间巨大。用户每天滚动浏览30-90分钟。Meta通过非凡的定向精准度来弥补，从行为和人际图谱中推断意图。每用户年收入约57美元。YouTube介于两者之间：中等CPM、长会话时长、视频创意。</p>
-    <p>广告价格
-（CPM）是广告商愿意为每千次展示支付的价格。这就是事情变得有趣的地方，因为并非所有注意力都被同等定价。CPM最终取决于一个问题：这个用户会买东西吗？这又分解为三个要素：意图（用户是否正在做决策？）、归因（广告商能否将广告追溯到购买行为？）、以及受众质量（这个用户有消费能力吗？）。</p>
     <p>总结来说，Google出售意图。Meta出售注意力。YouTube出售观看时间。</p>
+
+    <h3>3c. AI助手的定位——ChatGPT案例研究</h3>
+
     <p>我们以ChatGPT作为测试案例，因为它拥有最大的免费用户基础和最多的广告数据可供参考。ChatGPT的广告定价很可能更接近Google而非Meta，并且在那些对话上下文能够增强商业意图的品类中可能具有优势。</p>
-    <p>3c. Where AI assistants fit - a ChatGPT case study</p>
     <p>当有人打开ChatGPT询问笔记本电脑推荐、比较保险计划或规划家庭旅行时，这种交互类似于搜索，但具有更丰富的上下文。用户通常在一个提示中提供预算、偏好、约束条件和意图。这使得商业信号对广告商来说更易读，尽管这并不自动意味着每一次AI查询都比搜索查询更有价值。</p>
-    <p>目前ChatGPT拥有约8-9亿免费用户（占WAU的95%）。
-如果ChatGPT能每个免费用户每年产生30美元的广告收入，那么在现有规模下意味着250亿美元的广告收入。作为参考，Meta每用户产生57美元，Google每用户产生84美元，因此对于一个高意图的登录产品来说，30美元并不激进。</p>
-    <p>我预计ChatGPT的实际CPM至少与Google搜索相当，在某些品类中可能更高。早期数据支持这一点。OpenAI的优质广告位定价
-约为60美元CPM
-，远高于展示广告，处于高意图搜索的范围内。</p>
+    <p>我预计ChatGPT的实际CPM至少与Google搜索相当，在某些品类中可能更高。早期数据支持这一点。OpenAI的优质广告位定价<a href="https://www.emarketer.com/content/openai-wants-premium-ad-dollars-before-has-premium-measurement" target="_blank" rel="noopener noreferrer">约为60美元CPM</a>，远高于展示广告，处于高意图搜索的范围内。</p>
+    <p>目前ChatGPT拥有约8-9亿免费用户（占WAU的95%）。<strong>如果ChatGPT能每个免费用户每年产生30美元的广告收入，那么在现有规模下意味着250亿美元的广告收入。作为参考，Meta每用户产生57美元，Google每用户产生84美元，因此对于一个高意图的登录产品来说，30美元并不激进。</strong></p>
     <p>早期数据显示对信任指标没有影响，但测试仍处于早期阶段。将广告规模扩大20倍而不破坏建立使用习惯的产品体验，这才是真正的执行挑战。这个机会尚未得到验证的主要原因是，并非所有的AI使用时间都具有商业价值。ChatGPT的相当一部分使用是信息获取型、创意型或生产力导向型，而非交易型。而且，与信息流或搜索结果页不同，对话式界面给你提供的植入广告的明显位置更少，且不损害信任。因此，上行空间是真实的，但执行约束也同样真实：OpenAI必须在货币化习惯的同时，不破坏创造这一习惯的产品本身。</p>
     <p>还有一个更乐观的可能性。AI不仅创造广告库存。它可以创造全新的广告格式。对话式广告——产品推荐融入对话之中而非生硬地贴在旁边——实际上可以改善用户体验而非降低它。想象一下，你让ChatGPT规划一个周末旅行，它根据你独特的偏好和记忆，在对话中为你推荐一个相关的酒店优惠。那不是打断。那是功能。如果AI能够实现超个性化、代理行为以及与品牌的真正对话式互动，那么广告机会不仅可能很大，而且可能与今天存在的任何广告体验有本质上的不同。</p>
-    <p>Google的策略与OpenAI明显不同。Google
-多次
-表示没有计划在Gemini中投放广告。今年1月在达沃斯，DeepMind CEO Demis Hassabis
-表示他对
-OpenAI在ChatGPT中急于推出广告感到"惊讶"。Google Ads副总裁Dan Taylor
-于2025年12月在X上表示：
-"Gemini应用中没有广告，目前也没有计划改变这一点。"</p>
-    <p>3d. Why Google can wait</p>
+
+    <h3>3d. 为什么Google可以等待</h3>
+
+    <p>Google的策略与OpenAI明显不同。Google<a href="https://searchengineland.com/google-rules-out-ads-in-gemini-for-now-467780" target="_blank" rel="noopener noreferrer">多次</a>表示没有计划在Gemini中投放广告。今年1月在达沃斯，DeepMind CEO Demis Hassabis<a href="https://techcrunch.com/2026/01/22/google-deepmind-ceo-is-surprised-openai-is-rushing-forward-with-ads-in-chatgpt/" target="_blank" rel="noopener noreferrer">表示他对OpenAI在ChatGPT中急于推出广告感到"惊讶"</a>。Google Ads副总裁Dan Taylor<a href="https://searchengineland.com/google-corrects-report-claiming-ads-are-coming-to-gemini-in-2026-465856" target="_blank" rel="noopener noreferrer">于2025年12月在X上表示</a>：<em>"Gemini应用中没有广告，目前也没有计划改变这一点。"</em></p>
+    <p><strong>这是只有Google才能拥有的战略奢侈</strong>。Google在搜索领域已经拥有一个2950亿美元的广告现金机器。它可以补贴Gemini作为亏损引导产品，用无广告体验来增长用户和加深参与度，同时通过其现有的搜索基础设施（AI概要和AI模式已经承载广告）来将AI变现。OpenAI没有这种奢侈。由于没有独立的现金奶牛可以依靠，它必须直接通过聊天界面进行货币化。</p>
     <p>目前，Gemini仅通过订阅变现。每个用户的收入机会远小于OpenAI正在构建的广告+订阅模式。但Google玩的是不同的游戏。它在保护助手以留住用户，同时积极变现搜索结果页。随着免费用户推理成本上升和Gemini用户基数突破7.5亿MAU，这一策略能否持续是一个开放性问题。在某个时间点，运营一个大规模免费AI助手的经济学可能迫使连Google也不得不采取行动。</p>
-    <p>这是只有Google才能拥有的战略奢侈
-。Google在搜索领域已经拥有一个2950亿美元的广告现金机器。它可以补贴Gemini作为亏损引导产品，用无广告体验来增长用户和加深参与度，同时通过其现有的搜索基础设施（AI概要和AI模式已经承载广告）来将AI变现。OpenAI没有这种奢侈。由于没有独立的现金奶牛可以依靠，它必须直接通过聊天界面进行货币化。</p>
-    <p>3d. 为什么Google可以等待</p>
-    <h2>这个系列提出了一个简单的问题：消费级AI仅仅是大量使用，还是正在成为一门真正的生意？第一部分展示了触达范围。第二部分展示了使用习惯。第三部分表明，货币化机会可能比许多人意识到的要大。</h2>
-    <p>这并不能保证建立Google或Meta规模的广告业务。对话式界面更难干净地变现，而信任是产品最宝贵的资产。但如果OpenAI能够证明广告可以存在于一个高意图的助手中而不破坏用户体验，那么长期广告机会最终可能超过订阅业务。如果这种情况发生，Google真正的战略问题将不再是Gemini是否应该保持无广告。而是它还能承受多久。</p>
+
+    <h2 id="s4">总结</h2>
+
+    <p>这个系列提出了一个简单的问题：消费级AI仅仅是大量使用，还是正在成为一门真正的生意？第一部分展示了触达范围。第二部分展示了使用习惯。第三部分表明，货币化机会可能比许多人意识到的要大。</p>
     <p>被低估的一点是，领先的AI助手——首当其冲是ChatGPT——已经具备了那些最大消费互联网企业最善于变现的属性：规模化、重复性的注意力。其周活跃用户中大约95%仍然是免费用户，这意味着大部分注意力今天几乎没有被货币化。</p>
-    <p>感谢Sarah Friar和Fidji Simo审阅本文及本系列各篇文章的初稿。</p>
-    <p>本文使用的数据来源包括SensorTower。</p>
-    <p>总结</p>
+    <p>这并不能保证建立Google或Meta规模的广告业务。对话式界面更难干净地变现，而信任是产品最宝贵的资产。但如果OpenAI能够证明广告可以存在于一个高意图的助手中而不破坏用户体验，那么长期广告机会最终可能超过订阅业务。如果这种情况发生，Google真正的战略问题将不再是Gemini是否应该保持无广告。而是它还能承受多久。</p>
+    <p><em>感谢Sarah Friar和Fidji Simo审阅本文及本系列各篇文章的初稿。</em></p>
+
+    <p class="footnotes">本文使用的数据来源包括SensorTower。</p>
+    <p class="footnotes">本通讯中呈现的信息仅代表作者观点，不一定反映任何其他人或实体的观点，包括Altimeter Capital Management, LP（"Altimeter"）。所提供的信息据信来自可靠来源，但对任何不准确之处不承担任何责任。本文仅供参考，不应视为投资建议。过往表现不保证未来结果。Altimeter是一家在美国证券交易委员会注册的投资顾问。注册并不暗示一定水平的技能或培训。Altimeter及其客户交易公开证券，并已和/或可能对本文提及的公司进行投资或做出投资决策。本文表达的观点是作者的观点，而非Altimeter或其客户的观点，Altimeter及其客户保留做出投资决策或进行交易活动的权利，这些决策或活动可能与本文表达的观点一致和/或不一致。本文及所呈现的信息仅供信息参考。本文表达的观点仅代表作者本人，不构成出售、推荐购买或招揽购买任何证券的要约，也不构成对任何投资产品或服务的推荐。虽然本文所包含的某些信息来自被认为可靠的来源，但作者及其任何雇主或关联方均未独立核实这些信息，且其准确性和完整性无法保证。因此，对于本信息的公平性、准确性、及时性或完整性，不作任何明示或暗示的陈述或保证，也不应依赖于此。作者及所有雇主及其关联人员对本信息不承担任何责任，也没有义务更新本文中的信息或分析。</p>
   </div>
   <div class="article-source">
-    <p>本文为 <a href="https://apoorv03.com/p/the-state-of-consumer-ai-part-3-time" target="_blank">原文</a> 的中文翻译，仅供学习参考。原始版权归原作者所有。</p>
-    <p style="margin-top:0.3rem;">MS&E 435 — Stanford University — <a href="../index.html">返回课程首页</a></p>
+    <p>本文为 <a href="https://apoorv03.com/p/the-state-of-consumer-ai-part-3-time" target="_blank" rel="noopener noreferrer">原文</a> 的中文翻译，仅供学习参考。原始版权归原作者所有。</p>
+    <p style="margin-top:0.3rem;">MS&amp;E 435 — Stanford University — <a href="../index.html">返回课程首页</a></p>
   </div>
 </div>
-</main>
 </body>
 </html>

@@ -8,5 +8,11 @@
 *_raw.html
 *_text.txt
 
+# Scratch / scaffolding
+_work/
+.tmp_*
+_*.py
+_*.html
+
 # OS files
 .DS_Store

@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI 数据中心入门 | MS&E 435 中文版</title>
+  <title>AI 数据中心入门指南 | MS&amp;E 435 中文版</title>
+  <meta name="description" content="《AI 数据中心入门指南》中文翻译：梳理数据中心从 ENIAC 到 AI 工厂的演进历史、AI 数据中心的建设流程与工业设备、算力与电力供应链，以及电网、核能、电池等瓶颈环节的主要受益者。作者 Eric Flaningam。">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
   <style>
     :root { --bg-base: #05080F; --bg-surface: #0C1220; --bg-elevated: #131D2E;
       --border: #1B2B44; --border-bright: #264166; --accent: #00E676;
@@ -29,6 +30,10 @@
     .article-content{padding-bottom:3rem}
     .article-content p{font-size:0.8rem;color:var(--text-secondary);line-height:2;margin-bottom:1.2rem;text-align:justify}
     .article-content p:first-child{margin-top:0}
+    .article-content p.no-indent{text-indent:0}
+    .article-content p.lead{font-size:0.9rem;color:var(--text-primary);font-weight:500;margin-bottom:0.4rem;padding-left:1rem;border-left:2px solid var(--accent)}
+    .article-content p.quote-src{font-size:0.65rem;color:var(--text-muted);text-align:right;margin-bottom:2rem}
+    .article-content p.disclaimer{font-size:0.7rem;color:var(--text-muted);line-height:1.8;margin-top:1.5rem}
     .article-source{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:0.6rem;color:var(--text-muted)}
     .article-source a{color:var(--text-muted)}
     .article-source a:hover{color:var(--accent)}
@@ -37,9 +42,9 @@
     .article-content h3{font-size:0.95rem;font-weight:600;color:var(--text-primary);margin:2rem 0 1rem;line-height:1.4}
     .article-content h4{font-size:0.85rem;font-weight:600;color:var(--accent);margin:1.5rem 0 0.8rem;line-height:1.4}
     .article-content p strong{color:var(--text-primary);font-weight:600}
-    .article-figure{margin:1.5rem 0;text-align:center}
+    .article-figure{margin:1.8rem 0;text-align:center}
     .article-figure img{max-width:100%;height:auto;border-radius:4px;border:1px solid var(--border)}
-    .article-figure figcaption{font-size:0.65rem;color:var(--text-muted);margin-top:0.5rem;font-style:italic;line-height:1.5}
+    .article-figure figcaption{font-size:0.65rem;color:var(--text-muted);margin-top:0.5rem;font-style:italic;line-height:1.5;text-align:left}
     .article-hr{border:none;border-top:1px solid var(--border);margin:2rem 0}
     </style>
 </head>
@@ -47,129 +52,139 @@
 <div class="container">
   <div class="article-header">
     <a href="../materials.html" class="back-link">&larr; 返回课程表</a>
-    <h1 class="article-title">AI 数据中心入门</h1>
-    <div class="article-meta">作者：Eric Flaningam | <a href="https://www.generativevalue.com/p/a-primer-on-ai-data-centers" target="_blank">阅读原文 →</a></div>
+    <h1 class="article-title">AI 数据中心入门指南</h1>
+    <div class="article-meta">作者：Eric Flaningam | <time datetime="2024-10-13">2024年10月13日</time> | <a href="https://www.generativevalue.com/p/a-primer-on-ai-data-centers" target="_blank" rel="noopener noreferrer">阅读原文 →</a></div>
   </div>
   <div class="article-content">
-    <p>100多年前，我们见证了类似的电网建设（讽刺的是，电网正是当今建设的瓶颈之一）。在电网诞生过程中，我们经历了发电厂的规模化建设（尽可能建设大型发电厂以获取性能提升）、"天文数字"般的资本支出，以及电力成本的急剧下降。</p>
-    <p>2. AI数据中心中的计算</p>
-    <p>"正如一位金融家当时所观察到的，美国新兴电力系统所需的资金数额"令人眼花缭乱"，听起来更像是天文数字，而不是实实在在辛苦赚来的美元总额。" - [描述1900年左右电网建设的文字]
-《电力损耗》，Richard Hirsh 1999，摘自《建设物理学》</p>
-    <figure class="article-figure"><img src="../assets/4974335b-6a3a-4559-8eba-b4704187abe1.png" alt="Source." loading="lazy" /><figcaption></figcaption></figure>
-    <p>本文将专门聚焦于建设AI专用数据中心所需的基础设施；如需了解数据中心的基础入门介绍，我推荐阅读我几个月前发布的这篇文章。</p>
-    <p>"数据中心"这个词远远不足以形容这些"AI工厂"（黄仁勋亲切地这么称呼它们）的庞大规模。最大的数据中心在土地、电气与冷却设备、建设成本、GPU及其他计算基础设施上的投入高达数十亿美元。</p>
-    <h2>3. AI数据中心的电力供应</h2>
-    <p>这还只是能源成本之前的部分。新建的超大规模数据中心将消耗高达1GW的能源容量。作为参考，纽约市的总消耗量约为5.5GW。也就是说，每建五个这样的超大数据中心，我们就相当于给电网增加了一个纽约市的用电量。</p>
-    <p>我们可以将数据中心价值链大致分为几个类别：数据中心的前期建设开发、支持数据中心的工业设备、数据中心内的计算基础设施，以及数据中心运行所需的能源。此外，还有拥有或租赁数据中心以向消费者提供终端服务的公司。</p>
-    <p>这张图并未涵盖所有与数据中心相关的公司。还有金融家、房地产开发商、建筑公司，以及许多其他公司为这一建设贡献力量。正如Morgan Housel所说："如果有人指出我遗漏了什么，我很可能会同意。"</p>
-    <p>AI数据中心入门指南 - 作者：Eric Flaningam</p>
-    <figure class="article-figure"><img src="../assets/b98e896a-243c-4373-8855-a0adce5d27f5.png" alt="This image doesn’t touch on every company exposed to the data center. There are financiers, real estate developers, construction firms, and a host of other companies contributing to this buildout. As Morgan Housel says, “I’m likely to agree with anyone who points out what I’ve missed.”" loading="lazy" /><figcaption></figcaption></figure>
-    <p>在深入探讨之前，我们应该先回顾一下数据中心的历史（这与我们今天看到的能源紧缺问题尤其相关，特别是在北弗吉尼亚地区）。</p>
-    <h2>1. 扩展（或增强）电网，或绕过电网</h2>
-    <p>数据中心的发展在很大程度上是伴随着计算机和互联网的兴起而演进的。我将简要讨论这些趋势的历史以及我们是如何走到今天的。</p>
+    <p class="lead">正如一位金融家当时所观察到的，美国新兴电力系统所需的资金数额"令人眼花缭乱"，"听起来更像是天文数字，而不是实实在在辛苦赚来的美元总额"。</p>
+    <p class="quote-src">——《电力损耗》，Richard Hirsh 1999，转引自 <a href="https://www.construction-physics.com/p/the-birth-of-the-grid" target="_blank" rel="noopener noreferrer">Construction Physics</a>（描述约 1900 年的电网建设）</p>
+
     <p>我们正处于历史上最大规模的计算基础设施建设项目之一。</p>
-    <p>今天，我们正见证数据中心的规模化建设、超大规模云服务商的"天文数字"资本支出，以及AI计算成本的急剧下降：</p>
-    <p>最早的计算形式与今天的数据中心颇为相似：一台集中式计算机，用于解决计算密集型的关键任务。</p>
-    <p>巨像计算机（Colossus）——由艾伦·图灵为破解恩尼格玛密码机而建造的计算机。（注：图灵也被誉为人工智能和计算机科学之父。他提出了图灵测试作为检验AI是否真实存在的方法，ChatGPT去年通过了这一测试）。</p>
-    <p>https://www.simslifecycle.com/blog/2022/the-journey-of-eniac-the-worlds-first-computer/</p>
-    <p>20世纪50年代，IBM凭借大型主机计算机崛起并主导了计算领域。这奠定了其在技术领域数十年的主导地位，同时AT&T也是当时另一家占据主导地位的技术公司。</p>
-    <figure class="article-figure"><img src="../assets/71f170f9-4d8b-4113-84d7-222c81ae2304.png" alt="" loading="lazy" /></figure>
-    <p>ENIAC——第二次世界大战期间由美国军方设计，但直到1946年才完成的计算机。
-巨像建造时间早于ENIAC，但由于巨像的保密性质，ENIAC常被视为第一台计算机。</p>
-    <p>ARPANET于1969年发布，最初是为了连接美国日益增长的计算机数量而开发的。现在它被视为互联网的最早雏形。由于它是一个政府项目，其连接最密集的区域集中在华盛顿特区周边。</p>
-    <p>20世纪90年代，随着互联网的发展，我们需要更多的物理基础设施来处理日益增长的互联网数据。其中一部分体现为作为互连节点的数据中心。像AT&T这样的电信运营商已经建设了通信基础设施，因此这对它们来说是自然而然的扩展方向。</p>
-    <p>https://www.visualcapitalist.com/cp/top-data-center-markets/</p>
-    <figure class="article-figure"><img src="../assets/https_3A_2F_2Fsubstack-post-media.s3.amazonaws.com_2Fpublic_2Fimages_2Fd80d8482-0e68-451e-842f-e8a95ffe82f7_1200x850.png" alt="" loading="lazy" /></figure>
-    <p>在互联网泡沫期间，数据中心经历了大规模投资，但泡沫破裂后投资大幅放缓（在推断数据时，我们应该牢记这一教训）。</p>
-    <p>数据中心的低迷期在2006年随着亚马逊云服务（AWS）的发布开始逆转。此后，美国的数据中心容量基本持续增长。</p>
-    <p>https://www.datacenterknowledge.com/data-center-construction/catching-up-with-data-center-construction-constraints</p>
-    <p>然而，这些电信公司与今天的垂直整合云服务商面临着类似的竞合关系。AT&T既拥有通过其基础设施传输的数据，也拥有基础设施本身。因此，在容量有限的情况下，AT&T会优先处理自己的数据。企业对这种关系心存顾虑，这促使了Digital Realty和Equinix等数据中心公司的崛起。</p>
-    <p>这正是北弗吉尼亚州在计算领域占据主导地位的根源。随着每一代新数据中心的建设，人们都希望利用已有的基础设施。而这些基础设施恰好就在北弗吉尼亚地区，直至今日依然如此！</p>
-    <figure class="article-figure"><img src="../assets/1d80f0e6-509a-4a7a-a289-9ab9bbd79b99.png" alt="Source." loading="lazy" /><figcaption></figcaption></figure>
-    <p>AI训练独特的工作负载使人们重新关注数据中心的规模。计算基础设施之间的距离越近，性能就越高。此外，当数据中心被设计为计算单元而不仅仅是服务器机房时，公司可以获得额外的集成优势。</p>
-    <figure class="article-figure"><img src="../assets/f0dd9d9b-2c73-4040-bec3-78dca40ed9a4.png" alt="" loading="lazy" /></figure>
-    <p>这种稳定增长一直持续到2023年，AI狂潮席卷而来。目前估计显示，到2030年数据中心容量将翻一番（请注意，这些只是估算值）。</p>
+    <p>100 多年前，我们见证了类似的电网建设（讽刺的是，电网正是当今建设浪潮的瓶颈之一）。在电网诞生的过程中，我们经历了发电厂的规模化建设（尽可能把发电厂建得更大以获取性能提升）、"天文数字"般的资本支出，以及电力成本的急剧下降。</p>
+    <p>今天，我们正见证数据中心的规模化建设、超大规模云服务商的"天文数字"资本支出，以及 AI 算力成本的急剧下降：</p>
+    <figure class="article-figure"><img src="../assets/4974335b-6a3a-4559-8eba-b4704187abe1.png" alt="GPT-4 各代模型 API 价格下降趋势图，从每百万 token 36 美元降至 4 美元，累计降幅 89%" loading="lazy" /><figcaption>图 1：GPT-4 价格改进。API 价格从 2023 年 3 月 GPT-4 的每百万 token 36 美元，降至 2023 年 11 月 GPT-4 Turbo 的 14 美元、2024 年 5 月 GPT-4o 的 7 美元，以及 2024 年 8 月 GPT-4o 的 4 美元，累计降幅约 89%。（来源：OpenAI 演示文稿；价格为按 80% 输入 token、20% 输出 token 计算的混合价。制图：Altimeter）</figcaption></figure>
+    <p>本文是一个系列文章的开篇，旨在深入剖析 AI 数据中心：它究竟意味着什么、谁为其提供组件、以及机会可能在哪里。</p>
+    <p>本文将专门聚焦于建设 AI 专用数据中心所需的基础设施；如果你需要一份关于数据中心的入门介绍，我推荐阅读我几个月前发布的<a href="https://www.generativevalue.com/p/a-primer-on-data-centers" target="_blank" rel="noopener noreferrer">这篇文章</a>。</p>
+
+    <h2>一、AI 数据中心概述</h2>
+    <p>"数据中心"这个词远远不足以形容这些"AI 工厂"（黄仁勋亲切地这么称呼它们）的庞大规模。最大的数据中心（例如 <a href="https://www.techradar.com/pro/xai-cluster-is-now-the-most-powerful-ai-training-system-in-the-world-but-questions-remain-over-storage-capacity-power-usage-and-why-it-s-actually-called-colossus" target="_blank" rel="noopener noreferrer">xAI 的 Colossus 集群</a>）在土地、电气与冷却设备、建设成本、GPU 及其他计算基础设施上的投入高达数十亿美元。</p>
+    <p>这还没算上能源成本。新建的最大型超大规模数据中心将消耗高达 <a href="https://www.datacenterfrontier.com/hyperscale/article/55021675/the-gigawatt-data-center-campus-is-coming" target="_blank" rel="noopener noreferrer">1GW 的电力容量</a>。作为参考，<a href="https://climate.cityofnewyork.us/subtopics/systems/" target="_blank" rel="noopener noreferrer">纽约市的总用电量约为 5.5GW</a>。也就是说，每建成五个这样的超大数据中心，就相当于给电网增加了一个纽约市的用电量。</p>
+    <p>我们可以把数据中心价值链大致分为几类：数据中心的前期建设开发、支撑数据中心的工业设备、数据中心内部的算力基础设施，以及数据中心运行所需的能源。此外，还有一批公司拥有或租赁数据中心，向终端用户提供服务。</p>
+    <p>我们可以用下图来呈现这条价值链：</p>
+    <figure class="article-figure"><img src="../assets/b98e896a-243c-4373-8855-a0adce5d27f5.png" alt="AI 数据中心价值链全景图，分为半导体、IT 基础设施、算力、开发与运营、数据中心、能源与工业设备等板块" loading="lazy" /><figcaption>图 2：AI 数据中心价值链全景。自左至右依次为半导体（内存、CPU、GPU 与 ASIC）、IT 基础设施（服务器、网络、存储）、算力（超大规模云服务商、AI 云、推理）、开发与运营、数据中心，以及底部支撑性的能源（可再生能源、石油与天然气、核能、电池）和工业设备（电气设备、冷却设备）。（制图：Generative Value）</figcaption></figure>
+    <p>这张图并未涵盖所有与数据中心相关的公司。还有金融家、房地产开发商、建筑公司，以及许多其他角色在为这轮建设贡献力量。正如 Morgan Housel 所说："如果有人指出我遗漏了什么，我很可能会同意。"</p>
+    <p>在深入探讨之前，我们应该先回顾一下数据中心的历史（这与我们今天看到的能源紧缺问题尤其相关，特别是在北弗吉尼亚地区）。</p>
+
+    <h2>二、数据中心简史</h2>
+    <p>数据中心的发展在很大程度上是伴随计算机和互联网的兴起而演进的。我将简要讨论这些趋势的历史，以及我们是如何走到今天的。</p>
+
+    <h4 class="article-h4">数据中心早期历史</h4>
+    <p>最早的计算形态与今天的数据中心颇为相似：一台集中式计算机，用于解决计算密集型的关键任务。</p>
+    <p>我们有两个早期的例子：</p>
+    <p><strong>巨像计算机（Colossus）</strong>——由<a href="https://www.britannica.com/technology/Colossus-computer" target="_blank" rel="noopener noreferrer">艾伦·图灵为破解恩尼格玛密码机而建造</a>的计算机。（注：图灵也被誉为人工智能和计算机科学之父。他提出了图灵测试，作为检验 AI 是否真实存在的方法，ChatGPT 去年<a href="https://humsci.stanford.edu/feature/study-finds-chatgpts-latest-bot-behaves-humans-only-better" target="_blank" rel="noopener noreferrer">通过了这一测试</a>）。</p>
+    <p><strong>ENIAC</strong>——<a href="https://www.seas.upenn.edu/about/history-heritage/eniac/" target="_blank" rel="noopener noreferrer">第二次世界大战期间由美国军方设计</a>，但直到 1946 年才完成的计算机。巨像的建造时间早于 ENIAC，但<a href="https://cs.stanford.edu/people/eroberts/courses/soco/projects/2008-09/colossus/colossus.html" target="_blank" rel="noopener noreferrer">由于巨像的保密性质</a>，ENIAC 常被视为第一台计算机。</p>
     <p>两者都被安置在可称为"首批数据中心"的场所中。</p>
-    <p>总结今天的AI数据中心：它们专注于规模、性能、成本，并且可以在任何地方建设。</p>
-    <figure class="article-figure"><img src="../assets/1b6ec4c7-48ed-4fb5-96fa-776749a1d402.png" alt="Source." loading="lazy" /><figcaption></figcaption></figure>
-    <p>计算提供商（超大规模云服务商、AI公司、GPU云）要么自行建设数据中心，要么与Vantage、QTS或Equinix等数据中心开发商合作，寻找一块具备能源容量的土地。</p>
-    <p>https://blog.rsisecurity.com/how-to-build-and-maintain-proper-data-center-security/</p>
-    <p>数据中心的工业设备大致可分为电气设备和冷却设备。电气设备从连接到外部能源的主开关柜开始，然后连接到配电单元、不间断电源（UPS）以及连接到服务器机架的线缆。大多数数据中心还会配备柴油发电机作为停电时的备用电源。</p>
-    <h2>2. 施工许可与液冷</h2>
-    <h4 class="article-h4">最后，由于训练不需要靠近终端用户，数据中心可以建在任何地方。</h4>
-    <p>然后，他们会聘请总承包商来管理施工过程，总承包商会为每个功能（电气、管道、暖通空调）聘请分包商并采购原材料。工人们会在项目建设期间搬迁到该地区。在建筑"外壳"搭建完成后，下一步就是安装设备。</p>
-    <p>虽然不如过去那么重要，但CPU在完成复杂操作和"委派"任务方面仍然扮演着重要角色。存储将数据保存在芯片之外，而内存则存储需要经常访问的数据。网络则将所有组件连接起来，既包括服务器内部，也包括服务器外部。</p>
-    <figure class="article-figure"><img src="../assets/4fd17452-46f5-44c4-a828-f404a25d090d.png" alt="" loading="lazy" /></figure>
-    <p>计算基础设施包括运行AI训练和推理工作负载的设备。主要设备是GPU或加速器。除英伟达、AMD和超大规模云服务商外，还有大量初创公司竞相争夺AI加速器市场的一份份额：</p>
-    <p>最后，所有这些都被封装在一台服务器中，以便安装在数据中心内。我们可以在下图中看到其中一台服务器的可视化展示（注意：存储将是外部的）。</p>
-    <p>第二类是机械和冷却设备。这包括冷水机组、冷却塔、暖通空调设备，以及连接到服务器本身的液体或空气冷却系统。</p>
+    <figure class="article-figure"><img src="../assets/71f170f9-4d8b-4113-84d7-222c81ae2304.png" alt="ENIAC 机房历史照片，成排的真空管机柜与密集的跳线电缆" loading="lazy" /><figcaption>图 3：ENIAC——第二次世界大战期间由美国军方设计、1946 年才完成建造的电子计算机。整机由成排的真空管机柜与密集跳线构成，是"数据中心"最早的雏形之一。</figcaption></figure>
+    <p class="no-indent">延伸阅读：<a href="https://www.simslifecycle.com/blog/2022/the-journey-of-eniac-the-worlds-first-computer/" target="_blank" rel="noopener noreferrer">《世界第一台计算机 ENIAC 的历程》——Sims Lifecycle Services</a></p>
+    <p>20 世纪 50 年代，IBM 凭借大型主机计算机崛起并主导了计算领域。这奠定了其在技术领域长达数十年的主导地位，AT&amp;T 则是当时另一家占据主导地位的科技公司。</p>
+    <p>ARPANET 于 1969 年发布（<a href="https://www.darpa.mil/about-us/timeline/arpanet" target="_blank" rel="noopener noreferrer">DARPA 时间线</a>），最初是为了连接美国日益增长的计算机数量而开发的。它现在被视为互联网的最早雏形。由于这是一个政府项目，其连接最密集的区域集中在华盛顿特区周边。</p>
+    <p>这正是北弗吉尼亚在计算领域占据主导地位的根源。随着每一代新数据中心的建设，人们都希望利用已有的基础设施。而这些基础设施恰好就在北弗吉尼亚地区，直至今日依然如此！</p>
+    <figure class="article-figure"><img src="../assets/d80d8482-0e68-451e-842f-e8a95ffe82f7.jpg" alt="全球前 50 大数据中心市场按用电量排名地图，北弗吉尼亚以 2,552 兆瓦位居第一" loading="lazy" /><figcaption>图 4：全球前 50 大数据中心市场（按用电量，单位：兆瓦）。北弗吉尼亚以 2,552 MW 位居第一，其后是北京（1,799 MW）、伦敦（1,007 MW）与法兰克福（864 MW）。（数据为 2023 年；来源：Cushman &amp; Wakefield、DataCenterHawk；制图：Visual Capitalist）</figcaption></figure>
+    <p class="no-indent">延伸阅读：<a href="https://www.visualcapitalist.com/cp/top-data-center-markets/" target="_blank" rel="noopener noreferrer">《全球前 50 大数据中心市场》——Visual Capitalist</a></p>
+
+    <h4 class="article-h4">互联网与云的崛起</h4>
+    <p>20 世纪 90 年代，随着互联网的发展，我们需要更多的物理基础设施来处理日益增长的互联网数据。其中一部分体现为作为互联节点的数据中心。像 AT&amp;T 这样的电信运营商已经建设了通信基础设施，因此这是它们自然而然的扩张方向。</p>
+    <p>然而，这些电信公司与今天的垂直整合云服务商面临着类似的"竞合"关系。AT&amp;T 既拥有通过其基础设施传输的数据，也拥有基础设施本身。因此在容量有限的情况下，AT&amp;T 会优先处理自己的数据。企业对这种关系心存顾虑，这促成了 Digital Realty 和 Equinix 等数据中心公司的崛起。</p>
+    <p>在互联网泡沫期间，数据中心经历了大规模投资，但泡沫破裂后投资大幅放缓（在推断数据时，我们应该牢记这一教训）。</p>
+    <figure class="article-figure"><img src="../assets/1d80f0e6-509a-4a7a-a289-9ab9bbd79b99.png" alt="上市电信服务商资本支出柱状图，2000 年达到约 1,230 亿美元峰值后急剧回落" loading="lazy" /><figcaption>图 5：上市电信服务商的资本支出（1991—2002 年，单位：十亿美元）。资本支出在 2000 年互联网泡沫顶点达到约 1,230 亿美元，随后急剧回落至 2002 年的约 550 亿美元。（来源：Compustat 及作者计算）</figcaption></figure>
+    <p>数据中心的低迷期在 2006 年随着亚马逊云服务（AWS）的发布开始逆转。此后，美国的数据中心容量基本保持持续增长。</p>
+    <figure class="article-figure"><img src="../assets/f0dd9d9b-2c73-4040-bec3-78dca40ed9a4.png" alt="麦肯锡图表：美国数据中心用电量 2014 至 2030 年预测，年增速约 10%" loading="lazy" /><figcaption>图 6：美国数据中心需求预计到 2030 年保持约 10% 的年增速。左图为按用电量计的数据中心功耗（吉瓦，2014—2030 年），右图为各类运营方的份额占比——超大规模云服务商（Hyperscalers）与托管（co-location）公司是增量的主要来源。（来源：McKinsey &amp; Company）</figcaption></figure>
+    <p class="no-indent">延伸阅读：<a href="https://www.datacenterknowledge.com/data-center-construction/catching-up-with-data-center-construction-constraints" target="_blank" rel="noopener noreferrer">《追赶数据中心建设的制约因素》——Data Center Knowledge</a></p>
+
+    <h4 class="article-h4">AI 数据中心的到来</h4>
+    <p>这种稳定增长一直持续到 2023 年，AI 狂潮席卷而来。目前的估算显示，到 2030 年<a href="https://www.srgresearch.com/articles/hyperscale-data-centers-hit-the-thousand-mark-total-capacity-is-doubling-every-four-years" target="_blank" rel="noopener noreferrer">数据中心容量将翻一番</a>（请注意，这些只是估算值）。</p>
+    <figure class="article-figure"><img src="../assets/1b6ec4c7-48ed-4fb5-96fa-776749a1d402.png" alt="全球数据中心年度用电量折线图，2030 年三种情形分别约为 750、1500 与 2100 TWh" loading="lazy" /><figcaption>图 7：全球数据中心年度用电量（TWh，2010—2030 年）。红线为基准情形下数据中心用电量占全球发电量的比重（左轴）；三种情形下 2030 年的数据中心用电量分别约为 750 TWh（AI 影响有限）、1,500 TWh（基准）与 2,100 TWh（加速）。（来源：SemiAnalysis）</figcaption></figure>
+    <p>AI 训练独特的工作负载，使人们重新关注数据中心的规模。算力基础设施彼此靠得越近，性能就越高。此外，当数据中心被设计为一个个"算力单元"而不仅仅是装满服务器的房间时，企业还能获得额外的集成优势。</p>
+    <p>最后，由于训练并不需要靠近终端用户，数据中心可以建在任何地方。</p>
+    <p>总结今天的 AI 数据中心：它们专注于规模、性能与成本，并且可以建在任何地方。</p>
+
+    <h2>三、建设 AI 数据中心需要什么？</h2>
+
+    <h4 class="article-h4">1. 建设 AI 数据中心</h4>
+    <p>算力提供商（超大规模云服务商、AI 公司、GPU 云）要么自行建设数据中心，要么与 Vantage、QTS 或 Equinix 等数据中心开发商合作，寻找一块具备电力容量的土地。</p>
+    <p>随后，他们会聘请总承包商来管理施工过程；总承包商再为每个专业（电气、管道、暖通空调）聘请分包商并采购原材料。工人会在项目建设期间迁入该地区。建筑的"外壳"搭建完成后，下一步就是安装设备。</p>
+    <figure class="article-figure"><img src="../assets/4fd17452-46f5-44c4-a828-f404a25d090d.png" alt="数据中心供配电与冷却系统拓扑示意图，标注主配电、柴油发电机、UPS、冷冻水机组与干冷器等设备" loading="lazy" /><figcaption>图 8：数据中心的供配电与冷却拓扑。市电以 10kV／1MW 进线，经主配电与自动转换开关（ATS，①）进入数据大厅；柴油发电机（②）作为停电时的备用电源；UPS（③）、冷冻水机组（④）、干冷器（⑤）与 UPS 电池（⑥）构成供电与散热系统，末端（⑧）为服务器、存储与网络设备。（来源：RSI Security）</figcaption></figure>
+    <p class="no-indent">延伸阅读：<a href="https://blog.rsisecurity.com/how-to-build-and-maintain-proper-data-center-security/" target="_blank" rel="noopener noreferrer">《如何建设与维护完善的数据中心安全体系》——RSI Security</a></p>
+    <p>数据中心的工业设备大致可分为电气设备和冷却设备。电气设备从连接外部能源的主开关柜开始，然后连接到配电单元、不间断电源（UPS），以及连接服务器机架的线缆。大多数数据中心还会配备柴油发电机，作为停电时的备用电源。</p>
+    <p>第二类是机械设备与冷却设备，包括冷水机组、冷却塔、暖通空调设备，以及连接到服务器本身的液冷或风冷系统。</p>
+
+    <h4 class="article-h4">2. AI 数据中心中的计算</h4>
+    <p>算力基础设施包括运行 AI 训练和推理工作负载的设备。最主要的设备是 GPU 或加速器。除英伟达、AMD 和超大规模云服务商之外，还有大量初创公司正在争夺 AI 加速器市场的一份份额：</p>
+    <figure class="article-figure"><img src="../assets/73e70748-26d2-4963-8059-cfb5f4547d8d.png" alt="半导体初创公司融资额折线图，纵轴为对数刻度，涵盖 2016 至 2024 年的多家 AI 芯片公司" loading="lazy" /><figcaption>图 9：半导体初创公司的累计融资额（2016—2024 年，纵轴为对数刻度）。Tenstorrent、Groq、Etched、Ampere、SambaNova、Cerebras、Graphcore、Untether AI、Hailo、SiFive、MatX 等 AI 芯片公司的融资规模持续攀升。（来源：ChipStrat）</figcaption></figure>
+    <p>虽然不如过去那么重要，但 CPU 在完成复杂操作和"委派"任务方面仍然扮演着重要角色。存储将数据保存在芯片之外，而内存则存放需要频繁访问的数据。网络则把所有组件连接起来，既包括服务器内部，也包括服务器外部。</p>
+    <p>最后，所有这些都被封装进一台服务器，以便安装在数据中心内。我们可以在下图中看到其中一台服务器的内部可视化（注意：存储将是外部的）。</p>
+    <figure class="article-figure"><img src="../assets/13ac39d3-633c-4c45-ba6a-4fe500bd639b.png" alt="AI 服务器内部架构图，2 颗 CPU 经 PCIe 交换机连接 8 颗 GPU，并通过 NVSwitch 与 ConnectX-7 网卡互联" loading="lazy" /><figcaption>图 10：一台 AI 服务器的内部架构（以 NVIDIA HGX H100 为例）。两颗 CPU 经 PCIe 交换机连接 8 颗 GPU（GPU 0—7），并通过 NVSwitch、ConnectX-7 网卡与 NVMe 存储实现卡间及对外互联，支持 PCIe、100GbE 等多种通信路径。（来源：SemiAnalysis）</figcaption></figure>
+
+    <h4 class="article-h4">3. AI 数据中心的电力供应</h4>
+    <p>能源供应链大致可分为以下几个环节：</p>
+    <p class="no-indent"><strong>能源来源</strong>——化石燃料、可再生能源和核能，都可以用来发电。</p>
+    <p class="no-indent"><strong>发电</strong>——发电厂将化石燃料转化为电能；对可再生能源而言，发电环节更接近能源来源本身。</p>
+    <p class="no-indent"><strong>输电</strong>——电力随后通过高压线路输送到靠近目的地的地方。变压器和变电站将高压电降至适合消费的水平。</p>
+    <p class="no-indent"><strong>公用事业／配电</strong>——公用事业公司负责最后一公里的配电，并通过购电协议（PPA）管理电力的输送。</p>
+    <figure class="article-figure"><img src="../assets/06779165-7e23-43de-9a0b-49a8f2aa05c0.png" alt="能源供应链示意图，从发电厂、变压器升压、输电线路、降压、配电线路到终端用户" loading="lazy" /><figcaption>图 11：能源供应链。发电厂发电后，由变压器升压经输电线路长距离输送，再逐级降压，最终通过配电线路送达终端用户。</figcaption></figure>
+    <p>输电与配电通常被合称为"电网"，由地方机构管理。根据地理位置的不同，其中任何一个环节都可能成为能源输送的瓶颈。</p>
+    <p>事实证明，能源正是 AI 数据中心建设的一个关键瓶颈。</p>
+    <p>不幸的是，并没有快速增加电力容量的简单办法。数据中心有两种选择：并网供电和离网供电。并网供电通过电网输送，由公用事业公司分配；离网供电则绕过电网，例如现场太阳能、风能和电池。或者更理想：<a href="https://www.ans.org/news/article-5842/amazon-buys-nuclearpowered-data-center-from-talen/" target="_blank" rel="noopener noreferrer">把 GW 级数据中心直接建在 2.5GW 核电站旁边</a>！</p>
+    <p>并网供电的问题在于扩大电网容量所需的时间；下图显示了从提出申请到投入商业运营的输电等待时间。（这指的是从能源来源申请输电容量，到实际投入使用的时间）。</p>
+    <figure class="article-figure"><img src="../assets/f52b5490-c087-43d3-b81b-1ab5a212e7f4.png" alt="并网申请到商业运营中位时长折线图，2005 至 2023 年从约 17 个月上升至接近 5 年" loading="lazy" /><figcaption>图 12：从并网申请（IR）到商业运营（COD）的中位时长（横轴为 2005—2023 年的投运年份）。中位时长已从 2005 年前后的约 17 个月升至 2022—2023 年投运项目的接近 5 年，浅色区间为 25—75 分位数。（来源：Lawrence Berkeley National Laboratory《Queued Up》；数据覆盖 6 个 ISO 与 8 个非 ISO 平衡区，约占全部运营项目的 61%）</figcaption></figure>
+    <p class="no-indent">数据来源：<a href="https://emp.lbl.gov/queues" target="_blank" rel="noopener noreferrer">劳伦斯伯克利国家实验室并网排队数据（LBNL）</a></p>
+    <p>解决这些挑战必然需要多种方案的组合。更多内容将在最后一节讨论。</p>
+
+    <h2>四、AI 数据中心有哪些新变化？</h2>
+    <p>新一代数据中心更大、更密集、更快，能源需求也更高。</p>
+    <p>数据中心的"超大化"并非新鲜事。每隔几年就会有关于数据中心规模膨胀的文章：<a href="https://www.datacenterfrontier.com/cloud/article/11430123/hyperscale-data-center-deals-will-get-bigger-much-bigger" target="_blank" rel="noopener noreferrer">从 2001 年的几兆瓦，到 2010 年代的 50 兆瓦</a>，再到 <a href="https://www.datacenterfrontier.com/hyperscale/article/11428969/aligned-plans-120-mw-data-center-as-super-sizing-continues-in-ashburn" target="_blank" rel="noopener noreferrer">2020 年"庞大的 120 兆瓦"数据中心</a>，直至今天的吉瓦级数据中心。</p>
+    <p>这些吉瓦级数据中心也更为密集，是采用系统视角设计出来的。这里要解决的核心问题是<a href="https://www.fabricatedknowledge.com/p/the-data-center-is-the-new-compute" target="_blank" rel="noopener noreferrer">摩尔定律的放缓</a>——即随着晶体管密度提升，半导体性能将持续改进这一规律。然而，晶体管的改进正变得越来越困难。因此，解决方案是把服务器、甚至整个数据中心更紧密地集成在一起。</p>
+    <p>在实践中，这意味着数据中心正被设计为集成系统，而不再是装满独立服务器的房间。这些服务器本身也被设计为集成系统，把各个组件更紧密地结合在一起。</p>
+    <p>这就是<a href="https://www.semianalysis.com/p/google-ai-infrastructure-supremacy" target="_blank" rel="noopener noreferrer">英伟达销售服务器和 POD</a> 的原因，也是超大规模云服务商正在构建系统级数据中心的原因，很可能也是 <a href="https://ir.amd.com/news-events/press-releases/detail/1211/amd-to-significantly-expand-data-center-ai-systems" target="_blank" rel="noopener noreferrer">AMD 收购 ZT Systems</a> 的原因。</p>
+    <p>下图展示了英伟达 DGX H100 的外观，它既可以作为独立服务器运行，也可以在 POD 中与其他 GPU 互联，或进一步组成 SuperPOD 以获得更多连接：</p>
+    <figure class="article-figure"><img src="../assets/b2ff8f67-d212-486d-a8a7-f2766db0e8d1.jpg" alt="NVIDIA DGX H100 服务器产品图，前方为数台独立服务器，后方为装满整机的机架" loading="lazy" /><figcaption>图 13：NVIDIA DGX H100。既可单机运行，也可通过 POD 与其他 GPU 互联，或进一步组成 SuperPOD。（来源：NVIDIA）</figcaption></figure>
+    <p>英伟达还率先推动了"加速计算"，即把任务从 CPU 上卸载出去，这提升了其他所有组件（包括 GPU、网络和软件）的重要性。</p>
+    <p>除此之外，AI 的独特需求还要求处理海量数据。这使得存储日益庞大的数据量（内存／存储）以及快速搬运日益庞大的数据量（网络）变得更加重要。这类似于心脏泵血——GPU 如同心脏，数据如同血液（这也是<a href="https://cloud.google.com/blog/products/ai-machine-learning/an-in-depth-look-at-googles-first-tensor-processing-unit-tpu" target="_blank" rel="noopener noreferrer">谷歌 TPU 的架构被称为"脉动阵列"</a>的原因）。</p>
+    <p>所有这些趋势汇聚在一起，造就了地球上最强大的计算机。这种算力带来了更高的能耗、更多的发热，以及每台服务器所需的更多冷却。而能耗只会继续上升（连同我们对算力的胃口）：</p>
+    <figure class="article-figure"><img src="../assets/0cab0ae0-ab3d-40cf-b635-1c04eed75c46.png" alt="英伟达 DGX A100、H100、B200 的最大功率与算力对比图，每 PFLOPS 功耗从 1.30 kW 降至 0.20 kW" loading="lazy" /><figcaption>图 14：NVIDIA DGX 系列服务器的功率与算力演进。DGX A100（6.5 kW／5 PFLOPS）、DGX H100（10.2 kW／32 PFLOPS）、DGX B200（14.3 kW／72 PFLOPS）——单机最大功率不断提升，但每 PFLOPS 的功耗已从 1.30 kW 降至 0.20 kW，能效显著改善。（来源：NVIDIA、Goldman Sachs Global Investment Research）</figcaption></figure>
+    <p class="no-indent">延伸阅读：<a href="https://www.goldmansachs.com/pdfs/insights/pages/generational-growth-ai-data-centers-and-the-coming-us-power-surge/report.pdf" target="_blank" rel="noopener noreferrer">《代际增长：AI 数据中心与美国即将到来的电力激增》——Goldman Sachs</a></p>
+
+    <h2>五、瓶颈与受益者</h2>
+    <p>这不是一份详尽的受益者名单，而是我目前最感兴趣的一份名单。整条供应链都处于紧绷状态，我听到过各种关于瓶颈的见闻，从缺乏建造变压器的熟练工人，到许可审批的自动化。</p>
+
+    <h4 class="article-h4">1. 扩展（或增强）电网，或绕开电网</h4>
+    <p>很明显，我们的能源基础设施需要发展，才能支撑这轮建设。几乎每家科技公司都更倾向于使用并网电力：它更可靠，管理起来也更省力。遗憾的是，当并网电力无法获得时，超大规模云服务商会自行采取行动。例如，<a href="https://www.aboutamazon.com/news/aws/aws-indiana-investment-11-billion" target="_blank" rel="noopener noreferrer">AWS 正投资 110 亿美元在印第安纳州建设一个数据中心园区</a>，并配套建设四个太阳能电站和一个风电场为其供电（600 兆瓦）。</p>
+    <p>从中长期来看，我对解决能源瓶颈的两个方向最为乐观：核能和电池。两者都能为数据中心提供更可持续的能源。</p>
+    <p>核能的优点已被充分论证：清洁、可靠。挑战在于如何以经济可行的方式建设核电设施。在我看来，一些世界上最令人兴奋的初创公司正在攻克这一难题。</p>
+    <p>长时储能电池的创新将是可再生能源向前迈出的重要一步。太阳能和风能的问题在于其波动性——只有在刮风或有阳光时才能发电。长时电池通过"能源富余时储存、能源短缺时释放"来缓解这一问题。</p>
+
+    <h4 class="article-h4">2. 施工许可与液冷</h4>
+    <p>在工业层面，我关注的两个趋势是许可审批自动化和液冷。当我与为本文做研究的人交流时，有一个话题反复被提及为这轮建设的瓶颈：许可审批。</p>
+    <p>对于数据中心和能源扩建，开发商需要取得建筑、环保、分区、噪音等方面的许可，可能还需要获得地方、州和国家级机构的批准。除此之外，还要应对因地区而异的优先购买权法律。对于能源基础设施而言，这更加令人头疼。像 <a href="https://www.permitflow.com/" target="_blank" rel="noopener noreferrer">PermitFlow</a> 这样的许可审批软件公司，正处于帮助缓解这些痛点的有利位置。</p>
+    <p>新型 AI 数据中心一个明显的不同之处，是服务器产生的热量不断增加。新一代数据中心将采用液冷，而下一代数据中心可能会采用<a href="https://www.parkplacetechnologies.com/blog/what-is-immersion-cooling-data-centers/" target="_blank" rel="noopener noreferrer">浸没式冷却</a>。</p>
+
     <h4 class="article-h4">3. 向计算公司致敬</h4>
-    <p>发电——发电厂将化石燃料转化为电能；对于可再生能源，发电过程更接近能源来源本身。</p>
-    <figure class="article-figure"><img src="../assets/73e70748-26d2-4963-8059-cfb5f4547d8d.png" alt="Source." loading="lazy" /><figcaption></figcaption></figure>
-    <p>输电——电力通过高压线路传输到靠近目的地的地方。变压器和变电站将高压电降压至适合消费的水平。</p>
-    <p>输电和配电通常被称为"电网"，由当地机构管理。根据地理位置的不同，其中任何一个环节都可能成为能源输送的瓶颈。</p>
-    <figure class="article-figure"><img src="../assets/13ac39d3-633c-4c45-ba6a-4fe500bd639b.png" alt="Source." loading="lazy" /><figcaption></figcaption></figure>
-    <h4 class="article-h4">4. 总结</h4>
-    <p>公用事业/配电——公用事业公司负责最后一公里的配电，并通过购电协议管理电力的输送。</p>
-    <p>电网供电的问题在于扩大电网容量所需的时间；下图显示了从申请到商业运营的输电等待时间。（这指的是从能源来源申请输电容量到实际投入使用的时间）。</p>
-    <p>不幸的是，没有快速增加能源容量的简单方法。数据中心有两种选择：电网供电和离网供电。电网供电通过电网传输，由公用事业公司分配。离网供电绕过电网，例如现场太阳能、风能和电池。
-或者更优方案：将GW级的数据中心建在2.5GW核电站旁边！</p>
-    <p>解决这些挑战必然需要多种方案的结合。更多内容将在最后一节讨论。</p>
-    <p>能源来源——化石燃料、可再生能源和核能，可以产生电力。</p>
-    <figure class="article-figure"><img src="../assets/06779165-7e23-43de-9a0b-49a8f2aa05c0.png" alt="" loading="lazy" /></figure>
-    <p>数据中心的"超大化"并非新鲜事。每隔几年就会有关于数据中心超大化的文章，从2001年的几兆瓦，到2010年代的50兆瓦，再到2020年"庞大的120兆瓦"数据中心，直至今天的吉瓦级数据中心。</p>
-    <p>在实践中，这意味着数据中心正被设计为集成系统，而非装满独立服务器的房间。这些服务器本身也被设计为集成系统，将所有组件更紧密地结合在一起。</p>
-    <p>这些吉瓦级数据中心也更为密集，采用系统视角进行设计。这里要解决的核心问题是摩尔定律的放缓——即随着晶体管密度的增加，半导体性能将持续提升这一规律。然而，晶体管的改进正变得越来越具有挑战性。因此，解决方案是将服务器、甚至整个数据中心更紧密地集成在一起。</p>
-    <p>这就是英伟达销售服务器和POD的原因，也是超大规模云服务商正在构建系统级数据中心的原因，同样也是AMD收购ZT Systems的可能原因。</p>
-    <figure class="article-figure"><img src="../assets/f52b5490-c087-43d3-b81b-1ab5a212e7f4.png" alt="" loading="lazy" /></figure>
-    <p>https://emp.lbl.gov/queues</p>
-    <p>除此之外，AI的独特需求需要处理海量数据。这使得存储日益庞大的数据量（内存/存储）以及快速移动日益庞大的数据量（网络）变得更加重要。这类似于心脏泵血，GPU如同心脏，数据如同血液（这就是为什么谷歌TPU的架构被称为脉动阵列）。</p>
-    <h2>4. What’s new about AI Data Centers?</h2>
-    <p>所有这些趋势汇聚在一起，形成了地球上最强大的计算机。这种计算能力带来了更高的能耗、更多的热量产生以及每个服务器所需的更多冷却。随着我们对计算能力的渴望不断增长，能源消耗也在不断增加：</p>
-    <p>https://www.goldmansachs.com/pdfs/insights/pages/generational-growth-ai-data-centers-and-the-coming-us-power-surge/report.pdf</p>
-    <p>这不是一份详尽的受益者名单，但这是我目前最感兴趣的名单。整个供应链都处于紧张状态，我听到过各种瓶颈问题的传闻，从缺乏熟练工人来建造变压器到许可审批自动化。</p>
-    <p>很明显，我们的能源基础设施需要发展以支持这一建设。几乎每家科技公司都更倾向于使用电网供电：这更可靠，管理起来也更省力。不幸的是，当无法获得电网供电时，超大规模云服务商会自行采取行动。例如，AWS正在投资110亿美元在印第安纳州建设一个数据中心园区，并建设四个太阳能发电场和一个风力发电场为其供电（600兆瓦）。</p>
-    <p>核能的优点已有充分记录：清洁、可靠的能源。挑战在于如何以经济可行的方式建设核设施。在我看来，一些世界上最令人兴奋的初创公司正在应对这一挑战。</p>
-    <p>长时电池创新将是可再生能源向前迈出的重要一步。太阳能和风能的问题在于它们具有间歇性——只有刮风或有阳光时才能提供能源。长时电池通过存储能源过剩时的能量并在能源短缺时释放来帮助解决这个问题。</p>
-    <figure class="article-figure"><img src="../assets/b2ff8f67-d212-486d-a8a7-f2766db0e8d1.png" alt="Source." loading="lazy" /><figcaption></figcaption></figure>
-    <p>下图展示了英伟达DGX H100的外观，它可以作为独立服务器运行，也可以在POD中与其他GPU连接，或者通过SuperPOD进行更多连接：</p>
-    <p>对于数据中心和能源扩建，开发商需要获得建筑、环保、分区、噪音等方面的许可。他们可能需要获得地方、州和国家机构的批准。此外还需要应对因地区而异的优先购买权法律。对于能源基础设施来说，这更加令人头疼。像PermitFlow这样的许可审批软件公司处于有利位置，可以帮助缓解这些难题。</p>
-    <p>很难不承认（1）英伟达在构建其生态系统方面所做的令人难以置信的工作，以及（2）AMD在巩固自身作为真正替代选择方面所做的努力。英伟达在AI领域的定位从应用到软件基础设施，再到云、系统和芯片，都令人叹为观止。如果编写一份应对技术浪潮的完美剧本，英伟达已经完美演绎了。</p>
-    <figure class="article-figure"><img src="../assets/https_3A_2F_2Fsubstack-post-media.s3.amazonaws.com_2Fpublic_2Fimages_2F0cab0ae0-ab3d-40cf-b635-1c04eed75c46_1256x588.png" alt="" loading="lazy" /></figure>
-    <p>新型AI数据中心的一个明显区别是服务器产生的热量不断增加。新一代数据中心将采用液冷方式，而下一代数据中心可能会采用浸没式冷却。</p>
-    <h2>5. Bottlenecks & Beneficiaries</h2>
-    <p>我对数据中心建设的最后思考是：虽然这看起来像是一个新趋势，但它是计算发展的更宏大历史的一部分。我认为AI、数据中心和计算不应该是彼此独立的讨论话题。</p>
-    <h4 class="article-h4">1. Expanding (or Enhancing) the Electric Grid or Getting Around It</h4>
-    <p>最后，随着收入流经价值链，涉足数据中心建设的计算公司应继续表现良好。从网络到存储再到服务器，如果一家公司提供顶级性能，它们就会发展得很好。</p>
-    <p>"看待人类历史的一种狭窄方式是：经过数千年的科学发现和技术进步的累积，我们学会了如何融化沙子，加入一些杂质，以惊人的精度在极小的尺度上排列成计算机芯片，让电能通过它们，最终创造出能够生成越来越强大的人工智能的系统。"</p>
-    <p>艾伦·图灵是现代计算机、计算机科学和AI之父，这绝非巧合。过去100年来，创造智能一直是持续不变的趋势。而数据中心正是当今这一趋势的核心。</p>
-    <p>免责声明：本文所含信息不构成投资建议，也不应作为投资建议使用。在投资本文讨论的任何证券之前，投资者应进行自己的尽职调查。尽管我力求准确，但我不能保证本文信息的准确性或可靠性。本文基于我的个人观点，应作为观点而非事实参考。在本网站及其他链接内容或发布到社交媒体及其他平台上的观点均为我个人观点，不代表Felicis Ventures Management Company, LLC的观点。</p>
-    <h4 class="article-h4">2. Construction Permitting & Liquid Cooling</h4>
-    <p>在工业方面，我关注的两个趋势是许可审批自动化和液冷。当我与为本文进行研究的人交谈时，一个话题反复被提及为建设瓶颈：许可审批。</p>
-    <p>最近参观了圣克拉拉的几个数据中心，亲眼目睹了DGX H100的POD机群运行，并且正在建设更多机架以容纳更大的Super-POD，很明显我们仍处于AI数据中心增长轨迹的早期阶段，未来还有更多发展。南湾地区最大的瓶颈是电力暂停令。这些能源挑战在文章中已有提及：
-https://www.datacenterfrontier.com/energy/article/55089067/silicon-valley-utilities-gird-for-surging-us-energy-demand-fed-by-new-data-centers</p>
-    <p>从中长期来看，我对解决能源瓶颈的两个领域最为乐观：核能和电池。两者都能为数据中心提供更可持续的能源。</p>
-    <h4 class="article-h4">3. An Obligatory Hat Tip to the Computing Companies</h4>
-    <p>Jeffrey Cross
-2024年10月16日
-Eric Flaningam点赞</p>
-    <p>Crusoe是另一家在AI计算和能源服务方面都处于有利地位的公司。</p>
-    <p>很好的概述——遗漏了许多在总承包项目启动前进行设施和基础设施设计的公司。但总体而言信息量很丰富！</p>
-    <h4 class="article-h4">4. Final Thoughts</h4>
-    <p>Victor Chang
-2024年10月14日
-Eric Flaningam点赞</p>
-    <p>正如Sam Altman所描述的：</p>
-    <p>Eric Flaningam回复1条</p>
+    <p>很难不承认两点：（1）英伟达在构建自身生态方面所做的工作令人惊叹；（2）AMD 在确立自己作为真正替代选项方面所做的努力。英伟达在 AI 领域的定位之精准令人叹服——从应用，到软件基础设施，再到云、系统和芯片。如果为一次技术浪潮写一份完美的备战剧本，英伟达已经把它完美演绎了一遍。</p>
+    <p>Crusoe 是另一家在这轮建设中站位极佳的公司，同时提供 AI 算力与能源服务。</p>
+    <p>最后，随着收入沿价值链流动，涉足数据中心建设的计算公司应当继续有良好表现。从网络，到存储，再到服务器——只要一家公司能提供顶级性能，它就能做得好。</p>
+
+    <h4 class="article-h4">4. 结语</h4>
+    <p>关于数据中心建设，我的最后一点想法是：虽然它看起来像是一个新趋势，但它其实是计算发展更宏大历史的一部分。我认为 AI、数据中心和计算不应该是彼此割裂的话题。</p>
+    <p>正如 <a href="https://ia.samaltman.com/" target="_blank" rel="noopener noreferrer">Sam Altman 所描述的</a>：</p>
+    <p class="lead">"看待人类历史有一种狭隘的方式：经过数千年科学发现与技术进步的复利积累，我们学会了如何熔化沙子、加入一些杂质，以惊人的精度在极小的尺度上把它排列成计算机芯片，让电能从中流过，最终得到能够创造出越来越强大的人工智能的系统。"</p>
+    <p>艾伦·图灵是现代计算机、计算机科学和 AI 之父，这绝非巧合。在过去 100 年里，"创造智能"始终是一条持续不变的线索。而数据中心，正是今天这条线索的核心。</p>
     <p>一如既往，感谢阅读！</p>
-    <p>关于本文的讨论</p>
-    <p>回复</p>
+    <p class="no-indent disclaimer">免责声明：本文所含信息不构成投资建议，也不应作为投资建议使用。在投资本文讨论的任何证券之前，投资者应自行开展尽职调查。尽管我力求准确，但我无法保证本文信息的准确性或可靠性。本文基于我的个人观点，应作为观点而非事实参考。本网站及其他链接内容中、或发布到社交媒体及其他平台上的观点均为我个人观点，不代表 Felicis Ventures Management Company, LLC 的观点。</p>
   </div>
   <div class="article-source">
-    <p>本文为 <a href="https://www.generativevalue.com/p/a-primer-on-ai-data-centers" target="_blank">原文</a> 的中文翻译，仅供学习参考。原始版权归原作者所有。</p>
-    <p style="margin-top:0.3rem;">MS&E 435 — Stanford University — <a href="../index.html">返回课程首页</a></p>
+    <p>本文为 <a href="https://www.generativevalue.com/p/a-primer-on-ai-data-centers" target="_blank" rel="noopener noreferrer">原文</a> 的中文翻译，仅供学习参考。原始版权归原作者所有。</p>
+    <p style="margin-top:0.3rem;">MS&amp;E 435 — Stanford University — <a href="../index.html">返回课程首页</a></p>
   </div>
 </div>
-</main>
 </body>
 </html>
